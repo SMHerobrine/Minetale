@@ -1,1 +1,1 @@
-<img src="https://i.ibb.co/bRHjWZzc/minetale-logo.png" width="128">
+<img src="https://i.ibb.co/bRHjWZzc/minetale-logo.png" width="1080">
