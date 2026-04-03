@@ -1,0 +1,13 @@
+﻿{
+  "variants": {
+    "type=bottom": {
+      "model": "minetale:block/amber_slab"
+    },
+    "type=double": {
+      "model": "minetale:block/amber_planks"
+    },
+    "type=top": {
+      "model": "minetale:block/amber_slab_top"
+    }
+  }
+}

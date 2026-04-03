@@ -1,0 +1,19 @@
+﻿{
+  "block.minetale.amber_log": "Amber Log",
+  "block.minetale.amber_wood": "Amber Wood",
+  "block.minetale.stripped_amber_log": "Stripped Amber Log",
+  "block.minetale.stripped_amber_wood": "Stripped Amber Wood",
+  "block.minetale.amber_planks": "Amber Planks",
+  "block.minetale.amber_stairs": "Amber Stairs",
+  "block.minetale.amber_slab": "Amber Slab",
+  "block.minetale.amber_fence": "Amber Fence",
+  "block.minetale.amber_fence_gate": "Amber Fence Gate",
+  "block.minetale.amber_door": "Amber Door",
+  "block.minetale.amber_trapdoor": "Amber Trapdoor",
+  "block.minetale.amber_button": "Amber Button",
+  "block.minetale.amber_pressure_plate": "Amber Pressure Plate",
+  "block.minetale.amber_sign": "Amber Sign",
+  "block.minetale.amber_hanging_sign": "Amber Hanging Sign",
+  "item.minetale.amber_sign": "Amber Sign",
+  "item.minetale.amber_hanging_sign": "Amber Hanging Sign"
+}

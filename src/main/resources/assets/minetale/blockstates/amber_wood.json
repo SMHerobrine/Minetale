@@ -1,0 +1,16 @@
+﻿{
+  "variants": {
+    "axis=x": {
+      "model": "minetale:block/amber_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "minetale:block/amber_wood"
+    },
+    "axis=z": {
+      "model": "minetale:block/amber_wood",
+      "x": 90
+    }
+  }
+}
