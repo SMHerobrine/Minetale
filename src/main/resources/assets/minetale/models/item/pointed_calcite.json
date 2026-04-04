@@ -1,0 +1,7 @@
+{
+  "parent": "minetale:item/template/pointed_stone",
+  "textures": {
+    "all": "minecraft:block/calcite",
+    "particle": "minecraft:block/calcite"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minetale:item/template/pointed_stone",
+  "textures": {
+    "all": "minecraft:block/diorite",
+    "particle": "minecraft:block/diorite"
+  }
+}

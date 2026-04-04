@@ -1,0 +1,7 @@
+{
+  "parent": "minetale:block/template/down_tip_merge",
+  "textures": {
+    "all": "minecraft:block/stone",
+    "particle": "minecraft:block/stone"
+  }
+}

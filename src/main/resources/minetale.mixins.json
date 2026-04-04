@@ -3,7 +3,8 @@
 	"package": "com.smherobrine.minetale.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"mixins": [
-		"ExampleMixin"
+		"MultiNoiseBiomeSourceMixin",
+		"MultiNoiseBiomeSourceParameterListPresetMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

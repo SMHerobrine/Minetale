@@ -1,0 +1,7 @@
+{
+  "parent": "minetale:block/template/down_middle",
+  "textures": {
+    "all": "minecraft:block/calcite",
+    "particle": "minecraft:block/calcite"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minetale:block/template/down_base",
+  "textures": {
+    "all": "minecraft:block/deepslate",
+    "particle": "minecraft:block/deepslate"
+  }
+}

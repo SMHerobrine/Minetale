@@ -13,6 +13,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.HangingSignItem;
@@ -22,9 +23,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.RedStoneOreBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
@@ -116,6 +119,34 @@ public final class MinetaleBlocks {
 		new Block(copyProperties("chiseled_marble", Blocks.CHISELED_QUARTZ_BLOCK)));
 	public static final Block CHISELED_MARBLE_BRICKS = registerBlock("chiseled_marble_bricks",
 		new Block(copyProperties("chiseled_marble_bricks", Blocks.CHISELED_STONE_BRICKS)));
+	public static final Block VOLCANIC_ROCK = registerBlock("volcanic_rock",
+		new Block(copyProperties("volcanic_rock", Blocks.DEEPSLATE)));
+	public static final Block CRACKED_VOLCANIC_ROCK = registerBlock("cracked_volcanic_rock",
+		new Block(copyProperties("cracked_volcanic_rock", Blocks.DEEPSLATE)));
+	public static final Block VOLCANIC_COAL_ORE = registerBlock("volcanic_coal_ore",
+		new DropExperienceBlock(UniformInt.of(0, 2), copyProperties("volcanic_coal_ore", Blocks.DEEPSLATE_COAL_ORE)));
+	public static final Block VOLCANIC_COPPER_ORE = registerBlock("volcanic_copper_ore",
+		new Block(copyProperties("volcanic_copper_ore", Blocks.DEEPSLATE_COPPER_ORE)));
+	public static final Block VOLCANIC_IRON_ORE = registerBlock("volcanic_iron_ore",
+		new Block(copyProperties("volcanic_iron_ore", Blocks.DEEPSLATE_IRON_ORE)));
+	public static final Block VOLCANIC_GOLD_ORE = registerBlock("volcanic_gold_ore",
+		new Block(copyProperties("volcanic_gold_ore", Blocks.DEEPSLATE_GOLD_ORE)));
+	public static final Block VOLCANIC_REDSTONE_ORE = registerBlock("volcanic_redstone_ore",
+		new RedStoneOreBlock(copyProperties("volcanic_redstone_ore", Blocks.DEEPSLATE_REDSTONE_ORE)));
+	public static final Block VOLCANIC_EMERALD_ORE = registerBlock("volcanic_emerald_ore",
+		new DropExperienceBlock(UniformInt.of(3, 7), copyProperties("volcanic_emerald_ore", Blocks.DEEPSLATE_EMERALD_ORE)));
+	public static final Block VOLCANIC_LAPIS_ORE = registerBlock("volcanic_lapis_ore",
+		new DropExperienceBlock(UniformInt.of(2, 5), copyProperties("volcanic_lapis_ore", Blocks.DEEPSLATE_LAPIS_ORE)));
+	public static final Block VOLCANIC_DIAMOND_ORE = registerBlock("volcanic_diamond_ore",
+		new DropExperienceBlock(UniformInt.of(3, 7), copyProperties("volcanic_diamond_ore", Blocks.DEEPSLATE_DIAMOND_ORE)));
+	public static final Block POINTED_STONE = registerPointedStone("pointed_stone");
+	public static final Block POINTED_GRANITE = registerPointedStone("pointed_granite");
+	public static final Block POINTED_DIORITE = registerPointedStone("pointed_diorite");
+	public static final Block POINTED_ANDESITE = registerPointedStone("pointed_andesite");
+	public static final Block POINTED_DEEPSLATE = registerPointedStone("pointed_deepslate");
+	public static final Block POINTED_TUFF = registerPointedStone("pointed_tuff");
+	public static final Block POINTED_CALCITE = registerPointedStone("pointed_calcite");
+	public static final Block POINTED_VOLCANIC_ROCK = registerPointedStone("pointed_volcanic_rock");
 
 	private MinetaleBlocks() {
 	}
@@ -176,10 +207,33 @@ public final class MinetaleBlocks {
 			entries.accept(CRACKED_MARBLE_BRICKS);
 			entries.accept(CHISELED_MARBLE);
 			entries.accept(CHISELED_MARBLE_BRICKS);
+			entries.accept(VOLCANIC_ROCK);
+			entries.accept(CRACKED_VOLCANIC_ROCK);
+		});
+		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(entries -> {
+			entries.accept(VOLCANIC_ROCK);
+			entries.accept(CRACKED_VOLCANIC_ROCK);
+			entries.accept(VOLCANIC_COAL_ORE);
+			entries.accept(VOLCANIC_COPPER_ORE);
+			entries.accept(VOLCANIC_IRON_ORE);
+			entries.accept(VOLCANIC_GOLD_ORE);
+			entries.accept(VOLCANIC_REDSTONE_ORE);
+			entries.accept(VOLCANIC_EMERALD_ORE);
+			entries.accept(VOLCANIC_LAPIS_ORE);
+			entries.accept(VOLCANIC_DIAMOND_ORE);
+			entries.accept(POINTED_STONE);
+			entries.accept(POINTED_GRANITE);
+			entries.accept(POINTED_DIORITE);
+			entries.accept(POINTED_ANDESITE);
+			entries.accept(POINTED_DEEPSLATE);
+			entries.accept(POINTED_TUFF);
+			entries.accept(POINTED_CALCITE);
+			entries.accept(POINTED_VOLCANIC_ROCK);
 		});
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(entries -> {
 			entries.accept(AMBER_BUTTON);
 			entries.accept(AMBER_PRESSURE_PLATE);
+			entries.accept(VOLCANIC_REDSTONE_ORE);
 		});
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> {
 			entries.accept(AMBER_SIGN_ITEM);
@@ -195,6 +249,10 @@ public final class MinetaleBlocks {
 
 	private static Block registerBlockWithoutItem(String name, Block block) {
 		return Registry.register(BuiltInRegistries.BLOCK, id(name), block);
+	}
+
+	private static Block registerPointedStone(String name) {
+		return registerBlock(name, new MinetalePointedDripstoneBlock(copyProperties(name, Blocks.POINTED_DRIPSTONE)));
 	}
 
 	private static Item registerItem(String name, Item item) {
