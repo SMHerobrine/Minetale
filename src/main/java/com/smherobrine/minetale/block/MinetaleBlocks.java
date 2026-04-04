@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -79,6 +80,43 @@ public final class MinetaleBlocks {
 	public static final Item AMBER_HANGING_SIGN_ITEM = registerItem("amber_hanging_sign",
 		new HangingSignItem(AMBER_HANGING_SIGN, AMBER_WALL_HANGING_SIGN, itemProperties("amber_hanging_sign").stacksTo(16)));
 
+	public static final Block MARBLE = registerBlock("marble",
+		new Block(copyProperties("marble", Blocks.STONE)));
+	public static final Block MARBLE_STAIRS = registerBlock("marble_stairs",
+		new StairBlock(MARBLE.defaultBlockState(), copyProperties("marble_stairs", Blocks.POLISHED_ANDESITE_STAIRS)));
+	public static final Block MARBLE_SLAB = registerBlock("marble_slab",
+		new SlabBlock(copyProperties("marble_slab", Blocks.STONE_SLAB)));
+	public static final Block MARBLE_WALL = registerBlock("marble_wall",
+		new WallBlock(copyProperties("marble_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block COBBLED_MARBLE = registerBlock("cobbled_marble",
+		new Block(copyProperties("cobbled_marble", Blocks.COBBLESTONE)));
+	public static final Block COBBLED_MARBLE_STAIRS = registerBlock("cobbled_marble_stairs",
+		new StairBlock(COBBLED_MARBLE.defaultBlockState(), copyProperties("cobbled_marble_stairs", Blocks.COBBLESTONE_STAIRS)));
+	public static final Block COBBLED_MARBLE_SLAB = registerBlock("cobbled_marble_slab",
+		new SlabBlock(copyProperties("cobbled_marble_slab", Blocks.COBBLESTONE_SLAB)));
+	public static final Block COBBLED_MARBLE_WALL = registerBlock("cobbled_marble_wall",
+		new WallBlock(copyProperties("cobbled_marble_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block SMOOTH_MARBLE = registerBlock("smooth_marble",
+		new Block(copyProperties("smooth_marble", Blocks.SMOOTH_STONE)));
+	public static final Block SMOOTH_MARBLE_SLAB = registerBlock("smooth_marble_slab",
+		new SlabBlock(copyProperties("smooth_marble_slab", Blocks.SMOOTH_STONE_SLAB)));
+	public static final Block CRACKED_SMOOTH_MARBLE = registerBlock("cracked_smooth_marble",
+		new Block(copyProperties("cracked_smooth_marble", Blocks.SMOOTH_STONE)));
+	public static final Block MARBLE_BRICKS = registerBlock("marble_bricks",
+		new Block(copyProperties("marble_bricks", Blocks.STONE_BRICKS)));
+	public static final Block MARBLE_BRICKS_STAIRS = registerBlock("marble_bricks_stairs",
+		new StairBlock(MARBLE_BRICKS.defaultBlockState(), copyProperties("marble_bricks_stairs", Blocks.STONE_BRICK_STAIRS)));
+	public static final Block MARBLE_BRICKS_SLAB = registerBlock("marble_bricks_slab",
+		new SlabBlock(copyProperties("marble_bricks_slab", Blocks.STONE_BRICK_SLAB)));
+	public static final Block MARBLE_BRICKS_WALL = registerBlock("marble_bricks_wall",
+		new WallBlock(copyProperties("marble_bricks_wall", Blocks.STONE_BRICK_WALL)));
+	public static final Block CRACKED_MARBLE_BRICKS = registerBlock("cracked_marble_bricks",
+		new Block(copyProperties("cracked_marble_bricks", Blocks.CRACKED_STONE_BRICKS)));
+	public static final Block CHISELED_MARBLE = registerBlock("chiseled_marble",
+		new Block(copyProperties("chiseled_marble", Blocks.CHISELED_QUARTZ_BLOCK)));
+	public static final Block CHISELED_MARBLE_BRICKS = registerBlock("chiseled_marble_bricks",
+		new Block(copyProperties("chiseled_marble_bricks", Blocks.CHISELED_STONE_BRICKS)));
+
 	private MinetaleBlocks() {
 	}
 
@@ -120,6 +158,24 @@ public final class MinetaleBlocks {
 			entries.accept(AMBER_FENCE_GATE);
 			entries.accept(AMBER_DOOR);
 			entries.accept(AMBER_TRAPDOOR);
+			entries.accept(MARBLE);
+			entries.accept(MARBLE_STAIRS);
+			entries.accept(MARBLE_SLAB);
+			entries.accept(MARBLE_WALL);
+			entries.accept(COBBLED_MARBLE);
+			entries.accept(COBBLED_MARBLE_STAIRS);
+			entries.accept(COBBLED_MARBLE_SLAB);
+			entries.accept(COBBLED_MARBLE_WALL);
+			entries.accept(SMOOTH_MARBLE);
+			entries.accept(SMOOTH_MARBLE_SLAB);
+			entries.accept(CRACKED_SMOOTH_MARBLE);
+			entries.accept(MARBLE_BRICKS);
+			entries.accept(MARBLE_BRICKS_STAIRS);
+			entries.accept(MARBLE_BRICKS_SLAB);
+			entries.accept(MARBLE_BRICKS_WALL);
+			entries.accept(CRACKED_MARBLE_BRICKS);
+			entries.accept(CHISELED_MARBLE);
+			entries.accept(CHISELED_MARBLE_BRICKS);
 		});
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(entries -> {
 			entries.accept(AMBER_BUTTON);

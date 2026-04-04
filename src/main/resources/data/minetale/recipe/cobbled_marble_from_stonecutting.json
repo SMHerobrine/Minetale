@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minetale:marble",
+  "result": {
+    "count": 1,
+    "id": "minetale:cobbled_marble"
+  }
+}

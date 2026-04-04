@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": "minetale:marble",
+  "result": {
+    "id": "minetale:smooth_marble"
+  }
+}

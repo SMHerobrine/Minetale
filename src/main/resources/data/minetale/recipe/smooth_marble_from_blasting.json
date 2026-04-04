@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "category": "blocks",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "ingredient": "minetale:marble",
+  "result": {
+    "id": "minetale:smooth_marble"
+  }
+}

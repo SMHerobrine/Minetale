@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minetale:marble_bricks",
+  "result": {
+    "count": 2,
+    "id": "minetale:marble_bricks_slab"
+  }
+}
