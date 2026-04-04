@@ -3,13 +3,13 @@
 	"id": "minetale",
 	"version": "${version}",
 	"name": "Minetale",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Adding Hytale to Minecraft",
 	"authors": [
-		"Me!"
+		"SMHerobrine"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://discord.gg/QtcjrEXKDs",
+		"sources": "https://github.com/SMHerobrine/Minetale"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/minetale/icon.png",
