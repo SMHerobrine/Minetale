@@ -15,12 +15,14 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public final class LavaCaveTransformFeature extends Feature<NoneFeatureConfiguration> {
+public final class VolcanicCaveTransformFeature extends Feature<NoneFeatureConfiguration> {
 	private static final int MAX_LAVA_POOL_Y = -10;
+	private static final int MAX_VOLCANIC_CAVE_QUART_Y = 0;
+	private static final int MAX_VOLCANIC_CAVE_BLOCK_Y_EXCLUSIVE = (MAX_VOLCANIC_CAVE_QUART_Y + 1) << 2;
 	private static final int POINTED_LAVA_RADIUS = 2;
 	private static final int LAVA_BLOB_RADIUS = 3;
 
-	public LavaCaveTransformFeature(Codec<NoneFeatureConfiguration> codec) {
+	public VolcanicCaveTransformFeature(Codec<NoneFeatureConfiguration> codec) {
 		super(codec);
 	}
 
@@ -33,7 +35,10 @@ public final class LavaCaveTransformFeature extends Feature<NoneFeatureConfigura
 		int maxX = minX + 15;
 		int maxZ = minZ + 15;
 		int minY = level.getMinY();
-		int maxY = level.getMaxY();
+		int maxY = Math.min(level.getMaxY(), MAX_VOLCANIC_CAVE_BLOCK_Y_EXCLUSIVE);
+		if (minY >= maxY) {
+			return false;
+		}
 		boolean changed = false;
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
@@ -41,7 +46,7 @@ public final class LavaCaveTransformFeature extends Feature<NoneFeatureConfigura
 			for (int z = minZ; z <= maxZ; z++) {
 				for (int x = minX; x <= maxX; x++) {
 					pos.set(x, y, z);
-					if (!level.getBiome(pos).is(MinetaleBiomes.LAVA_CAVE)) {
+					if (!level.getBiome(pos).is(MinetaleBiomes.VOLCANIC_CAVE)) {
 						continue;
 					}
 
@@ -230,7 +235,7 @@ public final class LavaCaveTransformFeature extends Feature<NoneFeatureConfigura
 		BlockPos.MutableBlockPos neighbor = new BlockPos.MutableBlockPos();
 		for (Direction direction : Direction.values()) {
 			neighbor.setWithOffset(pos, direction);
-			if (!level.getBiome(neighbor).is(MinetaleBiomes.LAVA_CAVE)) {
+			if (!level.getBiome(neighbor).is(MinetaleBiomes.VOLCANIC_CAVE)) {
 				return true;
 			}
 		}

@@ -18,22 +18,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MultiNoiseBiomeSource.class)
 abstract class MultiNoiseBiomeSourceMixin {
-	private static final int MAX_LAVA_CAVE_QUART_Y = 0;
+	private static final int MAX_VOLCANIC_CAVE_QUART_Y = 0;
 
 	@Shadow
 	@Final
 	private Either<Climate.ParameterList<Holder<Biome>>, Holder<MultiNoiseBiomeSourceParameterList>> parameters;
 
 	@Inject(method = "getNoiseBiome(IIILnet/minecraft/world/level/biome/Climate$Sampler;)Lnet/minecraft/core/Holder;", at = @At("RETURN"), cancellable = true)
-	private void minetale$limitLavaCaveHeight(int quartX, int quartY, int quartZ, Climate.Sampler sampler,
+	private void minetale$limitVolcanicCaveHeight(int quartX, int quartY, int quartZ, Climate.Sampler sampler,
 		CallbackInfoReturnable<Holder<Biome>> cir) {
 		Holder<Biome> biome = cir.getReturnValue();
-		if (quartY <= MAX_LAVA_CAVE_QUART_Y || !biome.is(MinetaleBiomes.LAVA_CAVE)) {
+		if (quartY <= MAX_VOLCANIC_CAVE_QUART_Y || !biome.is(MinetaleBiomes.VOLCANIC_CAVE)) {
 			return;
 		}
 
 		Climate.TargetPoint target = sampler.sample(quartX, quartY, quartZ);
-		Holder<Biome> fallback = nearestNonLavaCaveBiome(this.minetale$parameters(), target);
+		Holder<Biome> fallback = nearestNonVolcanicCaveBiome(this.minetale$parameters(), target);
 		if (fallback != null) {
 			cir.setReturnValue(fallback);
 		}
@@ -43,13 +43,13 @@ abstract class MultiNoiseBiomeSourceMixin {
 		return this.parameters.map(direct -> direct, preset -> preset.value().parameters());
 	}
 
-	private static Holder<Biome> nearestNonLavaCaveBiome(Climate.ParameterList<Holder<Biome>> parameters, Climate.TargetPoint target) {
+	private static Holder<Biome> nearestNonVolcanicCaveBiome(Climate.ParameterList<Holder<Biome>> parameters, Climate.TargetPoint target) {
 		Holder<Biome> bestBiome = null;
 		long bestFitness = Long.MAX_VALUE;
 
 		for (Pair<Climate.ParameterPoint, Holder<Biome>> entry : parameters.values()) {
 			Holder<Biome> biome = entry.getSecond();
-			if (biome.is(MinetaleBiomes.LAVA_CAVE)) {
+			if (biome.is(MinetaleBiomes.VOLCANIC_CAVE)) {
 				continue;
 			}
 

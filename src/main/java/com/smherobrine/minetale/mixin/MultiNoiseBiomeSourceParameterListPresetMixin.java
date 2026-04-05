@@ -17,7 +17,7 @@ import java.util.function.Function;
 @Mixin(targets = "net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList$Preset")
 abstract class MultiNoiseBiomeSourceParameterListPresetMixin {
 	@Inject(method = "generateOverworldBiomes", at = @At("RETURN"), cancellable = true)
-	private static <T> void minetale$addLavaCaveBiome(Function<ResourceKey<Biome>, T> function,
+	private static <T> void minetale$addVolcanicCaveBiome(Function<ResourceKey<Biome>, T> function,
 		CallbackInfoReturnable<Climate.ParameterList<T>> cir) {
 		List<Pair<Climate.ParameterPoint, T>> values = new ArrayList<>(cir.getReturnValue().values());
 		values.add(Pair.of(
@@ -30,7 +30,7 @@ abstract class MultiNoiseBiomeSourceParameterListPresetMixin {
 				Climate.Parameter.span(-1.0F, 1.0F),
 				0.0F
 			),
-			function.apply(MinetaleBiomes.LAVA_CAVE)
+			function.apply(MinetaleBiomes.VOLCANIC_CAVE)
 		));
 		cir.setReturnValue(new Climate.ParameterList<>(values));
 	}
