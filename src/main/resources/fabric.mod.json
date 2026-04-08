@@ -11,7 +11,7 @@
 		"homepage": "https://discord.gg/QtcjrEXKDs",
 		"sources": "https://github.com/SMHerobrine/Minetale"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/minetale/icon.png",
 	"environment": "*",
 	"entrypoints": {

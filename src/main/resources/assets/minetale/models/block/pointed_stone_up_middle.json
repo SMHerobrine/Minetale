@@ -1,0 +1,7 @@
+{
+  "parent": "minetale:block/template/up_middle",
+  "textures": {
+    "all": "minecraft:block/stone",
+    "particle": "minecraft:block/stone"
+  }
+}

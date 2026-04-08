@@ -1,0 +1,7 @@
+{
+  "parent": "minetale:block/template/up_middle",
+  "textures": {
+    "all": "minecraft:block/diorite",
+    "particle": "minecraft:block/diorite"
+  }
+}

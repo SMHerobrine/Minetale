@@ -1,0 +1,31 @@
+{
+  "credit": "Created by Stridey",
+  "textures": {
+    "particle": "#particle"
+  },
+  "elements": [
+    {
+      "from": [3, 8, 3],
+      "to": [13, 16, 13],
+      "faces": {
+        "north": { "uv": [3, 0, 13, 8], "texture": "#all" },
+        "east": { "uv": [3, 0, 13, 8], "texture": "#all" },
+        "south": { "uv": [3, 0, 13, 8], "texture": "#all" },
+        "west": { "uv": [3, 0, 13, 8], "texture": "#all" },
+        "up": { "uv": [3, 3, 13, 13], "texture": "#all", "cullface": "up" }
+      }
+    },
+    {
+      "from": [2, 0, 2],
+      "to": [14, 8, 14],
+      "faces": {
+        "north": { "uv": [2, 8, 14, 16], "texture": "#all" },
+        "east": { "uv": [2, 8, 14, 16], "texture": "#all" },
+        "south": { "uv": [2, 8, 14, 16], "texture": "#all" },
+        "west": { "uv": [2, 8, 14, 16], "texture": "#all" },
+        "up": { "uv": [2, 2, 14, 14], "texture": "#all" },
+        "down": { "uv": [2, 2, 14, 14], "texture": "#all", "cullface": "down" }
+      }
+    }
+  ]
+}

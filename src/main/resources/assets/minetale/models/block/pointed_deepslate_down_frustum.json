@@ -1,0 +1,7 @@
+{
+  "parent": "minetale:block/template/down_frustum",
+  "textures": {
+    "all": "minecraft:block/deepslate",
+    "particle": "minecraft:block/deepslate"
+  }
+}

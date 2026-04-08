@@ -1,0 +1,7 @@
+{
+  "parent": "minetale:block/template/up_base",
+  "textures": {
+    "all": "minecraft:block/andesite",
+    "particle": "minecraft:block/andesite"
+  }
+}
