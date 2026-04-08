@@ -119,6 +119,10 @@ public final class MinetaleBlocks {
 		new Block(copyProperties("chiseled_marble", Blocks.CHISELED_QUARTZ_BLOCK)));
 	public static final Block CHISELED_MARBLE_BRICKS = registerBlock("chiseled_marble_bricks",
 		new Block(copyProperties("chiseled_marble_bricks", Blocks.CHISELED_STONE_BRICKS)));
+	public static final Block CHALK = registerBlock("chalk",
+		new Block(copyProperties("chalk", Blocks.CALCITE)));
+	public static final Block MOSSY_STONE = registerBlock("mossy_stone",
+		new Block(copyProperties("mossy_stone", Blocks.MOSSY_COBBLESTONE)));
 	public static final Block VOLCANIC_ROCK = registerBlock("volcanic_rock",
 		new Block(copyProperties("volcanic_rock", Blocks.DEEPSLATE)));
 	public static final Block CRACKED_VOLCANIC_ROCK = registerBlock("cracked_volcanic_rock",
@@ -207,10 +211,14 @@ public final class MinetaleBlocks {
 			entries.accept(CRACKED_MARBLE_BRICKS);
 			entries.accept(CHISELED_MARBLE);
 			entries.accept(CHISELED_MARBLE_BRICKS);
+			entries.accept(CHALK);
+			entries.accept(MOSSY_STONE);
 			entries.accept(VOLCANIC_ROCK);
 			entries.accept(CRACKED_VOLCANIC_ROCK);
 		});
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(entries -> {
+			entries.accept(CHALK);
+			entries.accept(MOSSY_STONE);
 			entries.accept(VOLCANIC_ROCK);
 			entries.accept(CRACKED_VOLCANIC_ROCK);
 			entries.accept(VOLCANIC_COAL_ORE);
