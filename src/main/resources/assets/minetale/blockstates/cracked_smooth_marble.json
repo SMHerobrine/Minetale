@@ -1,1 +1,22 @@
-{"variants":{"":{"model":"minetale:block/cracked_smooth_marble"}}}
+{
+  "variants": {
+    "": [
+      {
+        "model": "minetale:block/cracked_smooth_marble"
+      },
+      {
+        "model": "minetale:block/cracked_smooth_marble",
+        "y": 90
+      },
+      {
+        "model": "minetale:block/cracked_smooth_marble",
+        "x": 90
+      },
+      {
+        "model": "minetale:block/cracked_smooth_marble",
+        "x": 90,
+        "y": 90
+      }
+    ]
+  }
+}

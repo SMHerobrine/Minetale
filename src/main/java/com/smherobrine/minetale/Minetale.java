@@ -1,7 +1,6 @@
 package com.smherobrine.minetale;
 
 import com.smherobrine.minetale.block.MinetaleBlocks;
-import com.smherobrine.minetale.worldgen.MinetaleWorldgen;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,6 @@ public class Minetale implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		MinetaleBlocks.initialize();
-		MinetaleWorldgen.initialize();
 		LOGGER.info("Registered the amber wood set for {}", MOD_ID);
 	}
 }
