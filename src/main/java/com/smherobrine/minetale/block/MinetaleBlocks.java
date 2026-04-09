@@ -101,10 +101,20 @@ public final class MinetaleBlocks {
 		new WallBlock(copyProperties("cobbled_marble_wall", Blocks.COBBLESTONE_WALL)));
 	public static final Block SMOOTH_MARBLE = registerBlock("smooth_marble",
 		new Block(copyProperties("smooth_marble", Blocks.SMOOTH_STONE)));
+	public static final Block SMOOTH_MARBLE_STAIRS = registerBlock("smooth_marble_stairs",
+		new StairBlock(SMOOTH_MARBLE.defaultBlockState(), copyProperties("smooth_marble_stairs", Blocks.STONE_STAIRS)));
 	public static final Block SMOOTH_MARBLE_SLAB = registerBlock("smooth_marble_slab",
 		new SlabBlock(copyProperties("smooth_marble_slab", Blocks.SMOOTH_STONE_SLAB)));
+	public static final Block SMOOTH_MARBLE_WALL = registerBlock("smooth_marble_wall",
+		new WallBlock(copyProperties("smooth_marble_wall", Blocks.COBBLESTONE_WALL)));
 	public static final Block CRACKED_SMOOTH_MARBLE = registerBlock("cracked_smooth_marble",
 		new Block(copyProperties("cracked_smooth_marble", Blocks.SMOOTH_STONE)));
+	public static final Block CRACKED_SMOOTH_MARBLE_STAIRS = registerBlock("cracked_smooth_marble_stairs",
+		new StairBlock(CRACKED_SMOOTH_MARBLE.defaultBlockState(), copyProperties("cracked_smooth_marble_stairs", Blocks.STONE_STAIRS)));
+	public static final Block CRACKED_SMOOTH_MARBLE_SLAB = registerBlock("cracked_smooth_marble_slab",
+		new SlabBlock(copyProperties("cracked_smooth_marble_slab", Blocks.STONE_SLAB)));
+	public static final Block CRACKED_SMOOTH_MARBLE_WALL = registerBlock("cracked_smooth_marble_wall",
+		new WallBlock(copyProperties("cracked_smooth_marble_wall", Blocks.COBBLESTONE_WALL)));
 	public static final Block MARBLE_BRICKS = registerBlock("marble_bricks",
 		new Block(copyProperties("marble_bricks", Blocks.STONE_BRICKS)));
 	public static final Block MARBLE_BRICKS_STAIRS = registerBlock("marble_bricks_stairs",
@@ -121,8 +131,16 @@ public final class MinetaleBlocks {
 		new Block(copyProperties("chiseled_marble_bricks", Blocks.CHISELED_STONE_BRICKS)));
 	public static final Block CHALK = registerBlock("chalk",
 		new Block(copyProperties("chalk", Blocks.CALCITE)));
+	public static final Block STONE_WALL = registerBlock("stone_wall",
+		new WallBlock(copyProperties("stone_wall", Blocks.COBBLESTONE_WALL)));
 	public static final Block MOSSY_STONE = registerBlock("mossy_stone",
 		new Block(copyProperties("mossy_stone", Blocks.MOSSY_COBBLESTONE)));
+	public static final Block MOSSY_STONE_STAIRS = registerBlock("mossy_stone_stairs",
+		new StairBlock(MOSSY_STONE.defaultBlockState(), copyProperties("mossy_stone_stairs", Blocks.MOSSY_COBBLESTONE_STAIRS)));
+	public static final Block MOSSY_STONE_SLAB = registerBlock("mossy_stone_slab",
+		new SlabBlock(copyProperties("mossy_stone_slab", Blocks.MOSSY_COBBLESTONE_SLAB)));
+	public static final Block MOSSY_STONE_WALL = registerBlock("mossy_stone_wall",
+		new WallBlock(copyProperties("mossy_stone_wall", Blocks.MOSSY_COBBLESTONE_WALL)));
 	public static final Block VOLCANIC_ROCK = registerBlock("volcanic_rock",
 		new Block(copyProperties("volcanic_rock", Blocks.DEEPSLATE)));
 	public static final Block CRACKED_VOLCANIC_ROCK = registerBlock("cracked_volcanic_rock",
@@ -202,8 +220,13 @@ public final class MinetaleBlocks {
 			entries.accept(COBBLED_MARBLE_SLAB);
 			entries.accept(COBBLED_MARBLE_WALL);
 			entries.accept(SMOOTH_MARBLE);
+			entries.accept(SMOOTH_MARBLE_STAIRS);
 			entries.accept(SMOOTH_MARBLE_SLAB);
+			entries.accept(SMOOTH_MARBLE_WALL);
 			entries.accept(CRACKED_SMOOTH_MARBLE);
+			entries.accept(CRACKED_SMOOTH_MARBLE_STAIRS);
+			entries.accept(CRACKED_SMOOTH_MARBLE_SLAB);
+			entries.accept(CRACKED_SMOOTH_MARBLE_WALL);
 			entries.accept(MARBLE_BRICKS);
 			entries.accept(MARBLE_BRICKS_STAIRS);
 			entries.accept(MARBLE_BRICKS_SLAB);
@@ -212,13 +235,20 @@ public final class MinetaleBlocks {
 			entries.accept(CHISELED_MARBLE);
 			entries.accept(CHISELED_MARBLE_BRICKS);
 			entries.accept(CHALK);
+			entries.accept(STONE_WALL);
 			entries.accept(MOSSY_STONE);
+			entries.accept(MOSSY_STONE_STAIRS);
+			entries.accept(MOSSY_STONE_SLAB);
+			entries.accept(MOSSY_STONE_WALL);
 			entries.accept(VOLCANIC_ROCK);
 			entries.accept(CRACKED_VOLCANIC_ROCK);
 		});
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(entries -> {
 			entries.accept(CHALK);
 			entries.accept(MOSSY_STONE);
+			entries.accept(MOSSY_STONE_STAIRS);
+			entries.accept(MOSSY_STONE_SLAB);
+			entries.accept(MOSSY_STONE_WALL);
 			entries.accept(VOLCANIC_ROCK);
 			entries.accept(CRACKED_VOLCANIC_ROCK);
 			entries.accept(VOLCANIC_COAL_ORE);
