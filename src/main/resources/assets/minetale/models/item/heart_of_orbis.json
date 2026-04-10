@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minetale:item/the_heart_of_orbis"
+  },
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [0, 25, 0],
+      "translation": [0, 1, 0],
+      "scale": [1, 1, 1]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, -25, 0],
+      "translation": [0, 1, 0],
+      "scale": [1, 1, 1]
+    },
+    "thirdperson_righthand": {
+      "rotation": [0, 45, 0],
+      "translation": [0, 1, 0],
+      "scale": [1, 1, 1]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [0, -45, 0],
+      "translation": [0, 1, 0],
+      "scale": [1, 1, 1]
+    },
+    "ground": {
+      "translation": [0, 2, 0],
+      "scale": [1, 1, 1]
+    },
+    "gui": {
+      "rotation": [25, 225, 0],
+      "translation": [0, 0, 0],
+      "scale": [1, 1, 1]
+    },
+    "fixed": {
+      "rotation": [0, 180, 0],
+      "translation": [0, 0, 0],
+      "scale": [1, 1, 1]
+    }
+  }
+}

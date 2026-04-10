@@ -21,6 +21,12 @@ public final class MinetaleBlockEntityTypes {
 		FabricBlockEntityTypeBuilder.create(AmberHangingSignBlockEntity::new, MinetaleBlocks.AMBER_HANGING_SIGN, MinetaleBlocks.AMBER_WALL_HANGING_SIGN).build()
 	);
 
+	public static final BlockEntityType<HeartOfOrbisBlockEntity> HEART_OF_ORBIS = Registry.register(
+		BuiltInRegistries.BLOCK_ENTITY_TYPE,
+		Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "heart_of_orbis"),
+		FabricBlockEntityTypeBuilder.create(HeartOfOrbisBlockEntity::new, MinetaleBlocks.HEART_OF_ORBIS).build()
+	);
+
 	private MinetaleBlockEntityTypes() {
 	}
 

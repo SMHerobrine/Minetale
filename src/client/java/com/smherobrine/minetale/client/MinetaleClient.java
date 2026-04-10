@@ -1,6 +1,7 @@
 package com.smherobrine.minetale.client;
 
 import com.smherobrine.minetale.block.entity.MinetaleBlockEntityTypes;
+import com.smherobrine.minetale.client.renderer.HeartOfOrbisRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
@@ -13,5 +14,6 @@ public class MinetaleClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		BlockEntityRendererRegistry.register((BlockEntityType) MinetaleBlockEntityTypes.AMBER_SIGN, context -> new StandingSignRenderer(context));
 		BlockEntityRendererRegistry.register((BlockEntityType) MinetaleBlockEntityTypes.AMBER_HANGING_SIGN, context -> new HangingSignRenderer(context));
+		BlockEntityRendererRegistry.register((BlockEntityType) MinetaleBlockEntityTypes.HEART_OF_ORBIS, HeartOfOrbisRenderer::new);
 	}
 }

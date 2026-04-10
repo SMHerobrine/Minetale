@@ -4,6 +4,7 @@ import com.smherobrine.minetale.block.MinetaleBlocks;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.geckolib.GeckoLibConstants;
 
 public class Minetale implements ModInitializer {
 	public static final String MOD_ID = "minetale";
@@ -15,6 +16,7 @@ public class Minetale implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		GeckoLibConstants.init();
 		MinetaleBlocks.initialize();
 		LOGGER.info("Registered the amber wood set for {}", MOD_ID);
 	}

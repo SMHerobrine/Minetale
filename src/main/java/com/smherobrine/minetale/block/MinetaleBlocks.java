@@ -131,6 +131,10 @@ public final class MinetaleBlocks {
 		new Block(copyProperties("chiseled_marble_bricks", Blocks.CHISELED_STONE_BRICKS)));
 	public static final Block CHALK = registerBlock("chalk",
 		new Block(copyProperties("chalk", Blocks.CALCITE)));
+	public static final Block HEART_OF_ORBIS = registerBlockWithoutItem("heart_of_orbis",
+		new HeartOfOrbisBlock(copyProperties("heart_of_orbis", Blocks.ENCHANTING_TABLE).noOcclusion().dynamicShape()));
+	public static final Item HEART_OF_ORBIS_ITEM = registerItem("heart_of_orbis",
+		new BlockItem(HEART_OF_ORBIS, itemProperties("heart_of_orbis").useBlockDescriptionPrefix()));
 	public static final Block STONE_WALL = registerBlock("stone_wall",
 		new WallBlock(copyProperties("stone_wall", Blocks.COBBLESTONE_WALL)));
 	public static final Block MOSSY_STONE = registerBlock("mossy_stone",
@@ -235,6 +239,7 @@ public final class MinetaleBlocks {
 			entries.accept(CHISELED_MARBLE);
 			entries.accept(CHISELED_MARBLE_BRICKS);
 			entries.accept(CHALK);
+			entries.accept(HEART_OF_ORBIS);
 			entries.accept(STONE_WALL);
 			entries.accept(MOSSY_STONE);
 			entries.accept(MOSSY_STONE_STAIRS);
@@ -276,6 +281,7 @@ public final class MinetaleBlocks {
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> {
 			entries.accept(AMBER_SIGN_ITEM);
 			entries.accept(AMBER_HANGING_SIGN_ITEM);
+			entries.accept(HEART_OF_ORBIS);
 		});
 	}
 
