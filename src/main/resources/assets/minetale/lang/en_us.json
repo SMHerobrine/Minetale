@@ -63,5 +63,7 @@
   "block.minetale.pointed_calcite": "Pointed Calcite",
   "block.minetale.pointed_volcanic_rock": "Pointed Volcanic Rock",
   "item.minetale.amber_sign": "Amber Sign",
-  "item.minetale.amber_hanging_sign": "Amber Hanging Sign"
+  "item.minetale.amber_hanging_sign": "Amber Hanging Sign",
+  "toast.minetale.memory_unlocked.title": "Memory Unlocked",
+  "toast.minetale.memory_unlocked.description": "%s can now be recorded at the Heart of Orbis."
 }

@@ -1,0 +1,10 @@
+{
+  "memories_unlock": {
+    "sounds": [
+      {
+        "name": "minetale:memories_unlock",
+        "stream": false
+      }
+    ]
+  }
+}
