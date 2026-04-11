@@ -27,6 +27,12 @@ public final class MinetaleBlockEntityTypes {
 		FabricBlockEntityTypeBuilder.create(HeartOfOrbisBlockEntity::new, MinetaleBlocks.HEART_OF_ORBIS).build()
 	);
 
+	public static final BlockEntityType<ForgottenTempleGatewayBlockEntity> FORGOTTEN_TEMPLE_GATEWAY = Registry.register(
+		BuiltInRegistries.BLOCK_ENTITY_TYPE,
+		Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "forgotten_temple_gateway"),
+		FabricBlockEntityTypeBuilder.create(ForgottenTempleGatewayBlockEntity::new, MinetaleBlocks.FORGOTTEN_TEMPLE_GATEWAY).build()
+	);
+
 	private MinetaleBlockEntityTypes() {
 	}
 

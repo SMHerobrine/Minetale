@@ -168,6 +168,11 @@ public final class MinetaleBlocks {
 		new Block(copyProperties("chiseled_quartzite_bricks", Blocks.CHISELED_STONE_BRICKS)));
 	public static final Block CHALK = registerBlock("chalk",
 		new Block(copyProperties("chalk", Blocks.CALCITE)));
+	public static final Block FORGOTTEN_TEMPLE_GATEWAY = registerBlock("forgotten_temple_gateway",
+		new ForgottenTempleGatewayBlock(copyProperties("forgotten_temple_gateway", Blocks.STONE)
+			.strength(-1.0F, 3_600_000.0F)
+			.noLootTable()
+			.noOcclusion()));
 	public static final Block HEART_OF_ORBIS = registerBlockWithoutItem("heart_of_orbis",
 		new HeartOfOrbisBlock(copyProperties("heart_of_orbis", Blocks.ENCHANTING_TABLE).noOcclusion().dynamicShape()));
 	public static final Item HEART_OF_ORBIS_ITEM = registerItem("heart_of_orbis",
@@ -294,6 +299,7 @@ public final class MinetaleBlocks {
 			entries.accept(CHISELED_QUARTZITE);
 			entries.accept(CHISELED_QUARTZITE_BRICKS);
 			entries.accept(CHALK);
+			entries.accept(FORGOTTEN_TEMPLE_GATEWAY);
 			entries.accept(STONE_WALL);
 			entries.accept(MOSSY_STONE);
 			entries.accept(MOSSY_STONE_STAIRS);

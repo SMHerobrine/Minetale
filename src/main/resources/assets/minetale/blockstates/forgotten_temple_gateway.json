@@ -1,0 +1,85 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part_x": "1",
+        "part_z": "1"
+      },
+      "apply": {
+        "model": "minetale:block/forgotten_temple_gateway"
+      }
+    },
+    {
+      "when": {
+        "part_x": "0",
+        "part_z": "0"
+      },
+      "apply": {
+        "model": "minetale:block/forgotten_temple_gateway_helper"
+      }
+    },
+    {
+      "when": {
+        "part_x": "0",
+        "part_z": "1"
+      },
+      "apply": {
+        "model": "minetale:block/forgotten_temple_gateway_helper"
+      }
+    },
+    {
+      "when": {
+        "part_x": "0",
+        "part_z": "2"
+      },
+      "apply": {
+        "model": "minetale:block/forgotten_temple_gateway_helper"
+      }
+    },
+    {
+      "when": {
+        "part_x": "1",
+        "part_z": "0"
+      },
+      "apply": {
+        "model": "minetale:block/forgotten_temple_gateway_helper"
+      }
+    },
+    {
+      "when": {
+        "part_x": "1",
+        "part_z": "2"
+      },
+      "apply": {
+        "model": "minetale:block/forgotten_temple_gateway_helper"
+      }
+    },
+    {
+      "when": {
+        "part_x": "2",
+        "part_z": "0"
+      },
+      "apply": {
+        "model": "minetale:block/forgotten_temple_gateway_helper"
+      }
+    },
+    {
+      "when": {
+        "part_x": "2",
+        "part_z": "1"
+      },
+      "apply": {
+        "model": "minetale:block/forgotten_temple_gateway_helper"
+      }
+    },
+    {
+      "when": {
+        "part_x": "2",
+        "part_z": "2"
+      },
+      "apply": {
+        "model": "minetale:block/forgotten_temple_gateway_helper"
+      }
+    }
+  ]
+}
