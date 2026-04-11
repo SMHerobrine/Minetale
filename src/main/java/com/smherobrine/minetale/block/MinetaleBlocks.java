@@ -130,6 +130,42 @@ public final class MinetaleBlocks {
 		new Block(copyProperties("chiseled_marble", Blocks.CHISELED_QUARTZ_BLOCK)));
 	public static final Block CHISELED_MARBLE_BRICKS = registerBlock("chiseled_marble_bricks",
 		new Block(copyProperties("chiseled_marble_bricks", Blocks.CHISELED_STONE_BRICKS)));
+	public static final Block QUARTZITE = registerBlock("quartzite",
+		new Block(copyProperties("quartzite", Blocks.STONE)));
+	public static final Block QUARTZITE_STAIRS = registerBlock("quartzite_stairs",
+		new StairBlock(QUARTZITE.defaultBlockState(), copyProperties("quartzite_stairs", Blocks.POLISHED_ANDESITE_STAIRS)));
+	public static final Block QUARTZITE_SLAB = registerBlock("quartzite_slab",
+		new SlabBlock(copyProperties("quartzite_slab", Blocks.STONE_SLAB)));
+	public static final Block QUARTZITE_WALL = registerBlock("quartzite_wall",
+		new WallBlock(copyProperties("quartzite_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block COBBLED_QUARTZITE = registerBlock("cobbled_quartzite",
+		new Block(copyProperties("cobbled_quartzite", Blocks.COBBLESTONE)));
+	public static final Block COBBLED_QUARTZITE_STAIRS = registerBlock("cobbled_quartzite_stairs",
+		new StairBlock(COBBLED_QUARTZITE.defaultBlockState(), copyProperties("cobbled_quartzite_stairs", Blocks.COBBLESTONE_STAIRS)));
+	public static final Block COBBLED_QUARTZITE_SLAB = registerBlock("cobbled_quartzite_slab",
+		new SlabBlock(copyProperties("cobbled_quartzite_slab", Blocks.COBBLESTONE_SLAB)));
+	public static final Block COBBLED_QUARTZITE_WALL = registerBlock("cobbled_quartzite_wall",
+		new WallBlock(copyProperties("cobbled_quartzite_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block SMOOTH_QUARTZITE = registerBlock("smooth_quartzite",
+		new Block(copyProperties("smooth_quartzite", Blocks.SMOOTH_STONE)));
+	public static final Block SMOOTH_QUARTZITE_STAIRS = registerBlock("smooth_quartzite_stairs",
+		new StairBlock(SMOOTH_QUARTZITE.defaultBlockState(), copyProperties("smooth_quartzite_stairs", Blocks.STONE_STAIRS)));
+	public static final Block SMOOTH_QUARTZITE_SLAB = registerBlock("smooth_quartzite_slab",
+		new SlabBlock(copyProperties("smooth_quartzite_slab", Blocks.SMOOTH_STONE_SLAB)));
+	public static final Block SMOOTH_QUARTZITE_WALL = registerBlock("smooth_quartzite_wall",
+		new WallBlock(copyProperties("smooth_quartzite_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block QUARTZITE_BRICKS = registerBlock("quartzite_bricks",
+		new Block(copyProperties("quartzite_bricks", Blocks.STONE_BRICKS)));
+	public static final Block QUARTZITE_BRICKS_STAIRS = registerBlock("quartzite_bricks_stairs",
+		new StairBlock(QUARTZITE_BRICKS.defaultBlockState(), copyProperties("quartzite_bricks_stairs", Blocks.STONE_BRICK_STAIRS)));
+	public static final Block QUARTZITE_BRICKS_SLAB = registerBlock("quartzite_bricks_slab",
+		new SlabBlock(copyProperties("quartzite_bricks_slab", Blocks.STONE_BRICK_SLAB)));
+	public static final Block QUARTZITE_BRICKS_WALL = registerBlock("quartzite_bricks_wall",
+		new WallBlock(copyProperties("quartzite_bricks_wall", Blocks.STONE_BRICK_WALL)));
+	public static final Block CHISELED_QUARTZITE = registerBlock("chiseled_quartzite",
+		new Block(copyProperties("chiseled_quartzite", Blocks.CHISELED_QUARTZ_BLOCK)));
+	public static final Block CHISELED_QUARTZITE_BRICKS = registerBlock("chiseled_quartzite_bricks",
+		new Block(copyProperties("chiseled_quartzite_bricks", Blocks.CHISELED_STONE_BRICKS)));
 	public static final Block CHALK = registerBlock("chalk",
 		new Block(copyProperties("chalk", Blocks.CALCITE)));
 	public static final Block HEART_OF_ORBIS = registerBlockWithoutItem("heart_of_orbis",
@@ -239,6 +275,24 @@ public final class MinetaleBlocks {
 			entries.accept(CRACKED_MARBLE_BRICKS);
 			entries.accept(CHISELED_MARBLE);
 			entries.accept(CHISELED_MARBLE_BRICKS);
+			entries.accept(QUARTZITE);
+			entries.accept(QUARTZITE_STAIRS);
+			entries.accept(QUARTZITE_SLAB);
+			entries.accept(QUARTZITE_WALL);
+			entries.accept(COBBLED_QUARTZITE);
+			entries.accept(COBBLED_QUARTZITE_STAIRS);
+			entries.accept(COBBLED_QUARTZITE_SLAB);
+			entries.accept(COBBLED_QUARTZITE_WALL);
+			entries.accept(SMOOTH_QUARTZITE);
+			entries.accept(SMOOTH_QUARTZITE_STAIRS);
+			entries.accept(SMOOTH_QUARTZITE_SLAB);
+			entries.accept(SMOOTH_QUARTZITE_WALL);
+			entries.accept(QUARTZITE_BRICKS);
+			entries.accept(QUARTZITE_BRICKS_STAIRS);
+			entries.accept(QUARTZITE_BRICKS_SLAB);
+			entries.accept(QUARTZITE_BRICKS_WALL);
+			entries.accept(CHISELED_QUARTZITE);
+			entries.accept(CHISELED_QUARTZITE_BRICKS);
 			entries.accept(CHALK);
 			entries.accept(STONE_WALL);
 			entries.accept(MOSSY_STONE);

@@ -1,0 +1,41 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"texture_size": [128, 192],
+	"textures": {
+		"0": "forgotten_temple_gatewat"
+	},
+	"elements": [
+		{
+			"name": "Block",
+			"from": [-16, 0, -16],
+			"to": [32, 8, 32],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 4, 7]},
+			"faces": {
+				"north": {"uv": [7.625, 5.33333, 0.375, 6], "texture": "#0"},
+				"east": {"uv": [0.375, 5.33333, 7.625, 6], "texture": "#0"},
+				"south": {"uv": [0.375, 5.33333, 7.625, 6], "texture": "#0"},
+				"west": {"uv": [7.625, 5.33333, 0.375, 6], "texture": "#0"},
+				"up": {"uv": [0.375, 0.25, 7.625, 5.08333], "texture": "#0"},
+				"down": {"uv": [8.375, 0.16667, 15.625, 5], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "Base",
+			"origin": [8, 4, 7],
+			"scope": 0,
+			"color": 1,
+			"children": [
+				{
+					"name": "Block",
+					"origin": [8, 10, 7],
+					"scope": 0,
+					"color": 8,
+					"children": [0]
+				}
+			]
+		}
+	]
+}
