@@ -1,6 +1,9 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "minetale:item/heart_of_orbis"
+    "type": "minecraft:special",
+    "base": "minetale:item/heart_of_orbis",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
   }
 }

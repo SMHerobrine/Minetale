@@ -28,11 +28,35 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
 
 public class HeartOfOrbisBlock extends BaseEntityBlock {
 	public static final MapCodec<HeartOfOrbisBlock> CODEC = simpleCodec(HeartOfOrbisBlock::new);
 	private static final int HEIGHT = 4;
-	private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+	private static final VoxelShape[] SHAPES = new VoxelShape[] {
+		Shapes.or(
+			Block.box(-12.0D, 0.0D, -8.0D, 28.0D, 7.0D, 18.0D),
+			Block.box(-8.0D, 7.0D, -6.0D, 24.0D, 16.0D, 14.0D)
+		),
+		Shapes.or(
+			Block.box(-8.0D, 0.0D, -10.0D, 24.0D, 16.0D, 8.0D),
+			Block.box(-4.0D, 0.0D, 8.0D, 20.0D, 14.0D, 16.0D),
+			Block.box(-13.0D, 2.0D, 2.0D, -6.0D, 15.0D, 12.0D),
+			Block.box(22.0D, 2.0D, 2.0D, 29.0D, 15.0D, 12.0D)
+		),
+		Shapes.or(
+			Block.box(-16.0D, 0.0D, -18.0D, 32.0D, 16.0D, 6.0D),
+			Block.box(-12.0D, 0.0D, 4.0D, 28.0D, 15.0D, 16.0D),
+			Block.box(-20.0D, 3.0D, -8.0D, -8.0D, 13.0D, 4.0D),
+			Block.box(24.0D, 3.0D, -8.0D, 36.0D, 13.0D, 4.0D)
+		),
+		Shapes.or(
+			Block.box(-14.0D, 0.0D, -18.0D, 30.0D, 13.0D, 4.0D),
+			Block.box(-10.0D, 0.0D, 2.0D, 26.0D, 12.0D, 16.0D),
+			Block.box(-18.0D, 2.0D, -8.0D, -8.0D, 12.0D, 2.0D),
+			Block.box(24.0D, 2.0D, -8.0D, 34.0D, 12.0D, 2.0D)
+		)
+	};
 	private static final Component MENU_TITLE = Component.translatable("block.minetale.heart_of_orbis");
 	private static final IntegerProperty PART = IntegerProperty.create("part", 0, HEIGHT - 1);
 
@@ -58,12 +82,12 @@ public class HeartOfOrbisBlock extends BaseEntityBlock {
 
 	@Override
 	protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPE;
+		return getPartShape(state);
 	}
 
 	@Override
 	protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPE;
+		return getPartShape(state);
 	}
 
 	@Override
@@ -146,5 +170,9 @@ public class HeartOfOrbisBlock extends BaseEntityBlock {
 
 	private static BlockPos getBasePos(BlockPos pos, BlockState state) {
 		return pos.below(state.getValue(PART));
+	}
+
+	private static VoxelShape getPartShape(BlockState state) {
+		return SHAPES[state.getValue(PART)];
 	}
 }

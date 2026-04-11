@@ -2,6 +2,7 @@ package com.smherobrine.minetale.block;
 
 import com.smherobrine.minetale.Minetale;
 import com.smherobrine.minetale.block.entity.MinetaleBlockEntityTypes;
+import com.smherobrine.minetale.item.HeartOfOrbisItem;
 import com.smherobrine.minetale.item.MinetaleItemGroups;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
@@ -134,7 +135,7 @@ public final class MinetaleBlocks {
 	public static final Block HEART_OF_ORBIS = registerBlockWithoutItem("heart_of_orbis",
 		new HeartOfOrbisBlock(copyProperties("heart_of_orbis", Blocks.ENCHANTING_TABLE).noOcclusion().dynamicShape()));
 	public static final Item HEART_OF_ORBIS_ITEM = registerItem("heart_of_orbis",
-		new BlockItem(HEART_OF_ORBIS, itemProperties("heart_of_orbis").useBlockDescriptionPrefix()));
+		new HeartOfOrbisItem(HEART_OF_ORBIS, itemProperties("heart_of_orbis").useBlockDescriptionPrefix()));
 	public static final Block STONE_WALL = registerBlock("stone_wall",
 		new WallBlock(copyProperties("stone_wall", Blocks.COBBLESTONE_WALL)));
 	public static final Block MOSSY_STONE = registerBlock("mossy_stone",
@@ -239,7 +240,6 @@ public final class MinetaleBlocks {
 			entries.accept(CHISELED_MARBLE);
 			entries.accept(CHISELED_MARBLE_BRICKS);
 			entries.accept(CHALK);
-			entries.accept(HEART_OF_ORBIS);
 			entries.accept(STONE_WALL);
 			entries.accept(MOSSY_STONE);
 			entries.accept(MOSSY_STONE_STAIRS);
