@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minetale:chalk_bricks",
+  "result": {
+    "count": 1,
+    "id": "minetale:chalk_bricks_stairs"
+  }
+}

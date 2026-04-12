@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minetale:smooth_chalk",
+  "result": {
+    "count": 2,
+    "id": "minetale:smooth_chalk_slab"
+  }
+}

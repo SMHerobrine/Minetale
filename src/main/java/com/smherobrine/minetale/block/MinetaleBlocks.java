@@ -168,6 +168,30 @@ public final class MinetaleBlocks {
 		new Block(copyProperties("chiseled_quartzite_bricks", Blocks.CHISELED_STONE_BRICKS)));
 	public static final Block CHALK = registerBlock("chalk",
 		new Block(copyProperties("chalk", Blocks.CALCITE)));
+	public static final Block CHALK_STAIRS = registerBlock("chalk_stairs",
+		new StairBlock(CHALK.defaultBlockState(), copyProperties("chalk_stairs", Blocks.POLISHED_ANDESITE_STAIRS)));
+	public static final Block CHALK_SLAB = registerBlock("chalk_slab",
+		new SlabBlock(copyProperties("chalk_slab", Blocks.STONE_SLAB)));
+	public static final Block CHALK_WALL = registerBlock("chalk_wall",
+		new WallBlock(copyProperties("chalk_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block CHALK_BRICKS = registerBlock("chalk_bricks",
+		new Block(copyProperties("chalk_bricks", Blocks.STONE_BRICKS)));
+	public static final Block CHALK_BRICKS_STAIRS = registerBlock("chalk_bricks_stairs",
+		new StairBlock(CHALK_BRICKS.defaultBlockState(), copyProperties("chalk_bricks_stairs", Blocks.STONE_BRICK_STAIRS)));
+	public static final Block CHALK_BRICKS_SLAB = registerBlock("chalk_bricks_slab",
+		new SlabBlock(copyProperties("chalk_bricks_slab", Blocks.STONE_BRICK_SLAB)));
+	public static final Block CHALK_BRICKS_WALL = registerBlock("chalk_bricks_wall",
+		new WallBlock(copyProperties("chalk_bricks_wall", Blocks.STONE_BRICK_WALL)));
+	public static final Block CHISELED_CHALK_BRICKS = registerBlock("chiseled_chalk_bricks",
+		new Block(copyProperties("chiseled_chalk_bricks", Blocks.CHISELED_STONE_BRICKS)));
+	public static final Block SMOOTH_CHALK = registerBlock("smooth_chalk",
+		new Block(copyProperties("smooth_chalk", Blocks.SMOOTH_STONE)));
+	public static final Block SMOOTH_CHALK_STAIRS = registerBlock("smooth_chalk_stairs",
+		new StairBlock(SMOOTH_CHALK.defaultBlockState(), copyProperties("smooth_chalk_stairs", Blocks.STONE_STAIRS)));
+	public static final Block SMOOTH_CHALK_SLAB = registerBlock("smooth_chalk_slab",
+		new SlabBlock(copyProperties("smooth_chalk_slab", Blocks.SMOOTH_STONE_SLAB)));
+	public static final Block SMOOTH_CHALK_WALL = registerBlock("smooth_chalk_wall",
+		new WallBlock(copyProperties("smooth_chalk_wall", Blocks.COBBLESTONE_WALL)));
 	public static final Block FORGOTTEN_TEMPLE_GATEWAY = registerBlock("forgotten_temple_gateway",
 		new ForgottenTempleGatewayBlock(copyProperties("forgotten_temple_gateway", Blocks.STONE)
 			.strength(-1.0F, 3_600_000.0F)
@@ -299,6 +323,18 @@ public final class MinetaleBlocks {
 			entries.accept(CHISELED_QUARTZITE);
 			entries.accept(CHISELED_QUARTZITE_BRICKS);
 			entries.accept(CHALK);
+			entries.accept(CHALK_STAIRS);
+			entries.accept(CHALK_SLAB);
+			entries.accept(CHALK_WALL);
+			entries.accept(CHALK_BRICKS);
+			entries.accept(CHALK_BRICKS_STAIRS);
+			entries.accept(CHALK_BRICKS_SLAB);
+			entries.accept(CHALK_BRICKS_WALL);
+			entries.accept(CHISELED_CHALK_BRICKS);
+			entries.accept(SMOOTH_CHALK);
+			entries.accept(SMOOTH_CHALK_STAIRS);
+			entries.accept(SMOOTH_CHALK_SLAB);
+			entries.accept(SMOOTH_CHALK_WALL);
 			entries.accept(FORGOTTEN_TEMPLE_GATEWAY);
 			entries.accept(STONE_WALL);
 			entries.accept(MOSSY_STONE);
