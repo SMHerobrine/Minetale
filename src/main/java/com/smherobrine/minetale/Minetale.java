@@ -6,6 +6,7 @@ import com.smherobrine.minetale.orbis.MemoryUnlockTracker;
 import com.smherobrine.minetale.orbis.MinetaleSoundEvents;
 import com.smherobrine.minetale.orbis.OrbisMemoryRewards;
 import com.smherobrine.minetale.orbis.OrbisNetworking;
+import com.smherobrine.minetale.world.EdgeOfTheEchoProtection;
 import com.geckolib.GeckoLibConstants;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ public class Minetale implements ModInitializer {
 		OrbisMemoryRewards.initialize();
 		OrbisNetworking.initialize();
 		MemoryUnlockTracker.initialize();
+		EdgeOfTheEchoProtection.initialize();
 		MinetaleMenuTypes.initialize();
 		MinetaleBlocks.initialize();
 	}

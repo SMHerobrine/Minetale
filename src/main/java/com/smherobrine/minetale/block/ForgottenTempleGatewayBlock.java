@@ -1,9 +1,13 @@
 package com.smherobrine.minetale.block;
 
 import com.smherobrine.minetale.block.entity.ForgottenTempleGatewayBlockEntity;
+import com.smherobrine.minetale.world.EdgeOfTheEchoDimension;
+import com.smherobrine.minetale.world.EdgeOfTheEchoGatewayTracker;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -30,6 +34,8 @@ public final class ForgottenTempleGatewayBlock extends BaseEntityBlock {
 	private static final IntegerProperty PART_X = IntegerProperty.create("part_x", 0, 2);
 	private static final IntegerProperty PART_Z = IntegerProperty.create("part_z", 0, 2);
 	private static final VoxelShape PART_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
+	public static final java.util.function.Supplier<IntegerProperty> PART_X_ACCESSOR = () -> PART_X;
+	public static final java.util.function.Supplier<IntegerProperty> PART_Z_ACCESSOR = () -> PART_Z;
 
 	public ForgottenTempleGatewayBlock(BlockBehaviour.Properties properties) {
 		super(properties);
@@ -89,20 +95,30 @@ public final class ForgottenTempleGatewayBlock extends BaseEntityBlock {
 	@Override
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
 		if (!level.isClientSide()) {
-			boolean nextActive = !state.getValue(ACTIVE);
-			BlockPos centerPos = getCenterPos(pos, state);
-			for (int partX = 0; partX < 3; partX++) {
-				for (int partZ = 0; partZ < 3; partZ++) {
-					BlockPos partPos = centerPos.offset(partX - 1, 0, partZ - 1);
-					BlockState partState = level.getBlockState(partPos);
-					if (partState.is(this)) {
-						level.setBlock(partPos, partState.setValue(ACTIVE, nextActive), Block.UPDATE_ALL);
-					}
-				}
-			}
+			setActive(level, getCenterPos(pos, state), !state.getValue(ACTIVE));
 		}
 
 		return InteractionResult.SUCCESS;
+	}
+
+	@Override
+	public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+		super.stepOn(level, pos, state, entity);
+		if (level.isClientSide() || !state.getValue(ACTIVE) || !isCenter(state) || !(entity instanceof net.minecraft.server.level.ServerPlayer serverPlayer)) {
+			return;
+		}
+
+		if (EdgeOfTheEchoGatewayTracker.isOnCooldown(serverPlayer)) {
+			return;
+		}
+
+		boolean teleported = level.dimension() == EdgeOfTheEchoDimension.LEVEL_KEY
+			? EdgeOfTheEchoDimension.returnFromGateway(serverPlayer)
+			: EdgeOfTheEchoDimension.teleportFromGateway(serverPlayer, level.dimension(), pos);
+
+		if (!teleported) {
+			serverPlayer.sendSystemMessage(Component.literal("The Edge of the Echo could not be reached."));
+		}
 	}
 
 	@Override
@@ -148,6 +164,18 @@ public final class ForgottenTempleGatewayBlock extends BaseEntityBlock {
 				BlockState partState = level.getBlockState(partPos);
 				if (partState.is(state.getBlock())) {
 					level.destroyBlock(partPos, false, player);
+				}
+			}
+		}
+	}
+
+	private static void setActive(Level level, BlockPos centerPos, boolean active) {
+		for (int partX = 0; partX < 3; partX++) {
+			for (int partZ = 0; partZ < 3; partZ++) {
+				BlockPos partPos = centerPos.offset(partX - 1, 0, partZ - 1);
+				BlockState partState = level.getBlockState(partPos);
+				if (partState.is(MinetaleBlocks.FORGOTTEN_TEMPLE_GATEWAY)) {
+					level.setBlock(partPos, partState.setValue(ACTIVE, active), Block.UPDATE_ALL);
 				}
 			}
 		}
