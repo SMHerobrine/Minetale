@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minetale:volcanic_rock",
+  "result": {
+    "count": 1,
+    "id": "minetale:volcanic_rock_stairs"
+  }
+}
