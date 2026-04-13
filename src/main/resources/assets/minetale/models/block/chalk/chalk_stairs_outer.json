@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/outer_stairs","textures":{"bottom":"minetale:block/chalk","side":"minetale:block/chalk","top":"minetale:block/chalk"}}
+{"parent":"minecraft:block/outer_stairs","textures":{"bottom":"minetale:block/chalk/chalk","side":"minetale:block/chalk/chalk","top":"minetale:block/chalk/chalk"}}

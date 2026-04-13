@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/cube_column","textures":{"end":"minetale:block/cobbled_marble_top","side":"minetale:block/cobbled_marble_side"}}
+{"parent":"minecraft:block/cube_column","textures":{"end":"minetale:block/marble/cobbled_marble_top","side":"minetale:block/marble/cobbled_marble_side"}}

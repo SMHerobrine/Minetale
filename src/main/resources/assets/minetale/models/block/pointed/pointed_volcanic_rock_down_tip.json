@@ -1,1 +1,1 @@
-{"parent":"minetale:block/template/down_tip","textures":{"all":"minetale:block/volcanic_rock","particle":"minetale:block/volcanic_rock"}}
+{"parent":"minetale:block/template/down_tip","textures":{"all":"minetale:block/volcanic/volcanic_rock","particle":"minetale:block/volcanic/volcanic_rock"}}

@@ -1,7 +1,0 @@
-{
-  "parent": "minetale:item/template/pointed_stone",
-  "textures": {
-    "all": "minecraft:block/stone",
-    "particle": "minecraft:block/stone"
-  }
-}

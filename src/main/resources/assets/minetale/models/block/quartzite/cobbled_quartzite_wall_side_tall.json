@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/template_wall_side_tall","textures":{"wall":"minetale:block/cobbled_quartzite"}}
+{"parent":"minecraft:block/template_wall_side_tall","textures":{"wall":"minetale:block/quartzite/cobbled_quartzite"}}

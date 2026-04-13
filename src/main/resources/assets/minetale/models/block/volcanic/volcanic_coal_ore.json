@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/cube_all","textures":{"all":"minetale:block/volcanic_coal_ore"}}
+{"parent":"minecraft:block/cube_all","textures":{"all":"minetale:block/volcanic/volcanic_coal_ore"}}

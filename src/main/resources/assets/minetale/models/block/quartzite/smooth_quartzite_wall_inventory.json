@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/wall_inventory","textures":{"wall":"minetale:block/smooth_quartzite"}}
+{"parent":"minecraft:block/wall_inventory","textures":{"wall":"minetale:block/quartzite/smooth_quartzite"}}

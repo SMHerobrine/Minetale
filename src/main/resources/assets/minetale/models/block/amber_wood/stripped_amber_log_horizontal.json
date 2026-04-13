@@ -1,1 +1,1 @@
-﻿{"parent":"minecraft:block/cube_column_horizontal","textures":{"end":"minetale:block/stripped_amber_log_top","side":"minetale:block/stripped_amber_log"}}
+{"parent":"minecraft:block/cube_column_horizontal","textures":{"end":"minetale:block/amber_wood/stripped_amber_log_top","side":"minetale:block/amber_wood/stripped_amber_log"}}

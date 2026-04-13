@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/outer_stairs","textures":{"bottom":"minetale:block/smooth_quartzite","side":"minetale:block/smooth_quartzite","top":"minetale:block/smooth_quartzite"}}
+{"parent":"minecraft:block/outer_stairs","textures":{"bottom":"minetale:block/quartzite/smooth_quartzite","side":"minetale:block/quartzite/smooth_quartzite","top":"minetale:block/quartzite/smooth_quartzite"}}

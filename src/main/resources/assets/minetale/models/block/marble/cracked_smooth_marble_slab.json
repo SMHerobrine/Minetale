@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/slab","textures":{"bottom":"minetale:block/cracked_smooth_marble","side":"minetale:block/cracked_smooth_marble","top":"minetale:block/cracked_smooth_marble"}}
+{"parent":"minecraft:block/slab","textures":{"bottom":"minetale:block/marble/cracked_smooth_marble","side":"minetale:block/marble/cracked_smooth_marble","top":"minetale:block/marble/cracked_smooth_marble"}}

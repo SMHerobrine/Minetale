@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "minetale:block/cobbled_marble_slab"
+      "model": "minetale:block/marble/cobbled_marble_slab"
     },
     "type=double": {
-      "model": "minetale:block/cobbled_marble"
+      "model": "minetale:block/marble/cobbled_marble"
     },
     "type=top": {
-      "model": "minetale:block/cobbled_marble_slab_top"
+      "model": "minetale:block/marble/cobbled_marble_slab_top"
     }
   }
 }

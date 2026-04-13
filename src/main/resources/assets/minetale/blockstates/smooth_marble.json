@@ -2,18 +2,18 @@
   "variants": {
     "": [
       {
-        "model": "minetale:block/smooth_marble"
+        "model": "minetale:block/marble/smooth_marble"
       },
       {
-        "model": "minetale:block/smooth_marble",
+        "model": "minetale:block/marble/smooth_marble",
         "y": 90
       },
       {
-        "model": "minetale:block/smooth_marble",
+        "model": "minetale:block/marble/smooth_marble",
         "x": 90
       },
       {
-        "model": "minetale:block/smooth_marble",
+        "model": "minetale:block/marble/smooth_marble",
         "x": 90,
         "y": 90
       }

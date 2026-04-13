@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/template_wall_post","textures":{"wall":"minetale:block/cobbled_marble_side"}}
+{"parent":"minecraft:block/template_wall_post","textures":{"wall":"minetale:block/marble/cobbled_marble_side"}}

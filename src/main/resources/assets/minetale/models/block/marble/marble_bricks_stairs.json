@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/stairs","textures":{"bottom":"minetale:block/marble_bricks","side":"minetale:block/marble_bricks","top":"minetale:block/marble_bricks"}}
+{"parent":"minecraft:block/stairs","textures":{"bottom":"minetale:block/marble/marble_bricks","side":"minetale:block/marble/marble_bricks","top":"minetale:block/marble/marble_bricks"}}

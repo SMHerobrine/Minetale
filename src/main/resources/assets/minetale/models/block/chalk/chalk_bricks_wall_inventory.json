@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/wall_inventory","textures":{"wall":"minetale:block/chalk_bricks"}}
+{"parent":"minecraft:block/wall_inventory","textures":{"wall":"minetale:block/chalk/chalk_bricks"}}

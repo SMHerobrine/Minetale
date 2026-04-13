@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "minetale:block/chalk_bricks_slab"
+      "model": "minetale:block/chalk/chalk_bricks_slab"
     },
     "type=double": {
-      "model": "minetale:block/chalk_bricks"
+      "model": "minetale:block/chalk/chalk_bricks"
     },
     "type=top": {
-      "model": "minetale:block/chalk_bricks_slab_top"
+      "model": "minetale:block/chalk/chalk_bricks_slab_top"
     }
   }
 }

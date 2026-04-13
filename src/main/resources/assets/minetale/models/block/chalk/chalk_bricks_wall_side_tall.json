@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/template_wall_side_tall","textures":{"wall":"minetale:block/chalk_bricks"}}
+{"parent":"minecraft:block/template_wall_side_tall","textures":{"wall":"minetale:block/chalk/chalk_bricks"}}

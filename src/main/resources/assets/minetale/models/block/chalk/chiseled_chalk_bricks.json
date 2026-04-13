@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/cube_column","textures":{"end":"minetale:block/chiseled_chalk_bricks_top","side":"minetale:block/chiseled_chalk_bricks_side"}}
+{"parent":"minecraft:block/cube_column","textures":{"end":"minetale:block/chalk/chiseled_chalk_bricks_top","side":"minetale:block/chalk/chiseled_chalk_bricks_side"}}

@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/slab","textures":{"bottom":"minetale:block/quartzite","side":"minetale:block/quartzite","top":"minetale:block/quartzite"}}
+{"parent":"minecraft:block/slab","textures":{"bottom":"minetale:block/quartzite/quartzite","side":"minetale:block/quartzite/quartzite","top":"minetale:block/quartzite/quartzite"}}
