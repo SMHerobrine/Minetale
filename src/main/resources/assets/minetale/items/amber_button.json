@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minetale:item/amber_wood/amber_button"
+    "model": "minetale:item/amber_button"
   }
 }

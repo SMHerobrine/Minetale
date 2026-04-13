@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minetale:item/pointed/pointed_diorite"
+    "model": "minetale:item/pointed_diorite"
   }
 }

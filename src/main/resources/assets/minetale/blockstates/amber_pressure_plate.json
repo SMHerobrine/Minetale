@@ -1,10 +1,10 @@
-{
+﻿{
   "variants": {
     "powered=false": {
-      "model": "minetale:block/amber_wood/amber_pressure_plate"
+      "model": "minetale:block/amber_pressure_plate"
     },
     "powered=true": {
-      "model": "minetale:block/amber_wood/amber_pressure_plate_down"
+      "model": "minetale:block/amber_pressure_plate_down"
     }
   }
 }

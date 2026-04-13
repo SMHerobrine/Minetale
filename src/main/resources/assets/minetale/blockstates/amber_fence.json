@@ -1,13 +1,13 @@
-{
+﻿{
   "multipart": [
     {
       "apply": {
-        "model": "minetale:block/amber_wood/amber_fence_post"
+        "model": "minetale:block/amber_fence_post"
       }
     },
     {
       "apply": {
-        "model": "minetale:block/amber_wood/amber_fence_side",
+        "model": "minetale:block/amber_fence_side",
         "uvlock": true
       },
       "when": {
@@ -16,7 +16,7 @@
     },
     {
       "apply": {
-        "model": "minetale:block/amber_wood/amber_fence_side",
+        "model": "minetale:block/amber_fence_side",
         "uvlock": true,
         "y": 90
       },
@@ -26,7 +26,7 @@
     },
     {
       "apply": {
-        "model": "minetale:block/amber_wood/amber_fence_side",
+        "model": "minetale:block/amber_fence_side",
         "uvlock": true,
         "y": 180
       },
@@ -36,7 +36,7 @@
     },
     {
       "apply": {
-        "model": "minetale:block/amber_wood/amber_fence_side",
+        "model": "minetale:block/amber_fence_side",
         "uvlock": true,
         "y": 270
       },
