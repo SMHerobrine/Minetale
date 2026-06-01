@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minetale:block/gaia_statue_marble",
+    "particle": "minetale:block/gaia_statue_marble"
+  },
+  "display": {
+    "gui": {
+      "rotation": [25, 35, 0],
+      "translation": [0, -7, 0],
+      "scale": [0.1, 0.1, 0.1]
+    },
+    "ground": {
+      "translation": [0, 2, 0],
+      "scale": [0.12, 0.12, 0.12]
+    },
+    "fixed": {
+      "rotation": [0, 180, 0],
+      "translation": [0, -2, 0],
+      "scale": [0.11, 0.11, 0.11]
+    },
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 1, 0],
+      "scale": [0.08, 0.08, 0.08]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 1, 0],
+      "scale": [0.08, 0.08, 0.08]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 45, 0],
+      "translation": [0, 1, 0],
+      "scale": [0.09, 0.09, 0.09]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 225, 0],
+      "translation": [0, 1, 0],
+      "scale": [0.09, 0.09, 0.09]
+    }
+  }
+}

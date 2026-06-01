@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "minetale:item/gaia_statue",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

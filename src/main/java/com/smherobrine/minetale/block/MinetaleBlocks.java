@@ -2,6 +2,7 @@ package com.smherobrine.minetale.block;
 
 import com.smherobrine.minetale.Minetale;
 import com.smherobrine.minetale.block.entity.MinetaleBlockEntityTypes;
+import com.smherobrine.minetale.item.DecorativeGeoBlockItem;
 import com.smherobrine.minetale.item.HeartOfOrbisItem;
 import com.smherobrine.minetale.item.MinetaleItemGroups;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
@@ -37,12 +38,16 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public final class MinetaleBlocks {
 	public static final BlockSetType AMBER_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK)
 		.register(id("amber"));
 	public static final WoodType AMBER_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
 		.register(id("amber"), AMBER_BLOCK_SET_TYPE);
+	private static final float GAIA_STATUE_SCALE = 0.75F;
+	private static final VoxelShape GAIA_STATUE_SHAPE = Block.box(-7.0D, 0.0D, -4.0D, 23.0D, 67.5D, 26.0D);
+	private static final VoxelShape TEMPLE_BENCH_SHAPE = Block.box(-16.0D, 0.0D, -12.0D, 48.0D, 16.0D, 12.0D);
 
 	public static final Block AMBER_LOG = registerBlock("amber_log",
 		new RotatedPillarBlock(copyProperties("amber_log", Blocks.OAK_LOG)));
@@ -228,6 +233,16 @@ public final class MinetaleBlocks {
 		new Block(copyProperties("chiseled_ledgestone", Blocks.CHISELED_QUARTZ_BLOCK)));
 	public static final Block CHISELED_LEDGESTONE_BRICKS = registerBlock("chiseled_ledgestone_bricks",
 		new Block(copyProperties("chiseled_ledgestone_bricks", Blocks.CHISELED_STONE_BRICKS)));
+	public static final Block GAIA_STATUE_MARBLE = registerDecorativeGeoBlock("gaia_statue_marble",
+		"gaia_statue", "gaia_statue_marble", Blocks.STONE, GAIA_STATUE_SHAPE, GAIA_STATUE_SCALE);
+	public static final Block GAIA_STATUE_SANDSTONE = registerDecorativeGeoBlock("gaia_statue_sandstone",
+		"gaia_statue", "gaia_statue_sandstone", Blocks.SANDSTONE, GAIA_STATUE_SHAPE, GAIA_STATUE_SCALE);
+	public static final Block GAIA_STATUE_SHALE = registerDecorativeGeoBlock("gaia_statue_shale",
+		"gaia_statue", "gaia_statue_shale", Blocks.DEEPSLATE, GAIA_STATUE_SHAPE, GAIA_STATUE_SCALE);
+	public static final Block TEMPLE_BENCH_HARDSTONE = registerDecorativeGeoBlock("temple_bench_hardstone",
+		"temple_bench", "temple_bench_hardstone", Blocks.DEEPSLATE, TEMPLE_BENCH_SHAPE);
+	public static final Block TEMPLE_BENCH_MARBLE = registerDecorativeGeoBlock("temple_bench_marble",
+		"temple_bench", "temple_bench_marble", Blocks.STONE, TEMPLE_BENCH_SHAPE);
 	public static final Block FORGOTTEN_TEMPLE_GATEWAY = registerBlock("forgotten_temple_gateway",
 		new ForgottenTempleGatewayBlock(copyProperties("forgotten_temple_gateway", Blocks.STONE)
 			.strength(-1.0F, 3_600_000.0F)
@@ -456,6 +471,11 @@ public final class MinetaleBlocks {
 			entries.accept(AMBER_HANGING_SIGN_ITEM);
 			entries.accept(HEART_OF_ORBIS);
 			entries.accept(FORGOTTEN_TEMPLE_GATEWAY);
+			entries.accept(GAIA_STATUE_MARBLE);
+			entries.accept(GAIA_STATUE_SANDSTONE);
+			entries.accept(GAIA_STATUE_SHALE);
+			entries.accept(TEMPLE_BENCH_HARDSTONE);
+			entries.accept(TEMPLE_BENCH_MARBLE);
 		});
 	}
 
@@ -467,6 +487,26 @@ public final class MinetaleBlocks {
 
 	private static Block registerBlockWithoutItem(String name, Block block) {
 		return Registry.register(BuiltInRegistries.BLOCK, id(name), block);
+	}
+
+	private static Block registerDecorativeGeoBlock(String name, String modelName, String textureName, Block propertiesSource, VoxelShape shape) {
+		return registerDecorativeGeoBlock(name, modelName, textureName, propertiesSource, shape, 1.0F);
+	}
+
+	private static Block registerDecorativeGeoBlock(String name, String modelName, String textureName, Block propertiesSource, VoxelShape shape, float renderScale) {
+		return registerDecorativeGeoBlock(name, new DecorativeGeoBlock(
+			copyProperties(name, propertiesSource).noOcclusion().dynamicShape(),
+			id("block/" + modelName),
+			id("textures/block/" + textureName + ".png"),
+			shape,
+			renderScale
+		));
+	}
+
+	private static Block registerDecorativeGeoBlock(String name, DecorativeGeoBlock block) {
+		Block registeredBlock = registerBlockWithoutItem(name, block);
+		registerItem(name, new DecorativeGeoBlockItem(registeredBlock, itemProperties(name).useBlockDescriptionPrefix()));
+		return registeredBlock;
 	}
 
 	private static Block registerPointedStone(String name) {

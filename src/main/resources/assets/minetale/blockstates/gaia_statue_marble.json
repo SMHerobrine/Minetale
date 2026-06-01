@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "minetale:block/gaia_statue_marble_particle" },
+    "facing=east": { "model": "minetale:block/gaia_statue_marble_particle", "y": 90 },
+    "facing=south": { "model": "minetale:block/gaia_statue_marble_particle", "y": 180 },
+    "facing=west": { "model": "minetale:block/gaia_statue_marble_particle", "y": 270 }
+  }
+}

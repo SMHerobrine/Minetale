@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "minetale:block/temple_bench_marble_particle" },
+    "facing=east": { "model": "minetale:block/temple_bench_marble_particle", "y": 90 },
+    "facing=south": { "model": "minetale:block/temple_bench_marble_particle", "y": 180 },
+    "facing=west": { "model": "minetale:block/temple_bench_marble_particle", "y": 270 }
+  }
+}

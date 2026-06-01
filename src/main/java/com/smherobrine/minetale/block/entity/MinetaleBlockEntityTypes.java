@@ -33,6 +33,19 @@ public final class MinetaleBlockEntityTypes {
 		FabricBlockEntityTypeBuilder.create(ForgottenTempleGatewayBlockEntity::new, MinetaleBlocks.FORGOTTEN_TEMPLE_GATEWAY).build()
 	);
 
+	public static final BlockEntityType<DecorativeGeoBlockEntity> DECORATIVE_GEO = Registry.register(
+		BuiltInRegistries.BLOCK_ENTITY_TYPE,
+		Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "decorative_geo"),
+		FabricBlockEntityTypeBuilder.create(
+			DecorativeGeoBlockEntity::new,
+			MinetaleBlocks.GAIA_STATUE_MARBLE,
+			MinetaleBlocks.GAIA_STATUE_SANDSTONE,
+			MinetaleBlocks.GAIA_STATUE_SHALE,
+			MinetaleBlocks.TEMPLE_BENCH_HARDSTONE,
+			MinetaleBlocks.TEMPLE_BENCH_MARBLE
+		).build()
+	);
+
 	private MinetaleBlockEntityTypes() {
 	}
 
