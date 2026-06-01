@@ -8,4 +8,12 @@ public interface GeoDecorativeBlock {
 	Identifier getGeoTextureId();
 
 	float getGeoRenderScale();
+
+	default float getGeoRenderWidthScale() {
+		return getGeoRenderScale();
+	}
+
+	default float getGeoRenderHeightScale() {
+		return getGeoRenderScale();
+	}
 }

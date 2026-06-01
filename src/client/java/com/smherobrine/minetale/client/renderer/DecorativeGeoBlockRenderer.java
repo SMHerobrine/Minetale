@@ -15,7 +15,8 @@ public class DecorativeGeoBlockRenderer extends GeoBlockRenderer<DecorativeGeoBl
 
 	@Override
 	public void scaleModelForRender(RenderPassInfo<BlockEntityRenderState> renderPassInfo, float widthScale, float heightScale) {
-		float renderScale = DecorativeGeoModelData.getScale(renderPassInfo);
-		super.scaleModelForRender(renderPassInfo, widthScale * renderScale, heightScale * renderScale);
+		float renderWidthScale = DecorativeGeoModelData.getWidthScale(renderPassInfo);
+		float renderHeightScale = DecorativeGeoModelData.getHeightScale(renderPassInfo);
+		super.scaleModelForRender(renderPassInfo, widthScale * renderWidthScale, heightScale * renderHeightScale);
 	}
 }

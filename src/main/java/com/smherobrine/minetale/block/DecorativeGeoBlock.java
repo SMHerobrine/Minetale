@@ -29,7 +29,8 @@ public class DecorativeGeoBlock extends BaseEntityBlock implements GeoDecorative
 
 	private final Identifier modelId;
 	private final Identifier textureId;
-	private final float renderScale;
+	private final float renderWidthScale;
+	private final float renderHeightScale;
 	private final VoxelShape northShape;
 	private final VoxelShape eastShape;
 	private final VoxelShape southShape;
@@ -44,10 +45,16 @@ public class DecorativeGeoBlock extends BaseEntityBlock implements GeoDecorative
 	}
 
 	public DecorativeGeoBlock(BlockBehaviour.Properties properties, Identifier modelId, Identifier textureId, VoxelShape northShape, float renderScale) {
+		this(properties, modelId, textureId, northShape, renderScale, renderScale);
+	}
+
+	public DecorativeGeoBlock(BlockBehaviour.Properties properties, Identifier modelId, Identifier textureId, VoxelShape northShape,
+			float renderWidthScale, float renderHeightScale) {
 		super(properties);
 		this.modelId = modelId;
 		this.textureId = textureId;
-		this.renderScale = renderScale;
+		this.renderWidthScale = renderWidthScale;
+		this.renderHeightScale = renderHeightScale;
 		this.northShape = northShape;
 		this.eastShape = rotateShape(northShape, 1);
 		this.southShape = rotateShape(northShape, 2);
@@ -72,7 +79,17 @@ public class DecorativeGeoBlock extends BaseEntityBlock implements GeoDecorative
 
 	@Override
 	public float getGeoRenderScale() {
-		return this.renderScale;
+		return this.renderWidthScale;
+	}
+
+	@Override
+	public float getGeoRenderWidthScale() {
+		return this.renderWidthScale;
+	}
+
+	@Override
+	public float getGeoRenderHeightScale() {
+		return this.renderHeightScale;
 	}
 
 	@Override

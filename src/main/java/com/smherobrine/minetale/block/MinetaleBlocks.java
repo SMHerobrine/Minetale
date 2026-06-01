@@ -45,9 +45,11 @@ public final class MinetaleBlocks {
 		.register(id("amber"));
 	public static final WoodType AMBER_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
 		.register(id("amber"), AMBER_BLOCK_SET_TYPE);
-	private static final float GAIA_STATUE_SCALE = 0.75F;
-	private static final VoxelShape GAIA_STATUE_SHAPE = Block.box(-7.0D, 0.0D, -4.0D, 23.0D, 67.5D, 26.0D);
-	private static final VoxelShape TEMPLE_BENCH_SHAPE = Block.box(-16.0D, 0.0D, -12.0D, 48.0D, 16.0D, 12.0D);
+	private static final float GAIA_STATUE_WIDTH_SCALE = 0.4F;
+	private static final float GAIA_STATUE_HEIGHT_SCALE = 0.5F;
+	private static final float TEMPLE_BENCH_WIDTH_SCALE = 0.5F;
+	private static final VoxelShape GAIA_STATUE_SHAPE = Block.box(0.0D, 0.0D, 1.5D, 16.0D, 32.0D, 17.5D);
+	private static final VoxelShape TEMPLE_BENCH_SHAPE = Block.box(48.0D, 0.0D, 2.0D, 80.0D, 16.0D, 14.0D);
 
 	public static final Block AMBER_LOG = registerBlock("amber_log",
 		new RotatedPillarBlock(copyProperties("amber_log", Blocks.OAK_LOG)));
@@ -234,15 +236,15 @@ public final class MinetaleBlocks {
 	public static final Block CHISELED_LEDGESTONE_BRICKS = registerBlock("chiseled_ledgestone_bricks",
 		new Block(copyProperties("chiseled_ledgestone_bricks", Blocks.CHISELED_STONE_BRICKS)));
 	public static final Block GAIA_STATUE_MARBLE = registerDecorativeGeoBlock("gaia_statue_marble",
-		"gaia_statue", "gaia_statue_marble", Blocks.STONE, GAIA_STATUE_SHAPE, GAIA_STATUE_SCALE);
+		"gaia_statue", "gaia_statue_marble", Blocks.STONE, GAIA_STATUE_SHAPE, GAIA_STATUE_WIDTH_SCALE, GAIA_STATUE_HEIGHT_SCALE);
 	public static final Block GAIA_STATUE_SANDSTONE = registerDecorativeGeoBlock("gaia_statue_sandstone",
-		"gaia_statue", "gaia_statue_sandstone", Blocks.SANDSTONE, GAIA_STATUE_SHAPE, GAIA_STATUE_SCALE);
+		"gaia_statue", "gaia_statue_sandstone", Blocks.SANDSTONE, GAIA_STATUE_SHAPE, GAIA_STATUE_WIDTH_SCALE, GAIA_STATUE_HEIGHT_SCALE);
 	public static final Block GAIA_STATUE_SHALE = registerDecorativeGeoBlock("gaia_statue_shale",
-		"gaia_statue", "gaia_statue_shale", Blocks.DEEPSLATE, GAIA_STATUE_SHAPE, GAIA_STATUE_SCALE);
+		"gaia_statue", "gaia_statue_shale", Blocks.DEEPSLATE, GAIA_STATUE_SHAPE, GAIA_STATUE_WIDTH_SCALE, GAIA_STATUE_HEIGHT_SCALE);
 	public static final Block TEMPLE_BENCH_HARDSTONE = registerDecorativeGeoBlock("temple_bench_hardstone",
-		"temple_bench", "temple_bench_hardstone", Blocks.DEEPSLATE, TEMPLE_BENCH_SHAPE);
+		"temple_bench", "temple_bench_hardstone", Blocks.DEEPSLATE, TEMPLE_BENCH_SHAPE, TEMPLE_BENCH_WIDTH_SCALE, 1.0F);
 	public static final Block TEMPLE_BENCH_MARBLE = registerDecorativeGeoBlock("temple_bench_marble",
-		"temple_bench", "temple_bench_marble", Blocks.STONE, TEMPLE_BENCH_SHAPE);
+		"temple_bench", "temple_bench_marble", Blocks.STONE, TEMPLE_BENCH_SHAPE, TEMPLE_BENCH_WIDTH_SCALE, 1.0F);
 	public static final Block FORGOTTEN_TEMPLE_GATEWAY = registerBlock("forgotten_temple_gateway",
 		new ForgottenTempleGatewayBlock(copyProperties("forgotten_temple_gateway", Blocks.STONE)
 			.strength(-1.0F, 3_600_000.0F)
@@ -494,12 +496,18 @@ public final class MinetaleBlocks {
 	}
 
 	private static Block registerDecorativeGeoBlock(String name, String modelName, String textureName, Block propertiesSource, VoxelShape shape, float renderScale) {
+		return registerDecorativeGeoBlock(name, modelName, textureName, propertiesSource, shape, renderScale, renderScale);
+	}
+
+	private static Block registerDecorativeGeoBlock(String name, String modelName, String textureName, Block propertiesSource, VoxelShape shape,
+			float renderWidthScale, float renderHeightScale) {
 		return registerDecorativeGeoBlock(name, new DecorativeGeoBlock(
 			copyProperties(name, propertiesSource).noOcclusion().dynamicShape(),
 			id("block/" + modelName),
 			id("textures/block/" + textureName + ".png"),
 			shape,
-			renderScale
+			renderWidthScale,
+			renderHeightScale
 		));
 	}
 
