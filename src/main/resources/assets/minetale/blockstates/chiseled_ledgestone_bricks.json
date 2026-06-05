@@ -1,1 +1,16 @@
-{"variants":{"":{"model":"minetale:block/chiseled_ledgestone_bricks"}}}
+{
+  "variants": {
+    "axis=x": {
+      "model": "minetale:block/chiseled_ledgestone_bricks",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "minetale:block/chiseled_ledgestone_bricks"
+    },
+    "axis=z": {
+      "model": "minetale:block/chiseled_ledgestone_bricks",
+      "x": 90
+    }
+  }
+}

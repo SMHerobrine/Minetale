@@ -5,6 +5,7 @@ import com.smherobrine.minetale.menu.HeartOfOrbisMenu;
 import com.smherobrine.minetale.orbis.OrbisNetworking;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
@@ -21,6 +22,8 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -33,7 +36,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 public class HeartOfOrbisBlock extends BaseEntityBlock {
 	public static final MapCodec<HeartOfOrbisBlock> CODEC = simpleCodec(HeartOfOrbisBlock::new);
 	private static final int HEIGHT = 4;
-	private static final VoxelShape[] SHAPES = new VoxelShape[] {
+	private static final VoxelShape[] NORTH_SHAPES = new VoxelShape[] {
 		Shapes.or(
 			Block.box(-12.0D, 0.0D, -8.0D, 28.0D, 7.0D, 18.0D),
 			Block.box(-8.0D, 7.0D, -6.0D, 24.0D, 16.0D, 14.0D)
@@ -57,12 +60,16 @@ public class HeartOfOrbisBlock extends BaseEntityBlock {
 			Block.box(24.0D, 2.0D, -8.0D, 34.0D, 12.0D, 2.0D)
 		)
 	};
+	private static final VoxelShape[] EAST_SHAPES = rotateShapes(NORTH_SHAPES, 1);
+	private static final VoxelShape[] SOUTH_SHAPES = rotateShapes(NORTH_SHAPES, 2);
+	private static final VoxelShape[] WEST_SHAPES = rotateShapes(NORTH_SHAPES, 3);
 	private static final Component MENU_TITLE = Component.translatable("block.minetale.heart_of_orbis");
+	private static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 	private static final IntegerProperty PART = IntegerProperty.create("part", 0, HEIGHT - 1);
 
 	public HeartOfOrbisBlock(BlockBehaviour.Properties properties) {
 		super(properties);
-		registerDefaultState(this.stateDefinition.any().setValue(PART, 0));
+		registerDefaultState(this.stateDefinition.any().setValue(PART, 0).setValue(FACING, Direction.NORTH));
 	}
 
 	@Override
@@ -77,7 +84,7 @@ public class HeartOfOrbisBlock extends BaseEntityBlock {
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(PART);
+		builder.add(PART, FACING);
 	}
 
 	@Override
@@ -121,7 +128,7 @@ public class HeartOfOrbisBlock extends BaseEntityBlock {
 			}
 		}
 
-		return defaultBlockState();
+		return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
@@ -173,6 +180,40 @@ public class HeartOfOrbisBlock extends BaseEntityBlock {
 	}
 
 	private static VoxelShape getPartShape(BlockState state) {
-		return SHAPES[state.getValue(PART)];
+		return getShapesForFacing(state.getValue(FACING))[state.getValue(PART)];
+	}
+
+	private static VoxelShape[] getShapesForFacing(Direction facing) {
+		return switch (facing) {
+			case EAST -> EAST_SHAPES;
+			case SOUTH -> SOUTH_SHAPES;
+			case WEST -> WEST_SHAPES;
+			default -> NORTH_SHAPES;
+		};
+	}
+
+	private static VoxelShape[] rotateShapes(VoxelShape[] shapes, int clockwiseTurns) {
+		VoxelShape[] rotatedShapes = new VoxelShape[shapes.length];
+
+		for (int index = 0; index < shapes.length; index++) {
+			rotatedShapes[index] = rotateShape(shapes[index], clockwiseTurns);
+		}
+
+		return rotatedShapes;
+	}
+
+	private static VoxelShape rotateShape(VoxelShape shape, int clockwiseTurns) {
+		VoxelShape rotatedShape = shape;
+
+		for (int turn = 0; turn < clockwiseTurns; turn++) {
+			VoxelShape sourceShape = rotatedShape;
+			VoxelShape[] buffer = new VoxelShape[] { Shapes.empty() };
+			sourceShape.forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
+				buffer[0] = Shapes.or(buffer[0], Shapes.box(1.0D - maxZ, minY, minX, 1.0D - minZ, maxY, maxX))
+			);
+			rotatedShape = buffer[0];
+		}
+
+		return rotatedShape;
 	}
 }

@@ -46,10 +46,11 @@ public final class MinetaleBlocks {
 	public static final WoodType AMBER_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
 		.register(id("amber"), AMBER_BLOCK_SET_TYPE);
 	private static final float GAIA_STATUE_WIDTH_SCALE = 0.4F;
-	private static final float GAIA_STATUE_HEIGHT_SCALE = 0.5F;
+	private static final float GAIA_STATUE_HEIGHT_SCALE = 0.45F;
 	private static final float TEMPLE_BENCH_WIDTH_SCALE = 0.5F;
-	private static final VoxelShape GAIA_STATUE_SHAPE = Block.box(0.0D, 0.0D, 1.5D, 16.0D, 32.0D, 17.5D);
-	private static final VoxelShape TEMPLE_BENCH_SHAPE = Block.box(48.0D, 0.0D, 2.0D, 80.0D, 16.0D, 14.0D);
+	private static final float TEMPLE_BENCH_HEIGHT_SCALE = 0.9F;
+	private static final VoxelShape GAIA_STATUE_SHAPE = Block.box(0.0D, 0.0D, 1.5D, 16.0D, 30.0D, 17.5D);
+	private static final VoxelShape TEMPLE_BENCH_SHAPE = Block.box(0.0D, 0.0D, 2.0D, 32.0D, 14.5D, 14.0D);
 
 	public static final Block AMBER_LOG = registerBlock("amber_log",
 		new RotatedPillarBlock(copyProperties("amber_log", Blocks.OAK_LOG)));
@@ -179,6 +180,10 @@ public final class MinetaleBlocks {
 		new Block(copyProperties("chiseled_quartzite", Blocks.CHISELED_QUARTZ_BLOCK)));
 	public static final Block CHISELED_QUARTZITE_BRICKS = registerBlock("chiseled_quartzite_bricks",
 		new Block(copyProperties("chiseled_quartzite_bricks", Blocks.CHISELED_STONE_BRICKS)));
+	public static final Block FANCY_QUARTZITE_PILLAR_BASE = registerBlock("fancy_quartzite_pillar_base",
+		new Block(copyProperties("fancy_quartzite_pillar_base", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block FANCY_QUARTZITE_PILLAR = registerBlock("fancy_quartzite_pillar",
+		new Block(copyProperties("fancy_quartzite_pillar", Blocks.STONE_BRICKS).noOcclusion()));
 	public static final Block CHALK = registerBlock("chalk",
 		new Block(copyProperties("chalk", Blocks.CALCITE)));
 	public static final Block CHALK_STAIRS = registerBlock("chalk_stairs",
@@ -234,7 +239,7 @@ public final class MinetaleBlocks {
 	public static final Block CHISELED_LEDGESTONE = registerBlock("chiseled_ledgestone",
 		new Block(copyProperties("chiseled_ledgestone", Blocks.CHISELED_QUARTZ_BLOCK)));
 	public static final Block CHISELED_LEDGESTONE_BRICKS = registerBlock("chiseled_ledgestone_bricks",
-		new Block(copyProperties("chiseled_ledgestone_bricks", Blocks.CHISELED_STONE_BRICKS)));
+		new RotatedPillarBlock(copyProperties("chiseled_ledgestone_bricks", Blocks.CHISELED_STONE_BRICKS)));
 	public static final Block GAIA_STATUE_MARBLE = registerDecorativeGeoBlock("gaia_statue_marble",
 		"gaia_statue", "gaia_statue_marble", Blocks.STONE, GAIA_STATUE_SHAPE, GAIA_STATUE_WIDTH_SCALE, GAIA_STATUE_HEIGHT_SCALE);
 	public static final Block GAIA_STATUE_SANDSTONE = registerDecorativeGeoBlock("gaia_statue_sandstone",
@@ -242,9 +247,9 @@ public final class MinetaleBlocks {
 	public static final Block GAIA_STATUE_SHALE = registerDecorativeGeoBlock("gaia_statue_shale",
 		"gaia_statue", "gaia_statue_shale", Blocks.DEEPSLATE, GAIA_STATUE_SHAPE, GAIA_STATUE_WIDTH_SCALE, GAIA_STATUE_HEIGHT_SCALE);
 	public static final Block TEMPLE_BENCH_HARDSTONE = registerDecorativeGeoBlock("temple_bench_hardstone",
-		"temple_bench", "temple_bench_hardstone", Blocks.DEEPSLATE, TEMPLE_BENCH_SHAPE, TEMPLE_BENCH_WIDTH_SCALE, 1.0F);
+		"temple_bench", "temple_bench_hardstone", Blocks.DEEPSLATE, TEMPLE_BENCH_SHAPE, TEMPLE_BENCH_WIDTH_SCALE, TEMPLE_BENCH_HEIGHT_SCALE);
 	public static final Block TEMPLE_BENCH_MARBLE = registerDecorativeGeoBlock("temple_bench_marble",
-		"temple_bench", "temple_bench_marble", Blocks.STONE, TEMPLE_BENCH_SHAPE, TEMPLE_BENCH_WIDTH_SCALE, 1.0F);
+		"temple_bench", "temple_bench_marble", Blocks.STONE, TEMPLE_BENCH_SHAPE, TEMPLE_BENCH_WIDTH_SCALE, TEMPLE_BENCH_HEIGHT_SCALE);
 	public static final Block FORGOTTEN_TEMPLE_GATEWAY = registerBlock("forgotten_temple_gateway",
 		new ForgottenTempleGatewayBlock(copyProperties("forgotten_temple_gateway", Blocks.STONE)
 			.strength(-1.0F, 3_600_000.0F)
@@ -390,6 +395,8 @@ public final class MinetaleBlocks {
 			entries.accept(QUARTZITE_BRICKS_WALL);
 			entries.accept(CHISELED_QUARTZITE);
 			entries.accept(CHISELED_QUARTZITE_BRICKS);
+			entries.accept(FANCY_QUARTZITE_PILLAR_BASE);
+			entries.accept(FANCY_QUARTZITE_PILLAR);
 			entries.accept(CHALK);
 			entries.accept(CHALK_STAIRS);
 			entries.accept(CHALK_SLAB);
