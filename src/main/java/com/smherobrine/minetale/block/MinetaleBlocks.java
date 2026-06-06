@@ -144,6 +144,10 @@ public final class MinetaleBlocks {
 		new Block(copyProperties("chiseled_marble", Blocks.CHISELED_QUARTZ_BLOCK)));
 	public static final Block CHISELED_MARBLE_BRICKS = registerBlock("chiseled_marble_bricks",
 		new Block(copyProperties("chiseled_marble_bricks", Blocks.CHISELED_STONE_BRICKS)));
+	public static final Block FANCY_MARBLE_PILLAR_BASE = registerBlock("fancy_marble_pillar_base",
+		new FancyPillarBaseBlock(copyProperties("fancy_marble_pillar_base", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block FANCY_MARBLE_PILLAR = registerBlock("fancy_marble_pillar",
+		new RotatedPillarBlock(copyProperties("fancy_marble_pillar", Blocks.STONE_BRICKS).noOcclusion()));
 	public static final Block QUARTZITE = registerBlock("quartzite",
 		new Block(copyProperties("quartzite", Blocks.STONE)));
 	public static final Block QUARTZITE_STAIRS = registerBlock("quartzite_stairs",
@@ -181,9 +185,9 @@ public final class MinetaleBlocks {
 	public static final Block CHISELED_QUARTZITE_BRICKS = registerBlock("chiseled_quartzite_bricks",
 		new Block(copyProperties("chiseled_quartzite_bricks", Blocks.CHISELED_STONE_BRICKS)));
 	public static final Block FANCY_QUARTZITE_PILLAR_BASE = registerBlock("fancy_quartzite_pillar_base",
-		new Block(copyProperties("fancy_quartzite_pillar_base", Blocks.STONE_BRICKS).noOcclusion()));
+		new FancyPillarBaseBlock(copyProperties("fancy_quartzite_pillar_base", Blocks.STONE_BRICKS).noOcclusion()));
 	public static final Block FANCY_QUARTZITE_PILLAR = registerBlock("fancy_quartzite_pillar",
-		new Block(copyProperties("fancy_quartzite_pillar", Blocks.STONE_BRICKS).noOcclusion()));
+		new RotatedPillarBlock(copyProperties("fancy_quartzite_pillar", Blocks.STONE_BRICKS).noOcclusion()));
 	public static final Block CHALK = registerBlock("chalk",
 		new Block(copyProperties("chalk", Blocks.CALCITE)));
 	public static final Block CHALK_STAIRS = registerBlock("chalk_stairs",
@@ -210,6 +214,10 @@ public final class MinetaleBlocks {
 		new SlabBlock(copyProperties("smooth_chalk_slab", Blocks.SMOOTH_STONE_SLAB)));
 	public static final Block SMOOTH_CHALK_WALL = registerBlock("smooth_chalk_wall",
 		new WallBlock(copyProperties("smooth_chalk_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block FANCY_CHALK_PILLAR_BASE = registerBlock("fancy_chalk_pillar_base",
+		new FancyPillarBaseBlock(copyProperties("fancy_chalk_pillar_base", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block FANCY_CHALK_PILLAR = registerBlock("fancy_chalk_pillar",
+		new RotatedPillarBlock(copyProperties("fancy_chalk_pillar", Blocks.STONE_BRICKS).noOcclusion()));
 	public static final Block LEDGESTONE = registerBlock("ledgestone",
 		new Block(copyProperties("ledgestone", Blocks.STONE)));
 	public static final Block LEDGESTONE_STAIRS = registerBlock("ledgestone_stairs",
@@ -240,6 +248,10 @@ public final class MinetaleBlocks {
 		new Block(copyProperties("chiseled_ledgestone", Blocks.CHISELED_QUARTZ_BLOCK)));
 	public static final Block CHISELED_LEDGESTONE_BRICKS = registerBlock("chiseled_ledgestone_bricks",
 		new RotatedPillarBlock(copyProperties("chiseled_ledgestone_bricks", Blocks.CHISELED_STONE_BRICKS)));
+	public static final Block FANCY_LEDGESTONE_PILLAR_BASE = registerBlock("fancy_ledgestone_pillar_base",
+		new FancyPillarBaseBlock(copyProperties("fancy_ledgestone_pillar_base", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block FANCY_LEDGESTONE_PILLAR = registerBlock("fancy_ledgestone_pillar",
+		new RotatedPillarBlock(copyProperties("fancy_ledgestone_pillar", Blocks.STONE_BRICKS).noOcclusion()));
 	public static final Block GAIA_STATUE_MARBLE = registerDecorativeGeoBlock("gaia_statue_marble",
 		"gaia_statue", "gaia_statue_marble", Blocks.STONE, GAIA_STATUE_SHAPE, GAIA_STATUE_WIDTH_SCALE, GAIA_STATUE_HEIGHT_SCALE);
 	public static final Block GAIA_STATUE_SANDSTONE = registerDecorativeGeoBlock("gaia_statue_sandstone",
@@ -377,6 +389,8 @@ public final class MinetaleBlocks {
 			entries.accept(CRACKED_MARBLE_BRICKS_WALL);
 			entries.accept(CHISELED_MARBLE);
 			entries.accept(CHISELED_MARBLE_BRICKS);
+			entries.accept(FANCY_MARBLE_PILLAR_BASE);
+			entries.accept(FANCY_MARBLE_PILLAR);
 			entries.accept(QUARTZITE);
 			entries.accept(QUARTZITE_STAIRS);
 			entries.accept(QUARTZITE_SLAB);
@@ -410,6 +424,8 @@ public final class MinetaleBlocks {
 			entries.accept(SMOOTH_CHALK_STAIRS);
 			entries.accept(SMOOTH_CHALK_SLAB);
 			entries.accept(SMOOTH_CHALK_WALL);
+			entries.accept(FANCY_CHALK_PILLAR_BASE);
+			entries.accept(FANCY_CHALK_PILLAR);
 			entries.accept(LEDGESTONE);
 			entries.accept(LEDGESTONE_STAIRS);
 			entries.accept(LEDGESTONE_SLAB);
@@ -425,6 +441,8 @@ public final class MinetaleBlocks {
 			entries.accept(LEDGESTONE_BRICKS);
 			entries.accept(CHISELED_LEDGESTONE);
 			entries.accept(CHISELED_LEDGESTONE_BRICKS);
+			entries.accept(FANCY_LEDGESTONE_PILLAR_BASE);
+			entries.accept(FANCY_LEDGESTONE_PILLAR);
 			entries.accept(STONE_WALL);
 			entries.accept(MOSSY_STONE);
 			entries.accept(MOSSY_STONE_STAIRS);

@@ -1,7 +1,16 @@
 {
   "variants": {
-    "": {
+    "axis=x": {
+      "model": "minetale:block/fancy_quartzite_pillar",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
       "model": "minetale:block/fancy_quartzite_pillar"
+    },
+    "axis=z": {
+      "model": "minetale:block/fancy_quartzite_pillar",
+      "x": 90
     }
   }
 }

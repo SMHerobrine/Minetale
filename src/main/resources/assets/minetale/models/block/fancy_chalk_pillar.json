@@ -1,0 +1,7 @@
+{
+  "parent": "minetale:block/pillar_middle",
+  "textures": {
+    "0": "minetale:block/fancy_chalk_pillar",
+    "particle": "minetale:block/fancy_chalk_pillar"
+  }
+}
