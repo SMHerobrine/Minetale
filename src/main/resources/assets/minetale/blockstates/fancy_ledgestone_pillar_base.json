@@ -1,58 +1,30 @@
 {
   "variants": {
-    "axis=x,facing=east": {
-      "model": "minetale:block/fancy_ledgestone_pillar_base",
-      "x": 90,
-      "y": 270
-    },
-    "axis=x,facing=north": {
-      "model": "minetale:block/fancy_ledgestone_pillar_base",
-      "x": 90,
-      "y": 0
-    },
-    "axis=x,facing=south": {
-      "model": "minetale:block/fancy_ledgestone_pillar_base",
-      "x": 90,
-      "y": 180
-    },
-    "axis=x,facing=west": {
-      "model": "minetale:block/fancy_ledgestone_pillar_base",
-      "x": 90,
-      "y": 90
-    },
-    "axis=y,facing=east": {
-      "model": "minetale:block/fancy_ledgestone_pillar_base",
-      "y": 270
-    },
-    "axis=y,facing=north": {
-      "model": "minetale:block/fancy_ledgestone_pillar_base",
-      "y": 180
-    },
-    "axis=y,facing=south": {
+    "facing=down": {
       "model": "minetale:block/fancy_ledgestone_pillar_base"
     },
-    "axis=y,facing=west": {
+    "facing=up": {
       "model": "minetale:block/fancy_ledgestone_pillar_base",
-      "y": 90
+      "x": 180
     },
-    "axis=z,facing=east": {
-      "model": "minetale:block/fancy_ledgestone_pillar_base",
-      "x": 90,
-      "y": 270
-    },
-    "axis=z,facing=north": {
+    "facing=north": {
       "model": "minetale:block/fancy_ledgestone_pillar_base",
       "x": 90,
       "y": 180
     },
-    "axis=z,facing=south": {
+    "facing=south": {
       "model": "minetale:block/fancy_ledgestone_pillar_base",
       "x": 90
     },
-    "axis=z,facing=west": {
+    "facing=west": {
       "model": "minetale:block/fancy_ledgestone_pillar_base",
       "x": 90,
       "y": 90
+    },
+    "facing=east": {
+      "model": "minetale:block/fancy_ledgestone_pillar_base",
+      "x": 90,
+      "y": 270
     }
   }
 }
