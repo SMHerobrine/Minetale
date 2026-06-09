@@ -10,7 +10,7 @@ public class DecorativeGeoBlockModel extends GeoModel<DecorativeGeoBlockEntity> 
 	@Override
 	public void addAdditionalStateData(DecorativeGeoBlockEntity animatable, Object relatedObject, GeoRenderState renderState) {
 		if (animatable.getBlockState().getBlock() instanceof GeoDecorativeBlock block) {
-			DecorativeGeoModelData.add(block, renderState);
+			DecorativeGeoModelData.add(block, animatable.getBlockState(), renderState);
 		}
 	}
 

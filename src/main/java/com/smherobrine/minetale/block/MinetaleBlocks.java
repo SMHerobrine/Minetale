@@ -49,8 +49,14 @@ public final class MinetaleBlocks {
 	private static final float GAIA_STATUE_HEIGHT_SCALE = 0.45F;
 	private static final float TEMPLE_BENCH_WIDTH_SCALE = 0.5F;
 	private static final float TEMPLE_BENCH_HEIGHT_SCALE = 0.9F;
+	private static final float SMALL_RUBBLE_WIDTH_SCALE = 0.45F;
+	private static final float SMALL_RUBBLE_HEIGHT_SCALE = 0.6F;
+	private static final float MEDIUM_RUBBLE_WIDTH_SCALE = 0.5F;
+	private static final float MEDIUM_RUBBLE_HEIGHT_SCALE = 0.7F;
 	private static final VoxelShape GAIA_STATUE_SHAPE = Block.box(0.0D, 0.0D, 1.5D, 16.0D, 30.0D, 17.5D);
 	private static final VoxelShape TEMPLE_BENCH_SHAPE = Block.box(0.0D, 0.0D, 2.0D, 32.0D, 14.5D, 14.0D);
+	private static final VoxelShape SMALL_RUBBLE_SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D);
+	private static final VoxelShape MEDIUM_RUBBLE_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
 
 	public static final Block AMBER_LOG = registerBlock("amber_log",
 		new RotatedPillarBlock(copyProperties("amber_log", Blocks.OAK_LOG)));
@@ -148,6 +154,12 @@ public final class MinetaleBlocks {
 		new FancyPillarBaseBlock(copyProperties("fancy_marble_pillar_base", Blocks.STONE_BRICKS).noOcclusion()));
 	public static final Block FANCY_MARBLE_PILLAR = registerBlock("fancy_marble_pillar",
 		new RotatedPillarBlock(copyProperties("fancy_marble_pillar", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block SMALL_MARBLE_RUBBLE = registerVariantDecorativeGeoBlock("small_marble_rubble",
+		new String[] { "rubble_small_1", "rubble_small_2", "rubble_small_3" }, "marble_rubble", MARBLE, SMALL_RUBBLE_SHAPE,
+		SMALL_RUBBLE_WIDTH_SCALE, SMALL_RUBBLE_HEIGHT_SCALE);
+	public static final Block MEDIUM_MARBLE_RUBBLE = registerVariantDecorativeGeoBlock("medium_marble_rubble",
+		new String[] { "rubble_medium_1", "rubble_medium_2", "rubble_medium_3" }, "marble_rubble", MARBLE, MEDIUM_RUBBLE_SHAPE,
+		MEDIUM_RUBBLE_WIDTH_SCALE, MEDIUM_RUBBLE_HEIGHT_SCALE);
 	public static final Block QUARTZITE = registerBlock("quartzite",
 		new Block(copyProperties("quartzite", Blocks.STONE)));
 	public static final Block QUARTZITE_STAIRS = registerBlock("quartzite_stairs",
@@ -188,6 +200,12 @@ public final class MinetaleBlocks {
 		new FancyPillarBaseBlock(copyProperties("fancy_quartzite_pillar_base", Blocks.STONE_BRICKS).noOcclusion()));
 	public static final Block FANCY_QUARTZITE_PILLAR = registerBlock("fancy_quartzite_pillar",
 		new RotatedPillarBlock(copyProperties("fancy_quartzite_pillar", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block SMALL_QUARTZITE_RUBBLE = registerVariantDecorativeGeoBlock("small_quartzite_rubble",
+		new String[] { "rubble_small_1", "rubble_small_2", "rubble_small_3" }, "quartzite_rubble", QUARTZITE, SMALL_RUBBLE_SHAPE,
+		SMALL_RUBBLE_WIDTH_SCALE, SMALL_RUBBLE_HEIGHT_SCALE);
+	public static final Block MEDIUM_QUARTZITE_RUBBLE = registerVariantDecorativeGeoBlock("medium_quartzite_rubble",
+		new String[] { "rubble_medium_1", "rubble_medium_2", "rubble_medium_3" }, "quartzite_rubble", QUARTZITE, MEDIUM_RUBBLE_SHAPE,
+		MEDIUM_RUBBLE_WIDTH_SCALE, MEDIUM_RUBBLE_HEIGHT_SCALE);
 	public static final Block CHALK = registerBlock("chalk",
 		new Block(copyProperties("chalk", Blocks.CALCITE)));
 	public static final Block CHALK_STAIRS = registerBlock("chalk_stairs",
@@ -391,6 +409,8 @@ public final class MinetaleBlocks {
 			entries.accept(CHISELED_MARBLE_BRICKS);
 			entries.accept(FANCY_MARBLE_PILLAR_BASE);
 			entries.accept(FANCY_MARBLE_PILLAR);
+			entries.accept(SMALL_MARBLE_RUBBLE);
+			entries.accept(MEDIUM_MARBLE_RUBBLE);
 			entries.accept(QUARTZITE);
 			entries.accept(QUARTZITE_STAIRS);
 			entries.accept(QUARTZITE_SLAB);
@@ -411,6 +431,8 @@ public final class MinetaleBlocks {
 			entries.accept(CHISELED_QUARTZITE_BRICKS);
 			entries.accept(FANCY_QUARTZITE_PILLAR_BASE);
 			entries.accept(FANCY_QUARTZITE_PILLAR);
+			entries.accept(SMALL_QUARTZITE_RUBBLE);
+			entries.accept(MEDIUM_QUARTZITE_RUBBLE);
 			entries.accept(CHALK);
 			entries.accept(CHALK_STAIRS);
 			entries.accept(CHALK_SLAB);
@@ -540,6 +562,24 @@ public final class MinetaleBlocks {
 		Block registeredBlock = registerBlockWithoutItem(name, block);
 		registerItem(name, new DecorativeGeoBlockItem(registeredBlock, itemProperties(name).useBlockDescriptionPrefix()));
 		return registeredBlock;
+	}
+
+	private static Block registerVariantDecorativeGeoBlock(String name, String[] modelNames, String textureName, Block propertiesSource,
+			VoxelShape shape, float renderWidthScale, float renderHeightScale) {
+		Identifier[] modelIds = new Identifier[modelNames.length];
+
+		for (int index = 0; index < modelNames.length; index++) {
+			modelIds[index] = id("block/" + modelNames[index]);
+		}
+
+		return registerDecorativeGeoBlock(name, new VariantDecorativeGeoBlock(
+			copyProperties(name, propertiesSource).noOcclusion().dynamicShape(),
+			modelIds,
+			id("textures/block/" + textureName + ".png"),
+			shape,
+			renderWidthScale,
+			renderHeightScale
+		));
 	}
 
 	private static Block registerPointedStone(String name) {

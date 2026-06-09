@@ -6,6 +6,7 @@ import com.geckolib.renderer.base.RenderPassInfo;
 import com.smherobrine.minetale.Minetale;
 import com.smherobrine.minetale.block.GeoDecorativeBlock;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.state.BlockState;
 
 public final class DecorativeGeoModelData {
 	static final DataTicket<Identifier> MODEL_ID = DataTicket.create("minetale_decorative_geo_model", Identifier.class);
@@ -16,6 +17,13 @@ public final class DecorativeGeoModelData {
 	private static final Identifier FALLBACK_TEXTURE_ID = Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "textures/block/gaia_statue_marble.png");
 
 	private DecorativeGeoModelData() {
+	}
+
+	static void add(GeoDecorativeBlock block, BlockState state, GeoRenderState renderState) {
+		renderState.addGeckolibData(MODEL_ID, block.getGeoModelId(state));
+		renderState.addGeckolibData(TEXTURE_ID, block.getGeoTextureId(state));
+		renderState.addGeckolibData(RENDER_WIDTH_SCALE, block.getGeoRenderWidthScale());
+		renderState.addGeckolibData(RENDER_HEIGHT_SCALE, block.getGeoRenderHeightScale());
 	}
 
 	static void add(GeoDecorativeBlock block, GeoRenderState renderState) {

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north,variant=0": { "model": "minetale:block/small_quartzite_rubble_particle" },
+    "facing=east,variant=0": { "model": "minetale:block/small_quartzite_rubble_particle", "y": 90 },
+    "facing=south,variant=0": { "model": "minetale:block/small_quartzite_rubble_particle", "y": 180 },
+    "facing=west,variant=0": { "model": "minetale:block/small_quartzite_rubble_particle", "y": 270 },
+    "facing=north,variant=1": { "model": "minetale:block/small_quartzite_rubble_particle" },
+    "facing=east,variant=1": { "model": "minetale:block/small_quartzite_rubble_particle", "y": 90 },
+    "facing=south,variant=1": { "model": "minetale:block/small_quartzite_rubble_particle", "y": 180 },
+    "facing=west,variant=1": { "model": "minetale:block/small_quartzite_rubble_particle", "y": 270 },
+    "facing=north,variant=2": { "model": "minetale:block/small_quartzite_rubble_particle" },
+    "facing=east,variant=2": { "model": "minetale:block/small_quartzite_rubble_particle", "y": 90 },
+    "facing=south,variant=2": { "model": "minetale:block/small_quartzite_rubble_particle", "y": 180 },
+    "facing=west,variant=2": { "model": "minetale:block/small_quartzite_rubble_particle", "y": 270 }
+  }
+}

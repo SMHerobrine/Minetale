@@ -42,7 +42,11 @@ public final class MinetaleBlockEntityTypes {
 			MinetaleBlocks.GAIA_STATUE_SANDSTONE,
 			MinetaleBlocks.GAIA_STATUE_SHALE,
 			MinetaleBlocks.TEMPLE_BENCH_HARDSTONE,
-			MinetaleBlocks.TEMPLE_BENCH_MARBLE
+			MinetaleBlocks.TEMPLE_BENCH_MARBLE,
+			MinetaleBlocks.SMALL_MARBLE_RUBBLE,
+			MinetaleBlocks.MEDIUM_MARBLE_RUBBLE,
+			MinetaleBlocks.SMALL_QUARTZITE_RUBBLE,
+			MinetaleBlocks.MEDIUM_QUARTZITE_RUBBLE
 		).build()
 	);
 

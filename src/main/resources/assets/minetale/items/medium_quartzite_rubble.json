@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "minetale:item/medium_quartzite_rubble",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}
