@@ -5,6 +5,7 @@ import com.smherobrine.minetale.block.entity.MinetaleBlockEntityTypes;
 import com.smherobrine.minetale.item.DecorativeGeoBlockItem;
 import com.smherobrine.minetale.item.HeartOfOrbisItem;
 import com.smherobrine.minetale.item.MinetaleItemGroups;
+import com.smherobrine.minetale.item.RopeItem;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
@@ -373,6 +374,12 @@ public final class MinetaleBlocks {
 	public static final Block POINTED_TUFF = registerPointedStone("pointed_tuff");
 	public static final Block POINTED_CALCITE = registerPointedStone("pointed_calcite");
 	public static final Block POINTED_VOLCANIC_ROCK = registerPointedStone("pointed_volcanic_rock");
+	public static final Block ROPE = registerRopeBlock("rope", new RopeBlock(BlockBehaviour.Properties.of()
+		.setId(blockKey("rope"))
+		.strength(0.2F)
+		.isRedstoneConductor((state, level, pos) -> false)
+		.ignitedByLava()
+		.noCollision()));
 
 	private MinetaleBlocks() {
 	}
@@ -584,6 +591,7 @@ public final class MinetaleBlocks {
 			entries.accept(VOLCANIC_REDSTONE_ORE);
 		});
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> {
+			entries.accept(ROPE);
 			entries.accept(AMBER_SIGN_ITEM);
 			entries.accept(AMBER_HANGING_SIGN_ITEM);
 			entries.accept(HEART_OF_ORBIS);
@@ -599,6 +607,12 @@ public final class MinetaleBlocks {
 	private static Block registerBlock(String name, Block block) {
 		Block registeredBlock = registerBlockWithoutItem(name, block);
 		registerItem(name, new BlockItem(registeredBlock, itemProperties(name).useBlockDescriptionPrefix()));
+		return registeredBlock;
+	}
+
+	private static Block registerRopeBlock(String name, Block block) {
+		Block registeredBlock = registerBlockWithoutItem(name, block);
+		registerItem(name, new RopeItem(registeredBlock, itemProperties(name).useBlockDescriptionPrefix()));
 		return registeredBlock;
 	}
 

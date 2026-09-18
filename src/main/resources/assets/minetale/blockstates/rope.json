@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "attached=true": {
+      "model": "minetale:block/rope_connected"
+    },
+    "attached=false": {
+      "model": "minetale:block/rope_base"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+﻿{
+  "type": "minecraft:crafting_shaped",
+  "group": "sticks",
+  "key": {
+    "#": "minetale:plant_fibers"
+  },
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "result": {
+    "id": "minecraft:stick"
+  }
+}

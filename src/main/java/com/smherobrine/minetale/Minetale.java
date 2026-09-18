@@ -1,6 +1,7 @@
 package com.smherobrine.minetale;
 
 import com.smherobrine.minetale.block.MinetaleBlocks;
+import com.smherobrine.minetale.item.MinetaleItems;
 import com.smherobrine.minetale.menu.MinetaleMenuTypes;
 import com.smherobrine.minetale.orbis.MemoryUnlockTracker;
 import com.smherobrine.minetale.orbis.MinetaleSoundEvents;
@@ -29,6 +30,7 @@ public class Minetale implements ModInitializer {
 		MemoryUnlockTracker.initialize();
 		EdgeOfTheEchoProtection.initialize();
 		MinetaleMenuTypes.initialize();
+		MinetaleItems.initialize();
 		MinetaleBlocks.initialize();
 	}
 }
