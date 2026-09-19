@@ -57,8 +57,8 @@ public final class ForgottenTempleGatewayRenderer implements BlockEntityRenderer
 
 		poseStack.pushPose();
 		poseStack.translate(0.5D, hover, 0.5D);
-		poseStack.mulPose(cameraRenderState.orientation);
-		poseStack.mulPose(Axis.XP.rotationDegrees((float) Math.sin(renderState.animationTime * 0.05F) * 3.0F));
+		poseStack.rotate(cameraRenderState.orientation);
+		poseStack.rotateDegrees(Axis.XP, (float) Math.sin(renderState.animationTime * 0.05F) * 3.0F);
 
 		submitLayer(
 			poseStack,
@@ -165,7 +165,7 @@ public final class ForgottenTempleGatewayRenderer implements BlockEntityRenderer
 	private static void submitLayer(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, Identifier texture, int packedLight, float width, float height,
 		float rotationDegrees, float depth, int alpha, boolean emissive) {
 		poseStack.pushPose();
-		poseStack.mulPose(Axis.ZP.rotationDegrees(rotationDegrees));
+		poseStack.rotateDegrees(Axis.ZP, rotationDegrees);
 		poseStack.translate(0.0F, 0.0F, depth);
 		float halfWidth = width * 0.5F;
 		float halfHeight = height * 0.5F;
@@ -196,7 +196,7 @@ public final class ForgottenTempleGatewayRenderer implements BlockEntityRenderer
 
 			poseStack.pushPose();
 			poseStack.translate(x, y, depth + i * 0.0006F);
-			poseStack.mulPose(Axis.ZP.rotationDegrees(time * 3.5F + i * 41.0F));
+			poseStack.rotateDegrees(Axis.ZP, time * 3.5F + i * 41.0F);
 			submitNodeCollector.submitCustomGeometry(poseStack, RenderTypes.entityTranslucentEmissive(PORTAL_INNER), (pose, vertexConsumer) -> {
 				addVertex(vertexConsumer, pose, -size, -size, 0.0F, 0.0F, 1.0F, packedLight, alpha);
 				addVertex(vertexConsumer, pose, size, -size, 0.0F, 1.0F, 1.0F, packedLight, alpha);

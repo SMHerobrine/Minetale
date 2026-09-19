@@ -3,7 +3,6 @@ package com.smherobrine.minetale.block;
 import com.smherobrine.minetale.block.entity.HeartOfOrbisBlockEntity;
 import com.smherobrine.minetale.menu.HeartOfOrbisMenu;
 import com.smherobrine.minetale.orbis.OrbisNetworking;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -34,7 +33,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
 
 public class HeartOfOrbisBlock extends BaseEntityBlock {
-	public static final MapCodec<HeartOfOrbisBlock> CODEC = simpleCodec(HeartOfOrbisBlock::new);
 	private static final int HEIGHT = 4;
 	private static final VoxelShape[] NORTH_SHAPES = new VoxelShape[] {
 		Shapes.or(
@@ -70,11 +68,6 @@ public class HeartOfOrbisBlock extends BaseEntityBlock {
 	public HeartOfOrbisBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 		registerDefaultState(this.stateDefinition.any().setValue(PART, 0).setValue(FACING, Direction.NORTH));
-	}
-
-	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return CODEC;
 	}
 
 	@Override

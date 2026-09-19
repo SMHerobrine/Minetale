@@ -49,7 +49,7 @@ public final class OrbisClientNetworking {
 		ClientPlayNetworking.registerGlobalReceiver(MemoryToastPayload.TYPE, (payload, context) -> {
 			Minecraft client = context.client();
 			SystemToast.add(
-				client.getToastManager(),
+				client.gui.toastManager(),
 				MEMORY_UNLOCK_TOAST,
 				Component.translatable("toast.minetale.memory_unlocked.title"),
 				Component.translatable("toast.minetale.memory_unlocked.description", payload.mobName())

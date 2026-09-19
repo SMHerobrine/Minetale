@@ -1,1 +1,8 @@
-﻿{"variants":{"":{"model":"minetale:block/amber_hanging_sign"}}}
+{
+  "variants": {
+    "facing=east": { "model": "minetale:block/amber_wall_hanging_sign", "y": 270 },
+    "facing=north": { "model": "minetale:block/amber_wall_hanging_sign", "y": 180 },
+    "facing=south": { "model": "minetale:block/amber_wall_hanging_sign" },
+    "facing=west": { "model": "minetale:block/amber_wall_hanging_sign", "y": 90 }
+  }
+}

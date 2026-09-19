@@ -3,7 +3,6 @@ package com.smherobrine.minetale.block;
 import com.smherobrine.minetale.block.entity.ForgottenTempleGatewayBlockEntity;
 import com.smherobrine.minetale.world.EdgeOfTheEchoDimension;
 import com.smherobrine.minetale.world.EdgeOfTheEchoGatewayTracker;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -29,7 +28,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public final class ForgottenTempleGatewayBlock extends BaseEntityBlock {
-	public static final MapCodec<ForgottenTempleGatewayBlock> CODEC = simpleCodec(ForgottenTempleGatewayBlock::new);
 	public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 	private static final IntegerProperty PART_X = IntegerProperty.create("part_x", 0, 2);
 	private static final IntegerProperty PART_Z = IntegerProperty.create("part_z", 0, 2);
@@ -40,11 +38,6 @@ public final class ForgottenTempleGatewayBlock extends BaseEntityBlock {
 	public ForgottenTempleGatewayBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 		registerDefaultState(this.stateDefinition.any().setValue(ACTIVE, false).setValue(PART_X, 1).setValue(PART_Z, 1));
-	}
-
-	@Override
-	public MapCodec<ForgottenTempleGatewayBlock> codec() {
-		return CODEC;
 	}
 
 	@Override

@@ -4,12 +4,13 @@ import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 
 public final class OrbisMemoryHelper {
 	private static final Set<EntityType<?>> EXCLUDED_TYPES = Set.of(
-		EntityType.PLAYER,
-		EntityType.GIANT,
-		EntityType.ILLUSIONER
+		EntityTypes.PLAYER,
+		EntityTypes.GIANT,
+		EntityTypes.ILLUSIONER
 	);
 
 	private OrbisMemoryHelper() {

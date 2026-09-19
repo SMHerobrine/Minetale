@@ -1,6 +1,5 @@
 package com.smherobrine.minetale.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -26,7 +25,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class RopeBlock extends Block implements SimpleWaterloggedBlock {
 	public static final BooleanProperty ATTACHED = BlockStateProperties.ATTACHED;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-	public static final MapCodec<RopeBlock> CODEC = simpleCodec(RopeBlock::new);
 	private static final VoxelShape SHAPE = Block.column(14.0D, 0.0D, 16.0D);
 
 	public RopeBlock(BlockBehaviour.Properties properties) {
@@ -34,11 +32,6 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
 		registerDefaultState(stateDefinition.any()
 			.setValue(ATTACHED, false)
 			.setValue(WATERLOGGED, false));
-	}
-
-	@Override
-	protected MapCodec<? extends Block> codec() {
-		return CODEC;
 	}
 
 	@Override

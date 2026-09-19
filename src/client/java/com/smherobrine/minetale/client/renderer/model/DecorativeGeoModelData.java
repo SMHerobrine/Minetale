@@ -33,6 +33,10 @@ public final class DecorativeGeoModelData {
 		renderState.addGeckolibData(RENDER_HEIGHT_SCALE, block.getGeoRenderHeightScale());
 	}
 
+	public static Identifier getModel(RenderPassInfo<?> renderPassInfo) {
+		return renderPassInfo.getOrDefaultGeckolibData(MODEL_ID, FALLBACK_MODEL_ID);
+	}
+
 	static Identifier getModel(GeoRenderState renderState) {
 		return renderState.getOrDefaultGeckolibData(MODEL_ID, FALLBACK_MODEL_ID);
 	}

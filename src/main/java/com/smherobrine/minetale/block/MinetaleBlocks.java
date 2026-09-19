@@ -7,10 +7,11 @@ import com.smherobrine.minetale.item.HeartOfOrbisItem;
 import com.smherobrine.minetale.item.MinetaleItemGroups;
 import com.smherobrine.minetale.item.RopeItem;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.item.v1.BlockTransformerHelper;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -21,7 +22,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SignItem;
+import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
@@ -95,9 +96,11 @@ public final class MinetaleBlocks {
 		new AmberWallHangingSignBlock(AMBER_WOOD_TYPE, copyProperties("amber_wall_hanging_sign", Blocks.OAK_WALL_HANGING_SIGN).noCollision().strength(1.0F)));
 
 	public static final Item AMBER_SIGN_ITEM = registerItem("amber_sign",
-		new SignItem(AMBER_SIGN, AMBER_WALL_SIGN, itemProperties("amber_sign").stacksTo(16)));
+		new StandingAndWallBlockItem(AMBER_SIGN, AMBER_WALL_SIGN, Direction.DOWN,
+			itemProperties("amber_sign").stacksTo(16).signText()));
 	public static final Item AMBER_HANGING_SIGN_ITEM = registerItem("amber_hanging_sign",
-		new HangingSignItem(AMBER_HANGING_SIGN, AMBER_WALL_HANGING_SIGN, itemProperties("amber_hanging_sign").stacksTo(16)));
+		new HangingSignItem(AMBER_HANGING_SIGN, AMBER_WALL_HANGING_SIGN,
+			itemProperties("amber_hanging_sign").stacksTo(16).signText()));
 
 	public static final Block MARBLE = registerBlock("marble",
 		new Block(copyProperties("marble", Blocks.STONE)));
@@ -388,8 +391,8 @@ public final class MinetaleBlocks {
 		MinetaleBlockEntityTypes.initialize();
 		MinetaleItemGroups.initialize();
 
-		StrippableBlockRegistry.register(AMBER_LOG, STRIPPED_AMBER_LOG);
-		StrippableBlockRegistry.register(AMBER_WOOD, STRIPPED_AMBER_WOOD);
+		BlockTransformerHelper.registerStripping(AMBER_LOG, STRIPPED_AMBER_LOG);
+		BlockTransformerHelper.registerStripping(AMBER_WOOD, STRIPPED_AMBER_WOOD);
 
 		FlammableBlockRegistry flammables = FlammableBlockRegistry.getDefaultInstance();
 		flammables.add(AMBER_LOG, 5, 5);

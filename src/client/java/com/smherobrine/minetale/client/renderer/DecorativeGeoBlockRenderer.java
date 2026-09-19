@@ -14,6 +14,7 @@ import net.minecraft.resources.Identifier;
 
 public class DecorativeGeoBlockRenderer extends GeoBlockRenderer<DecorativeGeoBlockEntity, BlockEntityRenderState> {
 	private static final Identifier GAIA_STATUE_MODEL_ID = Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "block/gaia_statue");
+	private static final Identifier TEMPLE_BENCH_MODEL_ID = Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "block/temple_bench");
 
 	public DecorativeGeoBlockRenderer(BlockEntityRendererProvider.Context context) {
 		super(context, new DecorativeGeoBlockModel());
@@ -36,5 +37,15 @@ public class DecorativeGeoBlockRenderer extends GeoBlockRenderer<DecorativeGeoBl
 		float renderWidthScale = DecorativeGeoModelData.getWidthScale(renderPassInfo);
 		float renderHeightScale = DecorativeGeoModelData.getHeightScale(renderPassInfo);
 		super.scaleModelForRender(renderPassInfo, widthScale * renderWidthScale, heightScale * renderHeightScale);
+	}
+
+	@Override
+	public void adjustRenderPose(RenderPassInfo<BlockEntityRenderState> renderPassInfo) {
+		super.adjustRenderPose(renderPassInfo);
+
+		if (DecorativeGeoModelData.getModel(renderPassInfo).equals(TEMPLE_BENCH_MODEL_ID)) {
+			float renderWidthScale = DecorativeGeoModelData.getWidthScale(renderPassInfo);
+			renderPassInfo.poseStack().translate(1.0D / renderWidthScale, 0.0D, 0.0D);
+		}
 	}
 }

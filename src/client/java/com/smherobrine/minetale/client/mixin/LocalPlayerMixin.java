@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screens.inventory.HangingSignEditScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.world.level.block.entity.SignTextSlot;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,10 +21,10 @@ public class LocalPlayerMixin {
 	protected Minecraft minecraft;
 
 	@Inject(method = "openTextEdit", at = @At("HEAD"), cancellable = true)
-	private void openAmberHangingSignEditor(SignBlockEntity sign, boolean isFrontText, CallbackInfo ci) {
+	private void openAmberHangingSignEditor(SignBlockEntity sign, SignTextSlot slot, CallbackInfo ci) {
 		BlockState state = sign.getBlockState();
 		if (state.is(MinetaleBlocks.AMBER_HANGING_SIGN) || state.is(MinetaleBlocks.AMBER_WALL_HANGING_SIGN)) {
-			this.minecraft.setScreen(new HangingSignEditScreen(sign, isFrontText, this.minecraft.isTextFilteringEnabled()));
+			this.minecraft.gui.setScreen(new HangingSignEditScreen(sign, slot, this.minecraft.isTextFilteringEnabled()));
 			ci.cancel();
 		}
 	}

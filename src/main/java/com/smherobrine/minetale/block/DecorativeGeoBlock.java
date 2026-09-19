@@ -1,6 +1,5 @@
 package com.smherobrine.minetale.block;
 
-import com.mojang.serialization.MapCodec;
 import com.smherobrine.minetale.Minetale;
 import com.smherobrine.minetale.block.entity.DecorativeGeoBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -23,7 +22,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class DecorativeGeoBlock extends BaseEntityBlock implements GeoDecorativeBlock {
 	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
-	private static final MapCodec<DecorativeGeoBlock> CODEC = simpleCodec(DecorativeGeoBlock::new);
 	private static final Identifier FALLBACK_MODEL_ID = Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "block/gaia_statue");
 	private static final Identifier FALLBACK_TEXTURE_ID = Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "textures/block/gaia_statue_marble.png");
 
@@ -60,11 +58,6 @@ public class DecorativeGeoBlock extends BaseEntityBlock implements GeoDecorative
 		this.southShape = rotateShape(northShape, 2);
 		this.westShape = rotateShape(northShape, 3);
 		registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-	}
-
-	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return CODEC;
 	}
 
 	@Override

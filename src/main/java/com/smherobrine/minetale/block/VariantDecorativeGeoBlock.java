@@ -1,10 +1,8 @@
 package com.smherobrine.minetale.block;
 
-import com.mojang.serialization.MapCodec;
 import com.smherobrine.minetale.Minetale;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -20,7 +18,6 @@ public final class VariantDecorativeGeoBlock extends DecorativeGeoBlock {
 		Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "block/gaia_statue"),
 		Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "block/gaia_statue")
 	};
-	private static final MapCodec<VariantDecorativeGeoBlock> CODEC = simpleCodec(VariantDecorativeGeoBlock::new);
 
 	private final Identifier[] modelIds;
 
@@ -42,11 +39,6 @@ public final class VariantDecorativeGeoBlock extends DecorativeGeoBlock {
 		super(properties, firstModelId(modelIds), textureId, northShape, renderWidthScale, renderHeightScale);
 		this.modelIds = modelIds.clone();
 		registerDefaultState(defaultBlockState().setValue(VARIANT, 0));
-	}
-
-	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return CODEC;
 	}
 
 	@Override

@@ -13,8 +13,10 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.Compostable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ResolvableInt;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 public final class MinetaleItems {
@@ -32,7 +34,7 @@ public final class MinetaleItems {
 			.register(entries -> entries.accept(PLANT_FIBERS));
 
 		LootTableEvents.MODIFY_DROPS.register((lootTable, context, drops) -> {
-			BlockState state = context.getOptionalParameter(LootContextParams.BLOCK_STATE);
+			BlockState state = context.getOptional(LootContextParams.BLOCK_STATE);
 			if (state == null) {
 				return;
 			}
@@ -53,7 +55,13 @@ public final class MinetaleItems {
 	}
 
 	private static Item register(String name) {
-		return Registry.register(BuiltInRegistries.ITEM, id(name), new Item(new Item.Properties().setId(itemKey(name))));
+		Item.Properties properties = new Item.Properties().setId(itemKey(name));
+		if (name.equals("plant_fibers")) {
+			properties.component(net.minecraft.core.component.DataComponents.COMPOSTABLE,
+				new Compostable(new ResolvableInt.Constant(1)));
+		}
+
+		return Registry.register(BuiltInRegistries.ITEM, id(name), new Item(properties));
 	}
 
 	private static ResourceKey<Item> itemKey(String name) {
