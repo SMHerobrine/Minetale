@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minetale:block/heart_of_orbis"
+      }
+    }
+  ]
+}

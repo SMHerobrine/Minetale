@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "minetale:item/small_marble_rubble",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

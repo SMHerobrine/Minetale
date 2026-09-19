@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "minetale:block/volcanic_rock_slab"
+    },
+    "type=double": {
+      "model": "minetale:block/volcanic_rock"
+    },
+    "type=top": {
+      "model": "minetale:block/volcanic_rock_slab_top"
+    }
+  }
+}

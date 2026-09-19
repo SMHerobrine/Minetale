@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minetale:ledgestone",
+  "result": {
+    "count": 1,
+    "id": "minetale:ledgestone_stairs"
+  }
+}

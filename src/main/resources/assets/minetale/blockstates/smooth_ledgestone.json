@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "minetale:block/smooth_ledgestone"
+      },
+      {
+        "model": "minetale:block/smooth_ledgestone",
+        "y": 90
+      },
+      {
+        "model": "minetale:block/smooth_ledgestone",
+        "x": 90
+      },
+      {
+        "model": "minetale:block/smooth_ledgestone",
+        "x": 90,
+        "y": 90
+      }
+    ]
+  }
+}

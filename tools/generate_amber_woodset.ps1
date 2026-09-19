@@ -7,7 +7,16 @@ $root = Split-Path -Parent $PSScriptRoot
 $resourcesRoot = Join-Path $root "src\main\resources"
 $assetsRoot = Join-Path $resourcesRoot "assets\minetale"
 $dataRoot = Join-Path $resourcesRoot "data"
-$minecraftClientJar = Join-Path $env:USERPROFILE ".gradle\caches\fabric-loom\26.1.1\minecraft-client.jar"
+$gradleProperties = ConvertFrom-StringData (Get-Content (Join-Path $root "gradle.properties") -Raw)
+$minecraftVersion = $gradleProperties.minecraft_version
+$minecraftClientJar = Get-ChildItem (Join-Path $root ".gradle\loom-cache\minecraftMaven\net\minecraft") -Recurse -File |
+	Where-Object { $_.Name -like "minecraft-clientOnly-*-$minecraftVersion.jar" } |
+	Select-Object -First 1 -ExpandProperty FullName
+
+if (-not $minecraftClientJar) {
+	throw "Minecraft $minecraftVersion client jar was not found. Run a Gradle task first to populate Loom's cache."
+}
+
 $clientZip = [IO.Compression.ZipFile]::OpenRead($minecraftClientJar)
 
 function Ensure-Dir([string] $path) {
@@ -113,8 +122,7 @@ $blockModelsDir = Join-Path $assetsRoot "models\block"
 $itemModelsDir = Join-Path $assetsRoot "models\item"
 $blockTexturesDir = Join-Path $assetsRoot "textures\block"
 $itemTexturesDir = Join-Path $assetsRoot "textures\item"
-$entitySignsDir = Join-Path $assetsRoot "textures\entity\signs"
-$entityHangingSignsDir = Join-Path $assetsRoot "textures\entity\signs\hanging"
+$guiSignsDir = Join-Path $assetsRoot "textures\gui\signs"
 $guiHangingSignsDir = Join-Path $assetsRoot "textures\gui\hanging_signs"
 $langDir = Join-Path $assetsRoot "lang"
 
@@ -233,10 +241,10 @@ $generatedFiles = @{
   }
 }
 '@
-	(Join-Path $blockstatesDir "amber_sign.json") = '{"variants":{"":{"model":"minetale:block/amber_sign"}}}'
-	(Join-Path $blockstatesDir "amber_wall_sign.json") = '{"variants":{"":{"model":"minetale:block/amber_sign"}}}'
-	(Join-Path $blockstatesDir "amber_hanging_sign.json") = '{"variants":{"":{"model":"minetale:block/amber_hanging_sign"}}}'
-	(Join-Path $blockstatesDir "amber_wall_hanging_sign.json") = '{"variants":{"":{"model":"minetale:block/amber_hanging_sign"}}}'
+	(Join-Path $blockstatesDir "amber_sign.json") = (Get-ZipText $clientZip "assets/minecraft/blockstates/oak_sign.json").Replace("minecraft:block/oak_", "minetale:block/amber_")
+	(Join-Path $blockstatesDir "amber_wall_sign.json") = (Get-ZipText $clientZip "assets/minecraft/blockstates/oak_wall_sign.json").Replace("minecraft:block/oak_", "minetale:block/amber_")
+	(Join-Path $blockstatesDir "amber_hanging_sign.json") = (Get-ZipText $clientZip "assets/minecraft/blockstates/oak_hanging_sign.json").Replace("minecraft:block/oak_", "minetale:block/amber_")
+	(Join-Path $blockstatesDir "amber_wall_hanging_sign.json") = (Get-ZipText $clientZip "assets/minecraft/blockstates/oak_wall_hanging_sign.json").Replace("minecraft:block/oak_", "minetale:block/amber_")
 
 	(Join-Path $blockModelsDir "amber_log.json") = '{"parent":"minecraft:block/cube_column","textures":{"end":"minetale:block/amber_log_top","side":"minetale:block/amber_log"}}'
 	(Join-Path $blockModelsDir "amber_log_horizontal.json") = '{"parent":"minecraft:block/cube_column_horizontal","textures":{"end":"minetale:block/amber_log_top","side":"minetale:block/amber_log"}}'
@@ -273,8 +281,20 @@ $generatedFiles = @{
 	(Join-Path $blockModelsDir "amber_button_inventory.json") = '{"parent":"minecraft:block/button_inventory","textures":{"texture":"minetale:block/amber_planks"}}'
 	(Join-Path $blockModelsDir "amber_pressure_plate.json") = '{"parent":"minecraft:block/pressure_plate_up","textures":{"texture":"minetale:block/amber_planks"}}'
 	(Join-Path $blockModelsDir "amber_pressure_plate_down.json") = '{"parent":"minecraft:block/pressure_plate_down","textures":{"texture":"minetale:block/amber_planks"}}'
-	(Join-Path $blockModelsDir "amber_sign.json") = '{"textures":{"particle":"minetale:block/amber_planks"}}'
-	(Join-Path $blockModelsDir "amber_hanging_sign.json") = '{"textures":{"particle":"minetale:block/stripped_amber_log"}}'
+	(Join-Path $blockModelsDir "amber_sign_rot_0.json") = '{"parent":"minecraft:block/template_sign_rot_0","textures":{"all":"minetale:block/amber_sign","particle":"minetale:block/amber_planks"}}'
+	(Join-Path $blockModelsDir "amber_sign_rot_1.json") = '{"parent":"minecraft:block/template_sign_rot_1","textures":{"all":"minetale:block/amber_sign","particle":"minetale:block/amber_planks"}}'
+	(Join-Path $blockModelsDir "amber_sign_rot_2.json") = '{"parent":"minecraft:block/template_sign_rot_2","textures":{"all":"minetale:block/amber_sign","particle":"minetale:block/amber_planks"}}'
+	(Join-Path $blockModelsDir "amber_sign_rot_3.json") = '{"parent":"minecraft:block/template_sign_rot_3","textures":{"all":"minetale:block/amber_sign","particle":"minetale:block/amber_planks"}}'
+	(Join-Path $blockModelsDir "amber_wall_sign.json") = '{"parent":"minecraft:block/template_wall_sign","textures":{"all":"minetale:block/amber_sign","particle":"minetale:block/amber_planks"}}'
+	(Join-Path $blockModelsDir "amber_hanging_sign_rot_0.json") = '{"parent":"minecraft:block/template_hanging_sign_rot_0","textures":{"all":"minetale:block/amber_hanging_sign","particle":"minetale:block/stripped_amber_log"}}'
+	(Join-Path $blockModelsDir "amber_hanging_sign_rot_1.json") = '{"parent":"minecraft:block/template_hanging_sign_rot_1","textures":{"all":"minetale:block/amber_hanging_sign","particle":"minetale:block/stripped_amber_log"}}'
+	(Join-Path $blockModelsDir "amber_hanging_sign_rot_2.json") = '{"parent":"minecraft:block/template_hanging_sign_rot_2","textures":{"all":"minetale:block/amber_hanging_sign","particle":"minetale:block/stripped_amber_log"}}'
+	(Join-Path $blockModelsDir "amber_hanging_sign_rot_3.json") = '{"parent":"minecraft:block/template_hanging_sign_rot_3","textures":{"all":"minetale:block/amber_hanging_sign","particle":"minetale:block/stripped_amber_log"}}'
+	(Join-Path $blockModelsDir "amber_hanging_sign_attached_rot_0.json") = '{"parent":"minecraft:block/template_attached_hanging_sign_rot_0","textures":{"all":"minetale:block/amber_hanging_sign","particle":"minetale:block/stripped_amber_log"}}'
+	(Join-Path $blockModelsDir "amber_hanging_sign_attached_rot_1.json") = '{"parent":"minecraft:block/template_attached_hanging_sign_rot_1","textures":{"all":"minetale:block/amber_hanging_sign","particle":"minetale:block/stripped_amber_log"}}'
+	(Join-Path $blockModelsDir "amber_hanging_sign_attached_rot_2.json") = '{"parent":"minecraft:block/template_attached_hanging_sign_rot_2","textures":{"all":"minetale:block/amber_hanging_sign","particle":"minetale:block/stripped_amber_log"}}'
+	(Join-Path $blockModelsDir "amber_hanging_sign_attached_rot_3.json") = '{"parent":"minecraft:block/template_attached_hanging_sign_rot_3","textures":{"all":"minetale:block/amber_hanging_sign","particle":"minetale:block/stripped_amber_log"}}'
+	(Join-Path $blockModelsDir "amber_wall_hanging_sign.json") = '{"parent":"minecraft:block/template_wall_hanging_sign","textures":{"all":"minetale:block/amber_hanging_sign","particle":"minetale:block/stripped_amber_log"}}'
 
 	(Join-Path $itemModelsDir "amber_log.json") = '{"parent":"minetale:block/amber_log"}'
 	(Join-Path $itemModelsDir "amber_wood.json") = '{"parent":"minetale:block/amber_wood"}'
@@ -379,11 +399,12 @@ foreach ($texture in @(
 	@{ Source = "assets/minecraft/textures/block/oak_door_bottom.png"; Destination = Join-Path $blockTexturesDir "amber_door_bottom.png" },
 	@{ Source = "assets/minecraft/textures/block/oak_door_top.png"; Destination = Join-Path $blockTexturesDir "amber_door_top.png" },
 	@{ Source = "assets/minecraft/textures/block/oak_trapdoor.png"; Destination = Join-Path $blockTexturesDir "amber_trapdoor.png" },
+	@{ Source = "assets/minecraft/textures/block/oak_sign.png"; Destination = Join-Path $blockTexturesDir "amber_sign.png" },
+	@{ Source = "assets/minecraft/textures/block/oak_hanging_sign.png"; Destination = Join-Path $blockTexturesDir "amber_hanging_sign.png" },
 	@{ Source = "assets/minecraft/textures/item/oak_door.png"; Destination = Join-Path $itemTexturesDir "amber_door.png" },
 	@{ Source = "assets/minecraft/textures/item/oak_sign.png"; Destination = Join-Path $itemTexturesDir "amber_sign.png" },
 	@{ Source = "assets/minecraft/textures/item/oak_hanging_sign.png"; Destination = Join-Path $itemTexturesDir "amber_hanging_sign.png" },
-	@{ Source = "assets/minecraft/textures/entity/signs/oak.png"; Destination = Join-Path $entitySignsDir "amber.png" },
-	@{ Source = "assets/minecraft/textures/entity/signs/hanging/oak.png"; Destination = Join-Path $entityHangingSignsDir "amber.png" },
+	@{ Source = "assets/minecraft/textures/gui/signs/oak.png"; Destination = Join-Path $guiSignsDir "amber.png" },
 	@{ Source = "assets/minecraft/textures/gui/hanging_signs/oak.png"; Destination = Join-Path $guiHangingSignsDir "amber.png" }
 )) {
 	Save-TintedPng $texture.Source $texture.Destination

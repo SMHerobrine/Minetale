@@ -1,0 +1,212 @@
+package com.smherobrine.minetale.block;
+
+import com.smherobrine.minetale.block.entity.HeartOfOrbisBlockEntity;
+import com.smherobrine.minetale.menu.HeartOfOrbisMenu;
+import com.smherobrine.minetale.orbis.OrbisNetworking;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
+
+public class HeartOfOrbisBlock extends BaseEntityBlock {
+	private static final int HEIGHT = 4;
+	private static final VoxelShape[] NORTH_SHAPES = new VoxelShape[] {
+		Shapes.or(
+			Block.box(-12.0D, 0.0D, -8.0D, 28.0D, 7.0D, 18.0D),
+			Block.box(-8.0D, 7.0D, -6.0D, 24.0D, 16.0D, 14.0D)
+		),
+		Shapes.or(
+			Block.box(-8.0D, 0.0D, -10.0D, 24.0D, 16.0D, 8.0D),
+			Block.box(-4.0D, 0.0D, 8.0D, 20.0D, 14.0D, 16.0D),
+			Block.box(-13.0D, 2.0D, 2.0D, -6.0D, 15.0D, 12.0D),
+			Block.box(22.0D, 2.0D, 2.0D, 29.0D, 15.0D, 12.0D)
+		),
+		Shapes.or(
+			Block.box(-16.0D, 0.0D, -18.0D, 32.0D, 16.0D, 6.0D),
+			Block.box(-12.0D, 0.0D, 4.0D, 28.0D, 15.0D, 16.0D),
+			Block.box(-20.0D, 3.0D, -8.0D, -8.0D, 13.0D, 4.0D),
+			Block.box(24.0D, 3.0D, -8.0D, 36.0D, 13.0D, 4.0D)
+		),
+		Shapes.or(
+			Block.box(-14.0D, 0.0D, -18.0D, 30.0D, 13.0D, 4.0D),
+			Block.box(-10.0D, 0.0D, 2.0D, 26.0D, 12.0D, 16.0D),
+			Block.box(-18.0D, 2.0D, -8.0D, -8.0D, 12.0D, 2.0D),
+			Block.box(24.0D, 2.0D, -8.0D, 34.0D, 12.0D, 2.0D)
+		)
+	};
+	private static final VoxelShape[] EAST_SHAPES = rotateShapes(NORTH_SHAPES, 1);
+	private static final VoxelShape[] SOUTH_SHAPES = rotateShapes(NORTH_SHAPES, 2);
+	private static final VoxelShape[] WEST_SHAPES = rotateShapes(NORTH_SHAPES, 3);
+	private static final Component MENU_TITLE = Component.translatable("block.minetale.heart_of_orbis");
+	private static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+	private static final IntegerProperty PART = IntegerProperty.create("part", 0, HEIGHT - 1);
+
+	public HeartOfOrbisBlock(BlockBehaviour.Properties properties) {
+		super(properties);
+		registerDefaultState(this.stateDefinition.any().setValue(PART, 0).setValue(FACING, Direction.NORTH));
+	}
+
+	@Override
+	protected RenderShape getRenderShape(BlockState state) {
+		return RenderShape.INVISIBLE;
+	}
+
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		builder.add(PART, FACING);
+	}
+
+	@Override
+	protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+		return getPartShape(state);
+	}
+
+	@Override
+	protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+		return getPartShape(state);
+	}
+
+	@Override
+	protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
+		return new SimpleMenuProvider((id, inventory, player) -> new HeartOfOrbisMenu(id, inventory), MENU_TITLE);
+	}
+
+	@Override
+	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+		BlockPos basePos = getBasePos(pos, state);
+		BlockState baseState = level.getBlockState(basePos);
+
+		if (!level.isClientSide()) {
+			player.openMenu(baseState.getMenuProvider(level, basePos));
+			if (player instanceof ServerPlayer serverPlayer) {
+				OrbisNetworking.sendMemorySync(serverPlayer);
+			}
+		}
+
+		return InteractionResult.SUCCESS;
+	}
+
+	@Override
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		BlockPos pos = context.getClickedPos();
+		Level level = context.getLevel();
+
+		for (int offset = 1; offset < HEIGHT; offset++) {
+			if (!level.getBlockState(pos.above(offset)).canBeReplaced(context)) {
+				return null;
+			}
+		}
+
+		return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+	}
+
+	@Override
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+		for (int offset = 1; offset < HEIGHT; offset++) {
+			level.setBlock(pos.above(offset), state.setValue(PART, offset), Block.UPDATE_ALL);
+		}
+	}
+
+	@Override
+	protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		int part = state.getValue(PART);
+
+		if (part == 0) {
+			return true;
+		}
+
+		BlockState belowState = level.getBlockState(pos.below());
+
+		return belowState.is(this) && belowState.getValue(PART) == part - 1;
+	}
+
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return state.getValue(PART) == 0 ? new HeartOfOrbisBlockEntity(pos, state) : null;
+	}
+
+	@Override
+	public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+		BlockPos basePos = getBasePos(pos, state);
+
+		for (int offset = 0; offset < HEIGHT; offset++) {
+			BlockPos partPos = basePos.above(offset);
+			if (partPos.equals(pos)) {
+				continue;
+			}
+
+			BlockState partState = level.getBlockState(partPos);
+			if (partState.is(this)) {
+				level.destroyBlock(partPos, false, player);
+			}
+		}
+
+		return super.playerWillDestroy(level, pos, state, player);
+	}
+
+	private static BlockPos getBasePos(BlockPos pos, BlockState state) {
+		return pos.below(state.getValue(PART));
+	}
+
+	private static VoxelShape getPartShape(BlockState state) {
+		return getShapesForFacing(state.getValue(FACING))[state.getValue(PART)];
+	}
+
+	private static VoxelShape[] getShapesForFacing(Direction facing) {
+		return switch (facing) {
+			case EAST -> EAST_SHAPES;
+			case SOUTH -> SOUTH_SHAPES;
+			case WEST -> WEST_SHAPES;
+			default -> NORTH_SHAPES;
+		};
+	}
+
+	private static VoxelShape[] rotateShapes(VoxelShape[] shapes, int clockwiseTurns) {
+		VoxelShape[] rotatedShapes = new VoxelShape[shapes.length];
+
+		for (int index = 0; index < shapes.length; index++) {
+			rotatedShapes[index] = rotateShape(shapes[index], clockwiseTurns);
+		}
+
+		return rotatedShapes;
+	}
+
+	private static VoxelShape rotateShape(VoxelShape shape, int clockwiseTurns) {
+		VoxelShape rotatedShape = shape;
+
+		for (int turn = 0; turn < clockwiseTurns; turn++) {
+			VoxelShape sourceShape = rotatedShape;
+			VoxelShape[] buffer = new VoxelShape[] { Shapes.empty() };
+			sourceShape.forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
+				buffer[0] = Shapes.or(buffer[0], Shapes.box(1.0D - maxZ, minY, minX, 1.0D - minZ, maxY, maxX))
+			);
+			rotatedShape = buffer[0];
+		}
+
+		return rotatedShape;
+	}
+}

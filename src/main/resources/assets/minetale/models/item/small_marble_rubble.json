@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minetale:block/marble_rubble",
+    "particle": "minetale:block/marble_rubble"
+  },
+  "display": {
+    "gui": {
+      "rotation": [25, 35, 0],
+      "translation": [0, 1, 0],
+      "scale": [0.35, 0.35, 0.35]
+    },
+    "ground": {
+      "translation": [0, 2, 0],
+      "scale": [0.22, 0.22, 0.22]
+    },
+    "fixed": {
+      "rotation": [0, 180, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.3, 0.3, 0.3]
+    },
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 1, 0],
+      "scale": [0.22, 0.22, 0.22]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 1, 0],
+      "scale": [0.22, 0.22, 0.22]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 45, 0],
+      "translation": [0, 1, 0],
+      "scale": [0.24, 0.24, 0.24]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 225, 0],
+      "translation": [0, 1, 0],
+      "scale": [0.24, 0.24, 0.24]
+    }
+  }
+}

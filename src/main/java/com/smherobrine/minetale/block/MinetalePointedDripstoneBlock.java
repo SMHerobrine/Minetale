@@ -13,12 +13,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DripstoneThickness;
+import net.minecraft.world.level.block.state.properties.SpeleothemThickness;
 import net.minecraft.world.level.material.Fluids;
 
 final class MinetalePointedDripstoneBlock extends PointedDripstoneBlock {
 	MinetalePointedDripstoneBlock(BlockBehaviour.Properties properties) {
-		super(properties);
+		super(Blocks.DRIPSTONE_BLOCK.defaultBlockState(), properties);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ final class MinetalePointedDripstoneBlock extends PointedDripstoneBlock {
 		}
 
 		boolean tryMerge = !context.isSecondaryUseActive();
-		DripstoneThickness thickness = calculateThickness(level, pos, tipDirection, tryMerge);
+		SpeleothemThickness thickness = calculateThickness(level, pos, tipDirection, tryMerge);
 		return defaultBlockState()
 			.setValue(TIP_DIRECTION, tipDirection)
 			.setValue(THICKNESS, thickness)
@@ -66,7 +66,7 @@ final class MinetalePointedDripstoneBlock extends PointedDripstoneBlock {
 			return state;
 		}
 
-		boolean merged = state.getValue(THICKNESS) == DripstoneThickness.TIP_MERGE;
+		boolean merged = state.getValue(THICKNESS) == SpeleothemThickness.TIP_MERGE;
 		return state.setValue(THICKNESS, calculateThickness(level, pos, tipDirection, merged));
 	}
 
@@ -91,28 +91,28 @@ final class MinetalePointedDripstoneBlock extends PointedDripstoneBlock {
 		return isValidPointedPlacement(level, pos, opposite) ? opposite : null;
 	}
 
-	private static DripstoneThickness calculateThickness(LevelReader level, BlockPos pos, Direction tipDirection, boolean tryMerge) {
+	private static SpeleothemThickness calculateThickness(LevelReader level, BlockPos pos, Direction tipDirection, boolean tryMerge) {
 		Direction opposite = tipDirection.getOpposite();
 		BlockState oppositeState = level.getBlockState(pos.relative(tipDirection));
 		if (isPointedFamilyWithDirection(oppositeState, opposite)) {
-			if (tryMerge || oppositeState.getValue(THICKNESS) == DripstoneThickness.TIP_MERGE) {
-				return DripstoneThickness.TIP_MERGE;
+			if (tryMerge || oppositeState.getValue(THICKNESS) == SpeleothemThickness.TIP_MERGE) {
+				return SpeleothemThickness.TIP_MERGE;
 			}
 
-			return DripstoneThickness.TIP;
+			return SpeleothemThickness.TIP;
 		}
 
 		if (!isPointedFamilyWithDirection(oppositeState, tipDirection)) {
-			return DripstoneThickness.TIP;
+			return SpeleothemThickness.TIP;
 		}
 
-		DripstoneThickness previousThickness = oppositeState.getValue(THICKNESS);
-		if (previousThickness == DripstoneThickness.TIP || previousThickness == DripstoneThickness.TIP_MERGE) {
-			return DripstoneThickness.FRUSTUM;
+		SpeleothemThickness previousThickness = oppositeState.getValue(THICKNESS);
+		if (previousThickness == SpeleothemThickness.TIP || previousThickness == SpeleothemThickness.TIP_MERGE) {
+			return SpeleothemThickness.FRUSTUM;
 		}
 
 		BlockState forwardState = level.getBlockState(pos.relative(opposite));
-		return isPointedFamilyWithDirection(forwardState, tipDirection) ? DripstoneThickness.MIDDLE : DripstoneThickness.BASE;
+		return isPointedFamilyWithDirection(forwardState, tipDirection) ? SpeleothemThickness.MIDDLE : SpeleothemThickness.BASE;
 	}
 
 	private static boolean isValidPointedPlacement(LevelReader level, BlockPos pos, Direction tipDirection) {
@@ -136,12 +136,12 @@ final class MinetalePointedDripstoneBlock extends PointedDripstoneBlock {
 			return false;
 		}
 
-		DripstoneThickness thickness = state.getValue(THICKNESS);
-		return thickness == DripstoneThickness.TIP
-			|| allowMergedTip && thickness == DripstoneThickness.TIP_MERGE;
+		SpeleothemThickness thickness = state.getValue(THICKNESS);
+		return thickness == SpeleothemThickness.TIP
+			|| allowMergedTip && thickness == SpeleothemThickness.TIP_MERGE;
 	}
 
-	private static boolean isStalactite(BlockState state) {
+	protected static boolean isStalactite(BlockState state) {
 		return isPointedFamilyWithDirection(state, Direction.DOWN);
 	}
 

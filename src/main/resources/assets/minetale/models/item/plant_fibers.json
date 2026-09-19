@@ -1,0 +1,79 @@
+{
+  "format_version": "1.21.11",
+  "credit": "Made with Blockbench",
+  "parent": "minecraft:block/block",
+  "texture_size": [32, 64],
+  "textures": {
+    "0": "minetale:item/plant_fibers_texture",
+    "particle": "minetale:item/plant_fibers_texture"
+  },
+  "elements": [
+    {
+      "name": "Fiber",
+      "from": [-4, -16, 8],
+      "to": [20, 32, 8],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 11, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 0, 0], "texture": "#0"},
+        "south": {"uv": [0, 0, 12, 13], "texture": "#0"}
+      }
+    },
+    {
+      "name": "Fiber",
+      "from": [-4, -16, 8],
+      "to": [20, 32, 8],
+      "rotation": {"x": 0, "y": -180, "z": 0, "origin": [8, 11, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 0, 0], "texture": "#0"},
+        "south": {"uv": [0, 0, 12, 13], "texture": "#0"}
+      }
+    },
+    {
+      "name": "Fiber2",
+      "from": [-4, -16, 8],
+      "to": [20, 32, 8],
+      "rotation": {"x": -89.96329, "y": -87.91567, "z": 88.43214, "origin": [8, 11, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 0, 0], "texture": "#0"},
+        "south": {"uv": [0, 0, 12, 13], "texture": "#0"}
+      }
+    },
+    {
+      "name": "Fiber3",
+      "from": [-4, -16, 8],
+      "to": [20, 32, 8],
+      "rotation": {"x": -90.03671, "y": 87.91567, "z": -91.56786, "origin": [8, 11, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 0, 0], "texture": "#0"},
+        "south": {"uv": [0, 0, 12, 13], "texture": "#0"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "R-Attachment",
+      "origin": [8, 3, 8],
+      "scope": 0,
+      "color": 0,
+      "children": [
+        {
+          "name": "Fiber",
+          "origin": [8, 11, 8],
+          "scope": 0,
+          "color": 3,
+          "children": [
+            0,
+            1,
+            {
+              "name": "Fiber2",
+              "origin": [8, 11, 8],
+              "scope": 0,
+              "color": 1,
+              "children": [2, 3]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

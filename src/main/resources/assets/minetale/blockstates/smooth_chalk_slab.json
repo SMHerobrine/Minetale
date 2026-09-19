@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "minetale:block/smooth_chalk_slab"
+    },
+    "type=double": {
+      "model": "minetale:block/smooth_chalk"
+    },
+    "type=top": {
+      "model": "minetale:block/smooth_chalk_slab_top"
+    }
+  }
+}

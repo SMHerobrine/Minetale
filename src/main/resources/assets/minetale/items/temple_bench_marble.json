@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "minetale:item/temple_bench",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

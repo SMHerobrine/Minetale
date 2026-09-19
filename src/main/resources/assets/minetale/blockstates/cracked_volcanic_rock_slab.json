@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "minetale:block/cracked_volcanic_rock_slab"
+    },
+    "type=double": {
+      "model": "minetale:block/cracked_volcanic_rock"
+    },
+    "type=top": {
+      "model": "minetale:block/cracked_volcanic_rock_slab_top"
+    }
+  }
+}

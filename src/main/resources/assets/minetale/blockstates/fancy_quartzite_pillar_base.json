@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "minetale:block/fancy_quartzite_pillar_base"
+    },
+    "facing=up": {
+      "model": "minetale:block/fancy_quartzite_pillar_base",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "minetale:block/fancy_quartzite_pillar_base",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south": {
+      "model": "minetale:block/fancy_quartzite_pillar_base",
+      "x": 90
+    },
+    "facing=west": {
+      "model": "minetale:block/fancy_quartzite_pillar_base",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east": {
+      "model": "minetale:block/fancy_quartzite_pillar_base",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

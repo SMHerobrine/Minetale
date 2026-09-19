@@ -2,12 +2,16 @@ package com.smherobrine.minetale.block;
 
 import com.smherobrine.minetale.Minetale;
 import com.smherobrine.minetale.block.entity.MinetaleBlockEntityTypes;
+import com.smherobrine.minetale.item.DecorativeGeoBlockItem;
+import com.smherobrine.minetale.item.HeartOfOrbisItem;
 import com.smherobrine.minetale.item.MinetaleItemGroups;
+import com.smherobrine.minetale.item.RopeItem;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.item.v1.BlockTransformerHelper;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -18,7 +22,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SignItem;
+import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
@@ -36,12 +40,25 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public final class MinetaleBlocks {
 	public static final BlockSetType AMBER_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK)
 		.register(id("amber"));
 	public static final WoodType AMBER_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
 		.register(id("amber"), AMBER_BLOCK_SET_TYPE);
+	private static final float GAIA_STATUE_WIDTH_SCALE = 0.4F;
+	private static final float GAIA_STATUE_HEIGHT_SCALE = 0.45F;
+	private static final float TEMPLE_BENCH_WIDTH_SCALE = 0.5F;
+	private static final float TEMPLE_BENCH_HEIGHT_SCALE = 0.9F;
+	private static final float SMALL_RUBBLE_WIDTH_SCALE = 0.45F;
+	private static final float SMALL_RUBBLE_HEIGHT_SCALE = 0.6F;
+	private static final float MEDIUM_RUBBLE_WIDTH_SCALE = 0.5F;
+	private static final float MEDIUM_RUBBLE_HEIGHT_SCALE = 0.7F;
+	private static final VoxelShape GAIA_STATUE_SHAPE = Block.box(0.0D, 0.0D, 1.5D, 16.0D, 30.0D, 17.5D);
+	private static final VoxelShape TEMPLE_BENCH_SHAPE = Block.box(0.0D, 0.0D, 2.0D, 32.0D, 14.5D, 14.0D);
+	private static final VoxelShape SMALL_RUBBLE_SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D);
+	private static final VoxelShape MEDIUM_RUBBLE_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
 
 	public static final Block AMBER_LOG = registerBlock("amber_log",
 		new RotatedPillarBlock(copyProperties("amber_log", Blocks.OAK_LOG)));
@@ -79,9 +96,11 @@ public final class MinetaleBlocks {
 		new AmberWallHangingSignBlock(AMBER_WOOD_TYPE, copyProperties("amber_wall_hanging_sign", Blocks.OAK_WALL_HANGING_SIGN).noCollision().strength(1.0F)));
 
 	public static final Item AMBER_SIGN_ITEM = registerItem("amber_sign",
-		new SignItem(AMBER_SIGN, AMBER_WALL_SIGN, itemProperties("amber_sign").stacksTo(16)));
+		new StandingAndWallBlockItem(AMBER_SIGN, AMBER_WALL_SIGN, Direction.DOWN,
+			itemProperties("amber_sign").stacksTo(16).signText()));
 	public static final Item AMBER_HANGING_SIGN_ITEM = registerItem("amber_hanging_sign",
-		new HangingSignItem(AMBER_HANGING_SIGN, AMBER_WALL_HANGING_SIGN, itemProperties("amber_hanging_sign").stacksTo(16)));
+		new HangingSignItem(AMBER_HANGING_SIGN, AMBER_WALL_HANGING_SIGN,
+			itemProperties("amber_hanging_sign").stacksTo(16).signText()));
 
 	public static final Block MARBLE = registerBlock("marble",
 		new Block(copyProperties("marble", Blocks.STONE)));
@@ -91,6 +110,7 @@ public final class MinetaleBlocks {
 		new SlabBlock(copyProperties("marble_slab", Blocks.STONE_SLAB)));
 	public static final Block MARBLE_WALL = registerBlock("marble_wall",
 		new WallBlock(copyProperties("marble_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block MARBLE_BEAM = registerBeamBlock("marble_beam", Blocks.COBBLESTONE_WALL);
 	public static final Block COBBLED_MARBLE = registerBlock("cobbled_marble",
 		new Block(copyProperties("cobbled_marble", Blocks.COBBLESTONE)));
 	public static final Block COBBLED_MARBLE_STAIRS = registerBlock("cobbled_marble_stairs",
@@ -99,6 +119,7 @@ public final class MinetaleBlocks {
 		new SlabBlock(copyProperties("cobbled_marble_slab", Blocks.COBBLESTONE_SLAB)));
 	public static final Block COBBLED_MARBLE_WALL = registerBlock("cobbled_marble_wall",
 		new WallBlock(copyProperties("cobbled_marble_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block COBBLED_MARBLE_BEAM = registerBeamBlock("cobbled_marble_beam", Blocks.COBBLESTONE_WALL);
 	public static final Block SMOOTH_MARBLE = registerBlock("smooth_marble",
 		new Block(copyProperties("smooth_marble", Blocks.SMOOTH_STONE)));
 	public static final Block SMOOTH_MARBLE_STAIRS = registerBlock("smooth_marble_stairs",
@@ -107,6 +128,7 @@ public final class MinetaleBlocks {
 		new SlabBlock(copyProperties("smooth_marble_slab", Blocks.SMOOTH_STONE_SLAB)));
 	public static final Block SMOOTH_MARBLE_WALL = registerBlock("smooth_marble_wall",
 		new WallBlock(copyProperties("smooth_marble_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block SMOOTH_MARBLE_BEAM = registerBeamBlock("smooth_marble_beam", Blocks.COBBLESTONE_WALL);
 	public static final Block CRACKED_SMOOTH_MARBLE = registerBlock("cracked_smooth_marble",
 		new Block(copyProperties("cracked_smooth_marble", Blocks.SMOOTH_STONE)));
 	public static final Block CRACKED_SMOOTH_MARBLE_STAIRS = registerBlock("cracked_smooth_marble_stairs",
@@ -115,6 +137,7 @@ public final class MinetaleBlocks {
 		new SlabBlock(copyProperties("cracked_smooth_marble_slab", Blocks.STONE_SLAB)));
 	public static final Block CRACKED_SMOOTH_MARBLE_WALL = registerBlock("cracked_smooth_marble_wall",
 		new WallBlock(copyProperties("cracked_smooth_marble_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block CRACKED_SMOOTH_MARBLE_BEAM = registerBeamBlock("cracked_smooth_marble_beam", Blocks.COBBLESTONE_WALL);
 	public static final Block MARBLE_BRICKS = registerBlock("marble_bricks",
 		new Block(copyProperties("marble_bricks", Blocks.STONE_BRICKS)));
 	public static final Block MARBLE_BRICKS_STAIRS = registerBlock("marble_bricks_stairs",
@@ -123,16 +146,186 @@ public final class MinetaleBlocks {
 		new SlabBlock(copyProperties("marble_bricks_slab", Blocks.STONE_BRICK_SLAB)));
 	public static final Block MARBLE_BRICKS_WALL = registerBlock("marble_bricks_wall",
 		new WallBlock(copyProperties("marble_bricks_wall", Blocks.STONE_BRICK_WALL)));
+	public static final Block MARBLE_BRICKS_BEAM = registerBeamBlock("marble_bricks_beam", Blocks.STONE_BRICK_WALL);
 	public static final Block CRACKED_MARBLE_BRICKS = registerBlock("cracked_marble_bricks",
 		new Block(copyProperties("cracked_marble_bricks", Blocks.CRACKED_STONE_BRICKS)));
+	public static final Block CRACKED_MARBLE_BRICKS_STAIRS = registerBlock("cracked_marble_bricks_stairs",
+		new StairBlock(CRACKED_MARBLE_BRICKS.defaultBlockState(), copyProperties("cracked_marble_bricks_stairs", Blocks.STONE_BRICK_STAIRS)));
+	public static final Block CRACKED_MARBLE_BRICKS_SLAB = registerBlock("cracked_marble_bricks_slab",
+		new SlabBlock(copyProperties("cracked_marble_bricks_slab", Blocks.STONE_BRICK_SLAB)));
+	public static final Block CRACKED_MARBLE_BRICKS_WALL = registerBlock("cracked_marble_bricks_wall",
+		new WallBlock(copyProperties("cracked_marble_bricks_wall", Blocks.STONE_BRICK_WALL)));
+	public static final Block CRACKED_MARBLE_BRICKS_BEAM = registerBeamBlock("cracked_marble_bricks_beam", Blocks.STONE_BRICK_WALL);
 	public static final Block CHISELED_MARBLE = registerBlock("chiseled_marble",
 		new Block(copyProperties("chiseled_marble", Blocks.CHISELED_QUARTZ_BLOCK)));
+	public static final Block CHISELED_MARBLE_BEAM = registerBeamBlock("chiseled_marble_beam", Blocks.STONE_BRICK_WALL);
 	public static final Block CHISELED_MARBLE_BRICKS = registerBlock("chiseled_marble_bricks",
 		new Block(copyProperties("chiseled_marble_bricks", Blocks.CHISELED_STONE_BRICKS)));
+	public static final Block CHISELED_MARBLE_BRICKS_BEAM = registerBeamBlock("chiseled_marble_bricks_beam", Blocks.STONE_BRICK_WALL);
+	public static final Block FANCY_MARBLE_PILLAR_BASE = registerBlock("fancy_marble_pillar_base",
+		new FancyPillarBaseBlock(copyProperties("fancy_marble_pillar_base", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block FANCY_MARBLE_PILLAR = registerBlock("fancy_marble_pillar",
+		new RotatedPillarBlock(copyProperties("fancy_marble_pillar", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block SMALL_MARBLE_RUBBLE = registerVariantDecorativeGeoBlock("small_marble_rubble",
+		new String[] { "rubble_small_1", "rubble_small_2", "rubble_small_3" }, "marble_rubble", MARBLE, SMALL_RUBBLE_SHAPE,
+		SMALL_RUBBLE_WIDTH_SCALE, SMALL_RUBBLE_HEIGHT_SCALE);
+	public static final Block MEDIUM_MARBLE_RUBBLE = registerVariantDecorativeGeoBlock("medium_marble_rubble",
+		new String[] { "rubble_medium_1", "rubble_medium_2", "rubble_medium_3" }, "marble_rubble", MARBLE, MEDIUM_RUBBLE_SHAPE,
+		MEDIUM_RUBBLE_WIDTH_SCALE, MEDIUM_RUBBLE_HEIGHT_SCALE);
+	public static final Block QUARTZITE = registerBlock("quartzite",
+		new Block(copyProperties("quartzite", Blocks.STONE)));
+	public static final Block QUARTZITE_STAIRS = registerBlock("quartzite_stairs",
+		new StairBlock(QUARTZITE.defaultBlockState(), copyProperties("quartzite_stairs", Blocks.POLISHED_ANDESITE_STAIRS)));
+	public static final Block QUARTZITE_SLAB = registerBlock("quartzite_slab",
+		new SlabBlock(copyProperties("quartzite_slab", Blocks.STONE_SLAB)));
+	public static final Block QUARTZITE_WALL = registerBlock("quartzite_wall",
+		new WallBlock(copyProperties("quartzite_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block QUARTZITE_BEAM = registerBeamBlock("quartzite_beam", Blocks.COBBLESTONE_WALL);
+	public static final Block COBBLED_QUARTZITE = registerBlock("cobbled_quartzite",
+		new Block(copyProperties("cobbled_quartzite", Blocks.COBBLESTONE)));
+	public static final Block COBBLED_QUARTZITE_STAIRS = registerBlock("cobbled_quartzite_stairs",
+		new StairBlock(COBBLED_QUARTZITE.defaultBlockState(), copyProperties("cobbled_quartzite_stairs", Blocks.COBBLESTONE_STAIRS)));
+	public static final Block COBBLED_QUARTZITE_SLAB = registerBlock("cobbled_quartzite_slab",
+		new SlabBlock(copyProperties("cobbled_quartzite_slab", Blocks.COBBLESTONE_SLAB)));
+	public static final Block COBBLED_QUARTZITE_WALL = registerBlock("cobbled_quartzite_wall",
+		new WallBlock(copyProperties("cobbled_quartzite_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block COBBLED_QUARTZITE_BEAM = registerBeamBlock("cobbled_quartzite_beam", Blocks.COBBLESTONE_WALL);
+	public static final Block SMOOTH_QUARTZITE = registerBlock("smooth_quartzite",
+		new Block(copyProperties("smooth_quartzite", Blocks.SMOOTH_STONE)));
+	public static final Block SMOOTH_QUARTZITE_STAIRS = registerBlock("smooth_quartzite_stairs",
+		new StairBlock(SMOOTH_QUARTZITE.defaultBlockState(), copyProperties("smooth_quartzite_stairs", Blocks.STONE_STAIRS)));
+	public static final Block SMOOTH_QUARTZITE_SLAB = registerBlock("smooth_quartzite_slab",
+		new SlabBlock(copyProperties("smooth_quartzite_slab", Blocks.SMOOTH_STONE_SLAB)));
+	public static final Block SMOOTH_QUARTZITE_WALL = registerBlock("smooth_quartzite_wall",
+		new WallBlock(copyProperties("smooth_quartzite_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block SMOOTH_QUARTZITE_BEAM = registerBeamBlock("smooth_quartzite_beam", Blocks.COBBLESTONE_WALL);
+	public static final Block QUARTZITE_BRICKS = registerBlock("quartzite_bricks",
+		new Block(copyProperties("quartzite_bricks", Blocks.STONE_BRICKS)));
+	public static final Block QUARTZITE_BRICKS_STAIRS = registerBlock("quartzite_bricks_stairs",
+		new StairBlock(QUARTZITE_BRICKS.defaultBlockState(), copyProperties("quartzite_bricks_stairs", Blocks.STONE_BRICK_STAIRS)));
+	public static final Block QUARTZITE_BRICKS_SLAB = registerBlock("quartzite_bricks_slab",
+		new SlabBlock(copyProperties("quartzite_bricks_slab", Blocks.STONE_BRICK_SLAB)));
+	public static final Block QUARTZITE_BRICKS_WALL = registerBlock("quartzite_bricks_wall",
+		new WallBlock(copyProperties("quartzite_bricks_wall", Blocks.STONE_BRICK_WALL)));
+	public static final Block QUARTZITE_BRICKS_BEAM = registerBeamBlock("quartzite_bricks_beam", Blocks.STONE_BRICK_WALL);
+	public static final Block CHISELED_QUARTZITE = registerBlock("chiseled_quartzite",
+		new Block(copyProperties("chiseled_quartzite", Blocks.CHISELED_QUARTZ_BLOCK)));
+	public static final Block CHISELED_QUARTZITE_BEAM = registerBeamBlock("chiseled_quartzite_beam", Blocks.STONE_BRICK_WALL);
+	public static final Block CHISELED_QUARTZITE_BRICKS = registerBlock("chiseled_quartzite_bricks",
+		new Block(copyProperties("chiseled_quartzite_bricks", Blocks.CHISELED_STONE_BRICKS)));
+	public static final Block CHISELED_QUARTZITE_BRICKS_BEAM = registerBeamBlock("chiseled_quartzite_bricks_beam", Blocks.STONE_BRICK_WALL);
+	public static final Block FANCY_QUARTZITE_PILLAR_BASE = registerBlock("fancy_quartzite_pillar_base",
+		new FancyPillarBaseBlock(copyProperties("fancy_quartzite_pillar_base", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block FANCY_QUARTZITE_PILLAR = registerBlock("fancy_quartzite_pillar",
+		new RotatedPillarBlock(copyProperties("fancy_quartzite_pillar", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block SMALL_QUARTZITE_RUBBLE = registerVariantDecorativeGeoBlock("small_quartzite_rubble",
+		new String[] { "rubble_small_1", "rubble_small_2", "rubble_small_3" }, "quartzite_rubble", QUARTZITE, SMALL_RUBBLE_SHAPE,
+		SMALL_RUBBLE_WIDTH_SCALE, SMALL_RUBBLE_HEIGHT_SCALE);
+	public static final Block MEDIUM_QUARTZITE_RUBBLE = registerVariantDecorativeGeoBlock("medium_quartzite_rubble",
+		new String[] { "rubble_medium_1", "rubble_medium_2", "rubble_medium_3" }, "quartzite_rubble", QUARTZITE, MEDIUM_RUBBLE_SHAPE,
+		MEDIUM_RUBBLE_WIDTH_SCALE, MEDIUM_RUBBLE_HEIGHT_SCALE);
 	public static final Block CHALK = registerBlock("chalk",
 		new Block(copyProperties("chalk", Blocks.CALCITE)));
+	public static final Block CHALK_STAIRS = registerBlock("chalk_stairs",
+		new StairBlock(CHALK.defaultBlockState(), copyProperties("chalk_stairs", Blocks.POLISHED_ANDESITE_STAIRS)));
+	public static final Block CHALK_SLAB = registerBlock("chalk_slab",
+		new SlabBlock(copyProperties("chalk_slab", Blocks.STONE_SLAB)));
+	public static final Block CHALK_WALL = registerBlock("chalk_wall",
+		new WallBlock(copyProperties("chalk_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block CHALK_BEAM = registerBeamBlock("chalk_beam", Blocks.COBBLESTONE_WALL);
+	public static final Block CHALK_BRICKS = registerBlock("chalk_bricks",
+		new Block(copyProperties("chalk_bricks", Blocks.STONE_BRICKS)));
+	public static final Block CHALK_BRICKS_STAIRS = registerBlock("chalk_bricks_stairs",
+		new StairBlock(CHALK_BRICKS.defaultBlockState(), copyProperties("chalk_bricks_stairs", Blocks.STONE_BRICK_STAIRS)));
+	public static final Block CHALK_BRICKS_SLAB = registerBlock("chalk_bricks_slab",
+		new SlabBlock(copyProperties("chalk_bricks_slab", Blocks.STONE_BRICK_SLAB)));
+	public static final Block CHALK_BRICKS_WALL = registerBlock("chalk_bricks_wall",
+		new WallBlock(copyProperties("chalk_bricks_wall", Blocks.STONE_BRICK_WALL)));
+	public static final Block CHALK_BRICKS_BEAM = registerBeamBlock("chalk_bricks_beam", Blocks.STONE_BRICK_WALL);
+	public static final Block CHISELED_CHALK_BRICKS = registerBlock("chiseled_chalk_bricks",
+		new Block(copyProperties("chiseled_chalk_bricks", Blocks.CHISELED_STONE_BRICKS)));
+	public static final Block CHISELED_CHALK_BRICKS_BEAM = registerBeamBlock("chiseled_chalk_bricks_beam", Blocks.STONE_BRICK_WALL);
+	public static final Block SMOOTH_CHALK = registerBlock("smooth_chalk",
+		new Block(copyProperties("smooth_chalk", Blocks.SMOOTH_STONE)));
+	public static final Block SMOOTH_CHALK_STAIRS = registerBlock("smooth_chalk_stairs",
+		new StairBlock(SMOOTH_CHALK.defaultBlockState(), copyProperties("smooth_chalk_stairs", Blocks.STONE_STAIRS)));
+	public static final Block SMOOTH_CHALK_SLAB = registerBlock("smooth_chalk_slab",
+		new SlabBlock(copyProperties("smooth_chalk_slab", Blocks.SMOOTH_STONE_SLAB)));
+	public static final Block SMOOTH_CHALK_WALL = registerBlock("smooth_chalk_wall",
+		new WallBlock(copyProperties("smooth_chalk_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block SMOOTH_CHALK_BEAM = registerBeamBlock("smooth_chalk_beam", Blocks.COBBLESTONE_WALL);
+	public static final Block FANCY_CHALK_PILLAR_BASE = registerBlock("fancy_chalk_pillar_base",
+		new FancyPillarBaseBlock(copyProperties("fancy_chalk_pillar_base", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block FANCY_CHALK_PILLAR = registerBlock("fancy_chalk_pillar",
+		new RotatedPillarBlock(copyProperties("fancy_chalk_pillar", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block LEDGESTONE = registerBlock("ledgestone",
+		new Block(copyProperties("ledgestone", Blocks.STONE)));
+	public static final Block LEDGESTONE_STAIRS = registerBlock("ledgestone_stairs",
+		new StairBlock(LEDGESTONE.defaultBlockState(), copyProperties("ledgestone_stairs", Blocks.POLISHED_ANDESITE_STAIRS)));
+	public static final Block LEDGESTONE_SLAB = registerBlock("ledgestone_slab",
+		new SlabBlock(copyProperties("ledgestone_slab", Blocks.STONE_SLAB)));
+	public static final Block LEDGESTONE_WALL = registerBlock("ledgestone_wall",
+		new WallBlock(copyProperties("ledgestone_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block LEDGESTONE_BEAM = registerBeamBlock("ledgestone_beam", Blocks.COBBLESTONE_WALL);
+	public static final Block COBBLED_LEDGESTONE = registerBlock("cobbled_ledgestone",
+		new Block(copyProperties("cobbled_ledgestone", Blocks.COBBLESTONE)));
+	public static final Block COBBLED_LEDGESTONE_STAIRS = registerBlock("cobbled_ledgestone_stairs",
+		new StairBlock(COBBLED_LEDGESTONE.defaultBlockState(), copyProperties("cobbled_ledgestone_stairs", Blocks.COBBLESTONE_STAIRS)));
+	public static final Block COBBLED_LEDGESTONE_SLAB = registerBlock("cobbled_ledgestone_slab",
+		new SlabBlock(copyProperties("cobbled_ledgestone_slab", Blocks.COBBLESTONE_SLAB)));
+	public static final Block COBBLED_LEDGESTONE_WALL = registerBlock("cobbled_ledgestone_wall",
+		new WallBlock(copyProperties("cobbled_ledgestone_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block COBBLED_LEDGESTONE_BEAM = registerBeamBlock("cobbled_ledgestone_beam", Blocks.COBBLESTONE_WALL);
+	public static final Block SMOOTH_LEDGESTONE = registerBlock("smooth_ledgestone",
+		new Block(copyProperties("smooth_ledgestone", Blocks.SMOOTH_STONE)));
+	public static final Block SMOOTH_LEDGESTONE_STAIRS = registerBlock("smooth_ledgestone_stairs",
+		new StairBlock(SMOOTH_LEDGESTONE.defaultBlockState(), copyProperties("smooth_ledgestone_stairs", Blocks.STONE_STAIRS)));
+	public static final Block SMOOTH_LEDGESTONE_SLAB = registerBlock("smooth_ledgestone_slab",
+		new SlabBlock(copyProperties("smooth_ledgestone_slab", Blocks.SMOOTH_STONE_SLAB)));
+	public static final Block SMOOTH_LEDGESTONE_WALL = registerBlock("smooth_ledgestone_wall",
+		new WallBlock(copyProperties("smooth_ledgestone_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block SMOOTH_LEDGESTONE_BEAM = registerBeamBlock("smooth_ledgestone_beam", Blocks.COBBLESTONE_WALL);
+	public static final Block LEDGESTONE_BRICKS = registerBlock("ledgestone_bricks",
+		new Block(copyProperties("ledgestone_bricks", Blocks.STONE_BRICKS)));
+	public static final Block LEDGESTONE_BRICKS_STAIRS = registerBlock("ledgestone_bricks_stairs",
+		new StairBlock(LEDGESTONE_BRICKS.defaultBlockState(), copyProperties("ledgestone_bricks_stairs", Blocks.STONE_BRICK_STAIRS)));
+	public static final Block LEDGESTONE_BRICKS_SLAB = registerBlock("ledgestone_bricks_slab",
+		new SlabBlock(copyProperties("ledgestone_bricks_slab", Blocks.STONE_BRICK_SLAB)));
+	public static final Block LEDGESTONE_BRICKS_WALL = registerBlock("ledgestone_bricks_wall",
+		new WallBlock(copyProperties("ledgestone_bricks_wall", Blocks.STONE_BRICK_WALL)));
+	public static final Block LEDGESTONE_BRICKS_BEAM = registerBeamBlock("ledgestone_bricks_beam", Blocks.STONE_BRICK_WALL);
+	public static final Block CHISELED_LEDGESTONE = registerBlock("chiseled_ledgestone",
+		new Block(copyProperties("chiseled_ledgestone", Blocks.CHISELED_QUARTZ_BLOCK)));
+	public static final Block CHISELED_LEDGESTONE_BEAM = registerBeamBlock("chiseled_ledgestone_beam", Blocks.STONE_BRICK_WALL);
+	public static final Block CHISELED_LEDGESTONE_BRICKS = registerBlock("chiseled_ledgestone_bricks",
+		new RotatedPillarBlock(copyProperties("chiseled_ledgestone_bricks", Blocks.CHISELED_STONE_BRICKS)));
+	public static final Block CHISELED_LEDGESTONE_BRICKS_BEAM = registerBeamBlock("chiseled_ledgestone_bricks_beam", Blocks.STONE_BRICK_WALL);
+	public static final Block FANCY_LEDGESTONE_PILLAR_BASE = registerBlock("fancy_ledgestone_pillar_base",
+		new FancyPillarBaseBlock(copyProperties("fancy_ledgestone_pillar_base", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block FANCY_LEDGESTONE_PILLAR = registerBlock("fancy_ledgestone_pillar",
+		new RotatedPillarBlock(copyProperties("fancy_ledgestone_pillar", Blocks.STONE_BRICKS).noOcclusion()));
+	public static final Block GAIA_STATUE_MARBLE = registerDecorativeGeoBlock("gaia_statue_marble",
+		"gaia_statue", "gaia_statue_marble", Blocks.STONE, GAIA_STATUE_SHAPE, GAIA_STATUE_WIDTH_SCALE, GAIA_STATUE_HEIGHT_SCALE);
+	public static final Block GAIA_STATUE_SANDSTONE = registerDecorativeGeoBlock("gaia_statue_sandstone",
+		"gaia_statue", "gaia_statue_sandstone", Blocks.SANDSTONE, GAIA_STATUE_SHAPE, GAIA_STATUE_WIDTH_SCALE, GAIA_STATUE_HEIGHT_SCALE);
+	public static final Block GAIA_STATUE_SHALE = registerDecorativeGeoBlock("gaia_statue_shale",
+		"gaia_statue", "gaia_statue_shale", Blocks.DEEPSLATE, GAIA_STATUE_SHAPE, GAIA_STATUE_WIDTH_SCALE, GAIA_STATUE_HEIGHT_SCALE);
+	public static final Block TEMPLE_BENCH_HARDSTONE = registerDecorativeGeoBlock("temple_bench_hardstone",
+		"temple_bench", "temple_bench_hardstone", Blocks.DEEPSLATE, TEMPLE_BENCH_SHAPE, TEMPLE_BENCH_WIDTH_SCALE, TEMPLE_BENCH_HEIGHT_SCALE);
+	public static final Block TEMPLE_BENCH_MARBLE = registerDecorativeGeoBlock("temple_bench_marble",
+		"temple_bench", "temple_bench_marble", Blocks.STONE, TEMPLE_BENCH_SHAPE, TEMPLE_BENCH_WIDTH_SCALE, TEMPLE_BENCH_HEIGHT_SCALE);
+	public static final Block FORGOTTEN_TEMPLE_GATEWAY = registerBlock("forgotten_temple_gateway",
+		new ForgottenTempleGatewayBlock(copyProperties("forgotten_temple_gateway", Blocks.STONE)
+			.strength(-1.0F, 3_600_000.0F)
+			.noLootTable()
+			.noOcclusion()));
+	public static final Block HEART_OF_ORBIS = registerBlockWithoutItem("heart_of_orbis",
+		new HeartOfOrbisBlock(copyProperties("heart_of_orbis", Blocks.ENCHANTING_TABLE).noOcclusion().dynamicShape()));
+	public static final Item HEART_OF_ORBIS_ITEM = registerItem("heart_of_orbis",
+		new HeartOfOrbisItem(HEART_OF_ORBIS, itemProperties("heart_of_orbis").useBlockDescriptionPrefix()));
 	public static final Block STONE_WALL = registerBlock("stone_wall",
 		new WallBlock(copyProperties("stone_wall", Blocks.COBBLESTONE_WALL)));
+	public static final Block STONE_BEAM = registerBeamBlock("stone_beam", Blocks.COBBLESTONE_WALL);
 	public static final Block MOSSY_STONE = registerBlock("mossy_stone",
 		new Block(copyProperties("mossy_stone", Blocks.MOSSY_COBBLESTONE)));
 	public static final Block MOSSY_STONE_STAIRS = registerBlock("mossy_stone_stairs",
@@ -141,10 +334,25 @@ public final class MinetaleBlocks {
 		new SlabBlock(copyProperties("mossy_stone_slab", Blocks.MOSSY_COBBLESTONE_SLAB)));
 	public static final Block MOSSY_STONE_WALL = registerBlock("mossy_stone_wall",
 		new WallBlock(copyProperties("mossy_stone_wall", Blocks.MOSSY_COBBLESTONE_WALL)));
+	public static final Block MOSSY_STONE_BEAM = registerBeamBlock("mossy_stone_beam", Blocks.MOSSY_COBBLESTONE_WALL);
 	public static final Block VOLCANIC_ROCK = registerBlock("volcanic_rock",
 		new Block(copyProperties("volcanic_rock", Blocks.DEEPSLATE)));
+	public static final Block VOLCANIC_ROCK_STAIRS = registerBlock("volcanic_rock_stairs",
+		new StairBlock(VOLCANIC_ROCK.defaultBlockState(), copyProperties("volcanic_rock_stairs", Blocks.COBBLED_DEEPSLATE_STAIRS)));
+	public static final Block VOLCANIC_ROCK_SLAB = registerBlock("volcanic_rock_slab",
+		new SlabBlock(copyProperties("volcanic_rock_slab", Blocks.COBBLED_DEEPSLATE_SLAB)));
+	public static final Block VOLCANIC_ROCK_WALL = registerBlock("volcanic_rock_wall",
+		new WallBlock(copyProperties("volcanic_rock_wall", Blocks.COBBLED_DEEPSLATE_WALL)));
+	public static final Block VOLCANIC_ROCK_BEAM = registerBeamBlock("volcanic_rock_beam", Blocks.COBBLED_DEEPSLATE_WALL);
 	public static final Block CRACKED_VOLCANIC_ROCK = registerBlock("cracked_volcanic_rock",
 		new Block(copyProperties("cracked_volcanic_rock", Blocks.DEEPSLATE)));
+	public static final Block CRACKED_VOLCANIC_ROCK_STAIRS = registerBlock("cracked_volcanic_rock_stairs",
+		new StairBlock(CRACKED_VOLCANIC_ROCK.defaultBlockState(), copyProperties("cracked_volcanic_rock_stairs", Blocks.COBBLED_DEEPSLATE_STAIRS)));
+	public static final Block CRACKED_VOLCANIC_ROCK_SLAB = registerBlock("cracked_volcanic_rock_slab",
+		new SlabBlock(copyProperties("cracked_volcanic_rock_slab", Blocks.COBBLED_DEEPSLATE_SLAB)));
+	public static final Block CRACKED_VOLCANIC_ROCK_WALL = registerBlock("cracked_volcanic_rock_wall",
+		new WallBlock(copyProperties("cracked_volcanic_rock_wall", Blocks.COBBLED_DEEPSLATE_WALL)));
+	public static final Block CRACKED_VOLCANIC_ROCK_BEAM = registerBeamBlock("cracked_volcanic_rock_beam", Blocks.COBBLED_DEEPSLATE_WALL);
 	public static final Block VOLCANIC_COAL_ORE = registerBlock("volcanic_coal_ore",
 		new DropExperienceBlock(UniformInt.of(0, 2), copyProperties("volcanic_coal_ore", Blocks.DEEPSLATE_COAL_ORE)));
 	public static final Block VOLCANIC_COPPER_ORE = registerBlock("volcanic_copper_ore",
@@ -169,6 +377,12 @@ public final class MinetaleBlocks {
 	public static final Block POINTED_TUFF = registerPointedStone("pointed_tuff");
 	public static final Block POINTED_CALCITE = registerPointedStone("pointed_calcite");
 	public static final Block POINTED_VOLCANIC_ROCK = registerPointedStone("pointed_volcanic_rock");
+	public static final Block ROPE = registerRopeBlock("rope", new RopeBlock(BlockBehaviour.Properties.of()
+		.setId(blockKey("rope"))
+		.strength(0.2F)
+		.isRedstoneConductor((state, level, pos) -> false)
+		.ignitedByLava()
+		.noCollision()));
 
 	private MinetaleBlocks() {
 	}
@@ -177,8 +391,8 @@ public final class MinetaleBlocks {
 		MinetaleBlockEntityTypes.initialize();
 		MinetaleItemGroups.initialize();
 
-		StrippableBlockRegistry.register(AMBER_LOG, STRIPPED_AMBER_LOG);
-		StrippableBlockRegistry.register(AMBER_WOOD, STRIPPED_AMBER_WOOD);
+		BlockTransformerHelper.registerStripping(AMBER_LOG, STRIPPED_AMBER_LOG);
+		BlockTransformerHelper.registerStripping(AMBER_WOOD, STRIPPED_AMBER_WOOD);
 
 		FlammableBlockRegistry flammables = FlammableBlockRegistry.getDefaultInstance();
 		flammables.add(AMBER_LOG, 5, 5);
@@ -215,33 +429,130 @@ public final class MinetaleBlocks {
 			entries.accept(MARBLE_STAIRS);
 			entries.accept(MARBLE_SLAB);
 			entries.accept(MARBLE_WALL);
+			entries.accept(MARBLE_BEAM);
 			entries.accept(COBBLED_MARBLE);
 			entries.accept(COBBLED_MARBLE_STAIRS);
 			entries.accept(COBBLED_MARBLE_SLAB);
 			entries.accept(COBBLED_MARBLE_WALL);
+			entries.accept(COBBLED_MARBLE_BEAM);
 			entries.accept(SMOOTH_MARBLE);
 			entries.accept(SMOOTH_MARBLE_STAIRS);
 			entries.accept(SMOOTH_MARBLE_SLAB);
 			entries.accept(SMOOTH_MARBLE_WALL);
+			entries.accept(SMOOTH_MARBLE_BEAM);
 			entries.accept(CRACKED_SMOOTH_MARBLE);
 			entries.accept(CRACKED_SMOOTH_MARBLE_STAIRS);
 			entries.accept(CRACKED_SMOOTH_MARBLE_SLAB);
 			entries.accept(CRACKED_SMOOTH_MARBLE_WALL);
+			entries.accept(CRACKED_SMOOTH_MARBLE_BEAM);
 			entries.accept(MARBLE_BRICKS);
 			entries.accept(MARBLE_BRICKS_STAIRS);
 			entries.accept(MARBLE_BRICKS_SLAB);
 			entries.accept(MARBLE_BRICKS_WALL);
+			entries.accept(MARBLE_BRICKS_BEAM);
 			entries.accept(CRACKED_MARBLE_BRICKS);
+			entries.accept(CRACKED_MARBLE_BRICKS_STAIRS);
+			entries.accept(CRACKED_MARBLE_BRICKS_SLAB);
+			entries.accept(CRACKED_MARBLE_BRICKS_WALL);
+			entries.accept(CRACKED_MARBLE_BRICKS_BEAM);
 			entries.accept(CHISELED_MARBLE);
+			entries.accept(CHISELED_MARBLE_BEAM);
 			entries.accept(CHISELED_MARBLE_BRICKS);
+			entries.accept(CHISELED_MARBLE_BRICKS_BEAM);
+			entries.accept(FANCY_MARBLE_PILLAR_BASE);
+			entries.accept(FANCY_MARBLE_PILLAR);
+			entries.accept(SMALL_MARBLE_RUBBLE);
+			entries.accept(MEDIUM_MARBLE_RUBBLE);
+			entries.accept(QUARTZITE);
+			entries.accept(QUARTZITE_STAIRS);
+			entries.accept(QUARTZITE_SLAB);
+			entries.accept(QUARTZITE_WALL);
+			entries.accept(QUARTZITE_BEAM);
+			entries.accept(COBBLED_QUARTZITE);
+			entries.accept(COBBLED_QUARTZITE_STAIRS);
+			entries.accept(COBBLED_QUARTZITE_SLAB);
+			entries.accept(COBBLED_QUARTZITE_WALL);
+			entries.accept(COBBLED_QUARTZITE_BEAM);
+			entries.accept(SMOOTH_QUARTZITE);
+			entries.accept(SMOOTH_QUARTZITE_STAIRS);
+			entries.accept(SMOOTH_QUARTZITE_SLAB);
+			entries.accept(SMOOTH_QUARTZITE_WALL);
+			entries.accept(SMOOTH_QUARTZITE_BEAM);
+			entries.accept(QUARTZITE_BRICKS);
+			entries.accept(QUARTZITE_BRICKS_STAIRS);
+			entries.accept(QUARTZITE_BRICKS_SLAB);
+			entries.accept(QUARTZITE_BRICKS_WALL);
+			entries.accept(QUARTZITE_BRICKS_BEAM);
+			entries.accept(CHISELED_QUARTZITE);
+			entries.accept(CHISELED_QUARTZITE_BEAM);
+			entries.accept(CHISELED_QUARTZITE_BRICKS);
+			entries.accept(CHISELED_QUARTZITE_BRICKS_BEAM);
+			entries.accept(FANCY_QUARTZITE_PILLAR_BASE);
+			entries.accept(FANCY_QUARTZITE_PILLAR);
+			entries.accept(SMALL_QUARTZITE_RUBBLE);
+			entries.accept(MEDIUM_QUARTZITE_RUBBLE);
 			entries.accept(CHALK);
+			entries.accept(CHALK_STAIRS);
+			entries.accept(CHALK_SLAB);
+			entries.accept(CHALK_WALL);
+			entries.accept(CHALK_BEAM);
+			entries.accept(CHALK_BRICKS);
+			entries.accept(CHALK_BRICKS_STAIRS);
+			entries.accept(CHALK_BRICKS_SLAB);
+			entries.accept(CHALK_BRICKS_WALL);
+			entries.accept(CHALK_BRICKS_BEAM);
+			entries.accept(CHISELED_CHALK_BRICKS);
+			entries.accept(CHISELED_CHALK_BRICKS_BEAM);
+			entries.accept(SMOOTH_CHALK);
+			entries.accept(SMOOTH_CHALK_STAIRS);
+			entries.accept(SMOOTH_CHALK_SLAB);
+			entries.accept(SMOOTH_CHALK_WALL);
+			entries.accept(SMOOTH_CHALK_BEAM);
+			entries.accept(FANCY_CHALK_PILLAR_BASE);
+			entries.accept(FANCY_CHALK_PILLAR);
+			entries.accept(LEDGESTONE);
+			entries.accept(LEDGESTONE_STAIRS);
+			entries.accept(LEDGESTONE_SLAB);
+			entries.accept(LEDGESTONE_WALL);
+			entries.accept(LEDGESTONE_BEAM);
+			entries.accept(COBBLED_LEDGESTONE);
+			entries.accept(COBBLED_LEDGESTONE_STAIRS);
+			entries.accept(COBBLED_LEDGESTONE_SLAB);
+			entries.accept(COBBLED_LEDGESTONE_WALL);
+			entries.accept(COBBLED_LEDGESTONE_BEAM);
+			entries.accept(SMOOTH_LEDGESTONE);
+			entries.accept(SMOOTH_LEDGESTONE_STAIRS);
+			entries.accept(SMOOTH_LEDGESTONE_SLAB);
+			entries.accept(SMOOTH_LEDGESTONE_WALL);
+			entries.accept(SMOOTH_LEDGESTONE_BEAM);
+			entries.accept(LEDGESTONE_BRICKS);
+			entries.accept(LEDGESTONE_BRICKS_STAIRS);
+			entries.accept(LEDGESTONE_BRICKS_SLAB);
+			entries.accept(LEDGESTONE_BRICKS_WALL);
+			entries.accept(LEDGESTONE_BRICKS_BEAM);
+			entries.accept(CHISELED_LEDGESTONE);
+			entries.accept(CHISELED_LEDGESTONE_BEAM);
+			entries.accept(CHISELED_LEDGESTONE_BRICKS);
+			entries.accept(CHISELED_LEDGESTONE_BRICKS_BEAM);
+			entries.accept(FANCY_LEDGESTONE_PILLAR_BASE);
+			entries.accept(FANCY_LEDGESTONE_PILLAR);
 			entries.accept(STONE_WALL);
+			entries.accept(STONE_BEAM);
 			entries.accept(MOSSY_STONE);
 			entries.accept(MOSSY_STONE_STAIRS);
 			entries.accept(MOSSY_STONE_SLAB);
 			entries.accept(MOSSY_STONE_WALL);
+			entries.accept(MOSSY_STONE_BEAM);
 			entries.accept(VOLCANIC_ROCK);
+			entries.accept(VOLCANIC_ROCK_STAIRS);
+			entries.accept(VOLCANIC_ROCK_SLAB);
+			entries.accept(VOLCANIC_ROCK_WALL);
+			entries.accept(VOLCANIC_ROCK_BEAM);
 			entries.accept(CRACKED_VOLCANIC_ROCK);
+			entries.accept(CRACKED_VOLCANIC_ROCK_STAIRS);
+			entries.accept(CRACKED_VOLCANIC_ROCK_SLAB);
+			entries.accept(CRACKED_VOLCANIC_ROCK_WALL);
+			entries.accept(CRACKED_VOLCANIC_ROCK_BEAM);
 		});
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(entries -> {
 			entries.accept(CHALK);
@@ -249,8 +560,17 @@ public final class MinetaleBlocks {
 			entries.accept(MOSSY_STONE_STAIRS);
 			entries.accept(MOSSY_STONE_SLAB);
 			entries.accept(MOSSY_STONE_WALL);
+			entries.accept(MOSSY_STONE_BEAM);
 			entries.accept(VOLCANIC_ROCK);
+			entries.accept(VOLCANIC_ROCK_STAIRS);
+			entries.accept(VOLCANIC_ROCK_SLAB);
+			entries.accept(VOLCANIC_ROCK_WALL);
+			entries.accept(VOLCANIC_ROCK_BEAM);
 			entries.accept(CRACKED_VOLCANIC_ROCK);
+			entries.accept(CRACKED_VOLCANIC_ROCK_STAIRS);
+			entries.accept(CRACKED_VOLCANIC_ROCK_SLAB);
+			entries.accept(CRACKED_VOLCANIC_ROCK_WALL);
+			entries.accept(CRACKED_VOLCANIC_ROCK_BEAM);
 			entries.accept(VOLCANIC_COAL_ORE);
 			entries.accept(VOLCANIC_COPPER_ORE);
 			entries.accept(VOLCANIC_IRON_ORE);
@@ -274,8 +594,16 @@ public final class MinetaleBlocks {
 			entries.accept(VOLCANIC_REDSTONE_ORE);
 		});
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> {
+			entries.accept(ROPE);
 			entries.accept(AMBER_SIGN_ITEM);
 			entries.accept(AMBER_HANGING_SIGN_ITEM);
+			entries.accept(HEART_OF_ORBIS);
+			entries.accept(FORGOTTEN_TEMPLE_GATEWAY);
+			entries.accept(GAIA_STATUE_MARBLE);
+			entries.accept(GAIA_STATUE_SANDSTONE);
+			entries.accept(GAIA_STATUE_SHALE);
+			entries.accept(TEMPLE_BENCH_HARDSTONE);
+			entries.accept(TEMPLE_BENCH_MARBLE);
 		});
 	}
 
@@ -285,8 +613,62 @@ public final class MinetaleBlocks {
 		return registeredBlock;
 	}
 
+	private static Block registerRopeBlock(String name, Block block) {
+		Block registeredBlock = registerBlockWithoutItem(name, block);
+		registerItem(name, new RopeItem(registeredBlock, itemProperties(name).useBlockDescriptionPrefix()));
+		return registeredBlock;
+	}
+
 	private static Block registerBlockWithoutItem(String name, Block block) {
 		return Registry.register(BuiltInRegistries.BLOCK, id(name), block);
+	}
+
+	private static Block registerDecorativeGeoBlock(String name, String modelName, String textureName, Block propertiesSource, VoxelShape shape) {
+		return registerDecorativeGeoBlock(name, modelName, textureName, propertiesSource, shape, 1.0F);
+	}
+
+	private static Block registerDecorativeGeoBlock(String name, String modelName, String textureName, Block propertiesSource, VoxelShape shape, float renderScale) {
+		return registerDecorativeGeoBlock(name, modelName, textureName, propertiesSource, shape, renderScale, renderScale);
+	}
+
+	private static Block registerDecorativeGeoBlock(String name, String modelName, String textureName, Block propertiesSource, VoxelShape shape,
+			float renderWidthScale, float renderHeightScale) {
+		return registerDecorativeGeoBlock(name, new DecorativeGeoBlock(
+			copyProperties(name, propertiesSource).noOcclusion().dynamicShape(),
+			id("block/" + modelName),
+			id("textures/block/" + textureName + ".png"),
+			shape,
+			renderWidthScale,
+			renderHeightScale
+		));
+	}
+
+	private static Block registerDecorativeGeoBlock(String name, DecorativeGeoBlock block) {
+		Block registeredBlock = registerBlockWithoutItem(name, block);
+		registerItem(name, new DecorativeGeoBlockItem(registeredBlock, itemProperties(name).useBlockDescriptionPrefix()));
+		return registeredBlock;
+	}
+
+	private static Block registerVariantDecorativeGeoBlock(String name, String[] modelNames, String textureName, Block propertiesSource,
+			VoxelShape shape, float renderWidthScale, float renderHeightScale) {
+		Identifier[] modelIds = new Identifier[modelNames.length];
+
+		for (int index = 0; index < modelNames.length; index++) {
+			modelIds[index] = id("block/" + modelNames[index]);
+		}
+
+		return registerDecorativeGeoBlock(name, new VariantDecorativeGeoBlock(
+			copyProperties(name, propertiesSource).noOcclusion().dynamicShape(),
+			modelIds,
+			id("textures/block/" + textureName + ".png"),
+			shape,
+			renderWidthScale,
+			renderHeightScale
+		));
+	}
+
+	private static Block registerBeamBlock(String name, Block propertiesSource) {
+		return registerBlock(name, new BeamBlock(copyProperties(name, propertiesSource)));
 	}
 
 	private static Block registerPointedStone(String name) {

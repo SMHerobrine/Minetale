@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "minetale:block/ledgestone_slab"
+    },
+    "type=double": {
+      "model": "minetale:block/ledgestone"
+    },
+    "type=top": {
+      "model": "minetale:block/ledgestone_slab_top"
+    }
+  }
+}

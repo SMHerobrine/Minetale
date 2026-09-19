@@ -1,0 +1,29 @@
+{
+  "parent": "minetale:block/forgotten_temple_gateway",
+  "display": {
+    "ground": {
+      "translation": [0, 2, 0],
+      "scale": [0.2, 0.2, 0.2]
+    },
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.1, 0.1, 0.1]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.1, 0.1, 0.1]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 45, 0],
+      "translation": [1.13, 3.2, 1.13],
+      "scale": [0.2, 0.2, 0.2]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 225, 0],
+      "translation": [1.13, 3.2, 1.13],
+      "scale": [0.2, 0.2, 0.2]
+    }
+  }
+}

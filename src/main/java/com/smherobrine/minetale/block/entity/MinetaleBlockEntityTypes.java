@@ -21,6 +21,35 @@ public final class MinetaleBlockEntityTypes {
 		FabricBlockEntityTypeBuilder.create(AmberHangingSignBlockEntity::new, MinetaleBlocks.AMBER_HANGING_SIGN, MinetaleBlocks.AMBER_WALL_HANGING_SIGN).build()
 	);
 
+	public static final BlockEntityType<HeartOfOrbisBlockEntity> HEART_OF_ORBIS = Registry.register(
+		BuiltInRegistries.BLOCK_ENTITY_TYPE,
+		Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "heart_of_orbis"),
+		FabricBlockEntityTypeBuilder.create(HeartOfOrbisBlockEntity::new, MinetaleBlocks.HEART_OF_ORBIS).build()
+	);
+
+	public static final BlockEntityType<ForgottenTempleGatewayBlockEntity> FORGOTTEN_TEMPLE_GATEWAY = Registry.register(
+		BuiltInRegistries.BLOCK_ENTITY_TYPE,
+		Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "forgotten_temple_gateway"),
+		FabricBlockEntityTypeBuilder.create(ForgottenTempleGatewayBlockEntity::new, MinetaleBlocks.FORGOTTEN_TEMPLE_GATEWAY).build()
+	);
+
+	public static final BlockEntityType<DecorativeGeoBlockEntity> DECORATIVE_GEO = Registry.register(
+		BuiltInRegistries.BLOCK_ENTITY_TYPE,
+		Identifier.fromNamespaceAndPath(Minetale.MOD_ID, "decorative_geo"),
+		FabricBlockEntityTypeBuilder.create(
+			DecorativeGeoBlockEntity::new,
+			MinetaleBlocks.GAIA_STATUE_MARBLE,
+			MinetaleBlocks.GAIA_STATUE_SANDSTONE,
+			MinetaleBlocks.GAIA_STATUE_SHALE,
+			MinetaleBlocks.TEMPLE_BENCH_HARDSTONE,
+			MinetaleBlocks.TEMPLE_BENCH_MARBLE,
+			MinetaleBlocks.SMALL_MARBLE_RUBBLE,
+			MinetaleBlocks.MEDIUM_MARBLE_RUBBLE,
+			MinetaleBlocks.SMALL_QUARTZITE_RUBBLE,
+			MinetaleBlocks.MEDIUM_QUARTZITE_RUBBLE
+		).build()
+	);
+
 	private MinetaleBlockEntityTypes() {
 	}
 

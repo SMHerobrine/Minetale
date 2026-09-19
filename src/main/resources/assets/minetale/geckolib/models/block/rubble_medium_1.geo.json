@@ -1,0 +1,93 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "Rocks2",
+					"pivot": [9, 4.75, -9.999],
+					"rotation": [2.904, -55.083, -4.206],
+					"cubes": [
+						{
+							"origin": [2, 0.75, -19.499],
+							"size": [14, 8, 19],
+							"uv": {
+								"north": {"uv": [0, 19], "uv_size": [14, 8]},
+								"east": {"uv": [22, 19], "uv_size": [-8, -19], "uv_rotation": 90},
+								"south": {"uv": [0, 19], "uv_size": [14, 8]},
+								"west": {"uv": [22, 19], "uv_size": [-8, -19], "uv_rotation": 90},
+								"up": {"uv": [14, 19], "uv_size": [-14, -19]},
+								"down": {"uv": [14, 19], "uv_size": [-14, -19]}
+							}
+						}
+					]
+				},
+				{
+					"name": "Rocks3",
+					"pivot": [-3.59529, 8.00776, -2.80685],
+					"rotation": [-86.774, 0, 0],
+					"cubes": [
+						{
+							"origin": [-10.59529, 4.00776, -12.30685],
+							"size": [14, 8, 19],
+							"uv": {
+								"north": {"uv": [0, 19], "uv_size": [14, 8]},
+								"east": {"uv": [22, 19], "uv_size": [-8, -19], "uv_rotation": 90},
+								"south": {"uv": [0, 19], "uv_size": [14, 8]},
+								"west": {"uv": [22, 19], "uv_size": [-8, -19], "uv_rotation": 90},
+								"up": {"uv": [14, 19], "uv_size": [-14, -19]},
+								"down": {"uv": [14, 19], "uv_size": [-14, -19]}
+							}
+						}
+					]
+				},
+				{
+					"name": "Rocks4",
+					"pivot": [11.982, 2.2, 3.031],
+					"rotation": [2.904, -55.083, -4.206],
+					"cubes": [
+						{
+							"origin": [4.982, -1.8, -6.469],
+							"size": [14, 8, 19],
+							"uv": {
+								"north": {"uv": [0, 19], "uv_size": [14, 8]},
+								"east": {"uv": [22, 19], "uv_size": [-8, -19], "uv_rotation": 90},
+								"south": {"uv": [0, 19], "uv_size": [14, 8]},
+								"west": {"uv": [22, 19], "uv_size": [-8, -19], "uv_rotation": 90},
+								"up": {"uv": [14, 19], "uv_size": [-14, -19]},
+								"down": {"uv": [14, 19], "uv_size": [-14, -19]}
+							}
+						}
+					]
+				},
+				{
+					"name": "Rocks1",
+					"pivot": [0.04875, 5, 10],
+					"rotation": [6.829, -25.499, -12.111],
+					"cubes": [
+						{
+							"origin": [-6.95125, 1, 0.5],
+							"size": [14, 8, 19],
+							"uv": {
+								"north": {"uv": [0, 19], "uv_size": [14, 8]},
+								"east": {"uv": [22, 19], "uv_size": [-8, -19], "uv_rotation": 90},
+								"south": {"uv": [0, 19], "uv_size": [14, 8]},
+								"west": {"uv": [22, 19], "uv_size": [-8, -19], "uv_rotation": 90},
+								"up": {"uv": [14, 19], "uv_size": [-14, -19]},
+								"down": {"uv": [14, 19], "uv_size": [-14, -19]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}
