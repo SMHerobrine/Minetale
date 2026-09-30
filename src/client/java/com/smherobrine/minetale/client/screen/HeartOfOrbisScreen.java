@@ -9,6 +9,7 @@ import com.smherobrine.minetale.orbis.OrbisMemoryRewards;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -31,6 +32,7 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class HeartOfOrbisScreen extends AbstractContainerScreen<HeartOfOrbisMenu> {
+	private static final AtomicInteger NEXT_PREVIEW_ENTITY_ID = new AtomicInteger(-1);
 	private static final int SCREEN_WIDTH = 432;
 	private static final int SCREEN_HEIGHT = 312;
 	private static final int HEADER_HEIGHT = 24;
@@ -184,6 +186,7 @@ public class HeartOfOrbisScreen extends AbstractContainerScreen<HeartOfOrbisMenu
 				return null;
 			}
 
+			mob.setId(NEXT_PREVIEW_ENTITY_ID.getAndDecrement());
 			Identifier id = BuiltInRegistries.ENTITY_TYPE.getKey(type);
 			return new MobEntry(type, mob, mob.getType().getDescription(), id);
 		} catch (Exception ignored) {
@@ -267,15 +270,20 @@ public class HeartOfOrbisScreen extends AbstractContainerScreen<HeartOfOrbisMenu
 			graphics.fill(boxX, boxY, boxX + MODEL_BOX_SIZE, boxY + MODEL_BOX_SIZE, 0xCC101827);
 			graphics.outline(boxX, boxY, MODEL_BOX_SIZE, MODEL_BOX_SIZE, 0xFF40506C);
 
-			renderMobPreview(
-				graphics,
-				entry.mob(),
-				boxX + MODEL_BOX_PADDING,
-				boxY + MODEL_BOX_PADDING,
-				boxX + MODEL_BOX_SIZE - MODEL_BOX_PADDING,
-				boxY + MODEL_BOX_SIZE - MODEL_BOX_PADDING,
-				selected ? 29 : 26
-			);
+			try {
+				renderMobPreview(
+					graphics,
+					entry.mob(),
+					boxX + MODEL_BOX_PADDING,
+					boxY + MODEL_BOX_PADDING,
+					boxX + MODEL_BOX_SIZE - MODEL_BOX_PADDING,
+					boxY + MODEL_BOX_SIZE - MODEL_BOX_PADDING,
+					selected ? 29 : 26
+				);
+			} catch (RuntimeException ignored) {
+				// A renderer for an individual entity type must not prevent the screen from opening.
+				graphics.centeredText(this.font, Component.literal("?"), boxX + MODEL_BOX_SIZE / 2, boxY + 21, 0xFFB9C7DE);
+			}
 
 			int textX = boxX + MODEL_BOX_SIZE + TEXT_LEFT_PADDING;
 			int maxTextWidth = x + CARD_WIDTH - TEXT_RIGHT_PADDING - textX;
@@ -317,10 +325,6 @@ public class HeartOfOrbisScreen extends AbstractContainerScreen<HeartOfOrbisMenu
 			} else {
 				livingRenderState.xRot = 0.0F;
 			}
-
-			livingRenderState.boundingBoxWidth = livingRenderState.boundingBoxWidth / livingRenderState.scale;
-			livingRenderState.boundingBoxHeight = livingRenderState.boundingBoxHeight / livingRenderState.scale;
-			livingRenderState.scale = 1.0F;
 		}
 
 		Vector3f translation = new Vector3f(0.0F, previewHeight / 2.0F + 0.03F, 0.0F);
