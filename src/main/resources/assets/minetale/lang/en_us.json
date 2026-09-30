@@ -170,5 +170,6 @@
   "item.minetale.amber_hanging_sign": "Amber Hanging Sign",
   "item.minetale.plant_fibers": "Plant Fiber",
   "toast.minetale.memory_unlocked.title": "Memory Unlocked",
-  "toast.minetale.memory_unlocked.description": "%s can now be recorded at the Heart of Orbis."
+  "toast.minetale.memory_unlocked.description": "%s can now be recorded at the Heart of Orbis.",
+  "biome.minetale.volcanic_caves": "Volcanic Caves"
 }

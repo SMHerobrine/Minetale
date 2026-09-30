@@ -8,6 +8,7 @@ import com.smherobrine.minetale.orbis.MinetaleSoundEvents;
 import com.smherobrine.minetale.orbis.OrbisMemoryRewards;
 import com.smherobrine.minetale.orbis.OrbisNetworking;
 import com.smherobrine.minetale.world.EdgeOfTheEchoProtection;
+import com.smherobrine.minetale.world.biome.MinetaleBiomes;
 import com.geckolib.GeckoLibConstants;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ public class Minetale implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		GeckoLibConstants.init();
+		MinetaleBiomes.initialize();
 		MinetaleSoundEvents.initialize();
 		OrbisMemoryRewards.initialize();
 		OrbisNetworking.initialize();

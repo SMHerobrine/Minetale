@@ -19,6 +19,7 @@ public class MinetaleClient implements ClientModInitializer {
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void onInitializeClient() {
 		OrbisClientNetworking.initialize();
+		VolcanicWaterSteam.initialize();
 		BlockEntityRendererRegistry.register((BlockEntityType) MinetaleBlockEntityTypes.AMBER_SIGN, context -> new StandingSignRenderer(context));
 		BlockEntityRendererRegistry.register((BlockEntityType) MinetaleBlockEntityTypes.AMBER_HANGING_SIGN, context -> new HangingSignRenderer(context));
 		BlockEntityRendererRegistry.register((BlockEntityType) MinetaleBlockEntityTypes.HEART_OF_ORBIS, HeartOfOrbisRenderer::new);

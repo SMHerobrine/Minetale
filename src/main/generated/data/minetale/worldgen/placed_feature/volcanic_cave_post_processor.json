@@ -1,0 +1,8 @@
+{
+  "feature": "minetale:volcanic_cave_post_processor",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
