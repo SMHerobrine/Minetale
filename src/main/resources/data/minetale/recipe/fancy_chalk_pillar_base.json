@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": "minetale:smooth_chalk",
+    "S": "minetale:smooth_chalk_slab"
+  },
+  "pattern": [
+    " B ",
+    "SBS"
+  ],
+  "result": {
+    "count": 2,
+    "id": "minetale:fancy_chalk_pillar_base"
+  }
+}

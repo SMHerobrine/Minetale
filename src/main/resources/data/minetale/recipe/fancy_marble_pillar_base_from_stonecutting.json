@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minetale:smooth_marble",
+  "result": {
+    "count": 1,
+    "id": "minetale:fancy_marble_pillar_base"
+  }
+}

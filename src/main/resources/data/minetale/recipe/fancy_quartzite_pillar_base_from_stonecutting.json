@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minetale:smooth_quartzite",
+  "result": {
+    "count": 1,
+    "id": "minetale:fancy_quartzite_pillar_base"
+  }
+}

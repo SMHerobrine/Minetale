@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": "minetale:ledgestone_bricks_slab"
+  },
+  "pattern": [
+    "S",
+    "S",
+    "S"
+  ],
+  "result": {
+    "count": 6,
+    "id": "minetale:fancy_ledgestone_pillar"
+  }
+}

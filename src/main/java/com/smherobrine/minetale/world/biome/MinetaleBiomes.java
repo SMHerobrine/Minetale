@@ -17,6 +17,7 @@ import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.OrePlacements;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.ARGB;
 import net.minecraft.world.attribute.AmbientParticle;
 import net.minecraft.world.attribute.EnvironmentAttributes;
@@ -32,6 +33,7 @@ import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 
 public final class MinetaleBiomes {
 	private static final Identifier VOLCANIC_CAVE_POST_PROCESSOR_ID = id("volcanic_cave_post_processor");
+	private static final TagKey<Biome> VANILLA_CAVE_BIOMES = TagKey.create(Registries.BIOME, id("vanilla_cave_biomes"));
 
 	public static final ResourceKey<Biome> VOLCANIC_CAVES = ResourceKey.create(Registries.BIOME, id("volcanic_caves"));
 	public static final ResourceKey<Feature> VOLCANIC_CAVE_POST_PROCESSOR = ResourceKey.create(
@@ -57,6 +59,17 @@ public final class MinetaleBiomes {
 			GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
 			VOLCANIC_CAVE_POST_PROCESSOR_PLACED
 		);
+		// Ordinary underground caves retain their surface biome, so their decorations must
+		// be added to those biomes explicitly. Dedicated cave biomes keep their own palette.
+		for (String material : java.util.List.of("stone", "granite", "diorite", "andesite", "deepslate", "tuff", "calcite")) {
+			BiomeModifications.addFeature(
+				BiomeSelectors.foundInOverworld()
+					.and(BiomeSelectors.tag(VANILLA_CAVE_BIOMES).negate())
+					.and(BiomeSelectors.includeByKey(VOLCANIC_CAVES).negate()),
+				GenerationStep.Decoration.UNDERGROUND_DECORATION,
+				ResourceKey.create(Registries.PLACED_FEATURE, id("pointed_" + material + "_speleothems"))
+			);
+		}
 	}
 
 	public static void bootstrapFeatures(BootstrapContext<Feature> context) {

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minetale:ledgestone_bricks",
+  "result": {
+    "count": 1,
+    "id": "minetale:fancy_ledgestone_pillar"
+  }
+}

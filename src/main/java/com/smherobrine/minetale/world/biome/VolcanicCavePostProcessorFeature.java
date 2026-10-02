@@ -263,29 +263,6 @@ public record VolcanicCavePostProcessorFeature() implements Feature {
 		return changed;
 	}
 
-	private static boolean isInWater(WorldGenLevel level, BlockPos pos, BlockState state) {
-		if (state.hasProperty(SpeleothemBlock.WATERLOGGED) && state.getValue(SpeleothemBlock.WATERLOGGED)) {
-			return true;
-		}
-		if (level.getFluidState(pos).is(FluidTags.WATER)) {
-			return true;
-		}
-		if (level.getBlockState(pos.above()).getFluidState().is(FluidTags.WATER)) {
-			return true;
-		}
-		if (level.getBlockState(pos.below()).getFluidState().is(FluidTags.WATER)) {
-			return true;
-		}
-
-		int horizontalWater = 0;
-		for (Direction dir : Direction.Plane.HORIZONTAL) {
-			if (level.getBlockState(pos.relative(dir)).getFluidState().is(FluidTags.WATER)) {
-				horizontalWater++;
-			}
-		}
-		return horizontalWater >= 2;
-	}
-
 	private static boolean isSubmergedInLava(WorldGenLevel level, BlockPos pos) {
 		if (level.getBlockState(pos.above()).getFluidState().is(FluidTags.LAVA)) {
 			return true;
@@ -312,7 +289,9 @@ public record VolcanicCavePostProcessorFeature() implements Feature {
 				return Blocks.LAVA.defaultBlockState();
 			}
 
-			boolean waterlogged = isInWater(level, pos, state);
+			// Preserve water at this block only; neighboring waterlogged segments must not
+			// cause dry segments above the water surface to become water sources.
+			boolean waterlogged = state.getFluidState().is(FluidTags.WATER);
 			return MinetaleBlocks.POINTED_VOLCANIC_ROCK.defaultBlockState()
 				.setValue(SpeleothemBlock.TIP_DIRECTION, state.getValue(SpeleothemBlock.TIP_DIRECTION))
 				.setValue(SpeleothemBlock.THICKNESS, state.getValue(SpeleothemBlock.THICKNESS))
@@ -578,19 +557,7 @@ public record VolcanicCavePostProcessorFeature() implements Feature {
 				lava.add(poolPos);
 
 				if (poolPos.getY() == surfaceY) {
-					for (int upY = surfaceY + 1; upY <= Math.min(level.getMaxY(), surfaceY + 24); upY++) {
-						cursor.set(poolPos.getX(), upY, poolPos.getZ());
-						BlockState upState = level.getBlockState(cursor);
-						if (upState.isSolid()) {
-							break;
-						}
-						if (upState.is(MinetaleBlocks.POINTED_VOLCANIC_ROCK)
-							|| upState.is(Blocks.POINTED_DRIPSTONE)
-							|| upState.getFluidState().is(FluidTags.WATER)
-							|| upState.is(Blocks.WATER)) {
-							level.setBlock(cursor, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
-						}
-					}
+					clearAboveLava(level, poolPos);
 				}
 			}
 
@@ -624,6 +591,27 @@ public record VolcanicCavePostProcessorFeature() implements Feature {
 		return false;
 	}
 
+	private static boolean clearAboveLava(WorldGenLevel level, BlockPos lavaPos) {
+		boolean changed = false;
+		BlockPos.MutableBlockPos cursor = lavaPos.mutable();
+		for (int y = lavaPos.getY() + 1; y <= level.getMaxY(); y++) {
+			cursor.setY(y);
+			BlockState state = level.getBlockState(cursor);
+			// Pointed blocks can report themselves as solid. Remove them before testing
+			// for the cave ceiling, and scan the full cavern even when it is very tall.
+			if (state.is(MinetaleBlocks.POINTED_VOLCANIC_ROCK) || state.is(Blocks.POINTED_DRIPSTONE)) {
+				level.setBlock(cursor, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
+				changed = true;
+			} else if (state.isSolid()) {
+				break;
+			} else if (state.getFluidState().is(FluidTags.WATER)) {
+				level.setBlock(cursor, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
+				changed = true;
+			}
+		}
+		return changed;
+	}
+
 	private static boolean cleanLavaSurroundings(WorldGenLevel level, List<BlockPos> lava) {
 		boolean changed = false;
 		BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
@@ -637,21 +625,7 @@ public record VolcanicCavePostProcessorFeature() implements Feature {
 			// If this lava block is at the surface of a lava pool, clear upwards
 			cursor.set(lx, ly + 1, lz);
 			if (!lavaSet.contains(cursor)) {
-				for (int y = ly + 1; y <= Math.min(level.getMaxY(), ly + 32); y++) {
-					cursor.set(lx, y, lz);
-					BlockState state = level.getBlockState(cursor);
-					if (state.isSolid()) {
-						break;
-					}
-
-					if (state.is(MinetaleBlocks.POINTED_VOLCANIC_ROCK) || state.is(Blocks.POINTED_DRIPSTONE)) {
-						level.setBlock(cursor, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
-						changed = true;
-					} else if (state.getFluidState().is(FluidTags.WATER) || state.is(Blocks.WATER)) {
-						level.setBlock(cursor, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
-						changed = true;
-					}
-				}
+				changed |= clearAboveLava(level, lavaPos);
 			}
 
 			// 2. Clear submerged pointed rock or block water horizontally adjacent to lava
