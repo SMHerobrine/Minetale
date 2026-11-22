@@ -26,3 +26,8 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 ---
 *Feel free to contribute, open issues, or suggest features!*
+
+## Documentation
+
+- [Recipe documentation](docs/README.md)
+
