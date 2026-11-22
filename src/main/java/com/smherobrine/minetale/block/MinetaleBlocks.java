@@ -1,6 +1,7 @@
 package com.smherobrine.minetale.block;
 
 import com.smherobrine.minetale.Minetale;
+import com.smherobrine.minetale.orbis.MinetaleSoundEvents;
 import com.smherobrine.minetale.block.entity.MinetaleBlockEntityTypes;
 import com.smherobrine.minetale.item.DecorativeGeoBlockItem;
 import com.smherobrine.minetale.item.HeartOfOrbisItem;
@@ -380,6 +381,7 @@ public final class MinetaleBlocks {
 	public static final Block ROPE = registerRopeBlock("rope", new RopeBlock(BlockBehaviour.Properties.of()
 		.setId(blockKey("rope"))
 		.strength(0.2F)
+		.sound(MinetaleSoundEvents.ROPE)
 		.isRedstoneConductor((state, level, pos) -> false)
 		.ignitedByLava()
 		.noCollision()));

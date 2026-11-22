@@ -1,4 +1,29 @@
 {
+  "block.rope.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "minetale:blocks/rope/rope_break_01",
+      "minetale:blocks/rope/rope_break_02",
+      "minetale:blocks/rope/rope_break_03"
+    ]
+  },
+  "block.rope.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "minetale:blocks/rope/place_rope_01",
+      "minetale:blocks/rope/place_rope_02",
+      "minetale:blocks/rope/place_rope_03"
+    ]
+  },
+  "block.rope.step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "minetale:blocks/rope/step_rope_01",
+      "minetale:blocks/rope/step_rope_02",
+      "minetale:blocks/rope/step_rope_03",
+      "minetale:blocks/rope/step_rope_04"
+    ]
+  },
   "memories_unlock": {
     "sounds": [
       {
